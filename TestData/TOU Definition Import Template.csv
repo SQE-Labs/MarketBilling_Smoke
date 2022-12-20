@@ -1,0 +1,3 @@
+Cat,TOU Name,Season,TimeBand,Effective From,Effective to,Start Time,End Time,Mon,Tues,Wed,Thur,Fri,Sat,Sun,Hol,Calendar
+U,Ausgrid Seasonal Usage,SUM,P,1-Nov,31-Mar,0:00,7:00,X,X,X,X,X,X,X,,
+U,Ausgrid Seasonal Usage,SUM,P,1-Nov,31-Mar,0:00,7:00,X,,,,,,,X,1

@@ -1,0 +1,12 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+ExtentReports
+/ExtentReports
+/target
+target
+test-output
+/test-output
+.idea
+MarketBilling.iml
+.DS_Store
