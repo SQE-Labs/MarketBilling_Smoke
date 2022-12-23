@@ -1,13 +1,12 @@
 package CommonMethods;
 
-import java.util.List;
-
+import BrowsersBase.BrowsersInvoked;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import BrowsersBase.BrowsersInvoked;
+import java.util.List;
 
 
 public class WebDriverWaits extends BrowsersInvoked{
@@ -38,10 +37,17 @@ public class WebDriverWaits extends BrowsersInvoked{
 	   	        return (List<WebElement>) wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(element)); }
 	   		
 		    public static void ClickOn(By element) {
-		    	wait.until(ExpectedConditions.visibilityOfElementLocated(element));
-		        wait.until(ExpectedConditions.elementToBeClickable(element));
+				   try{
+					   wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+		               wait.until(ExpectedConditions.elementToBeClickable(element));
+				   }
+				catch(Exception e){
+
+				}
 		        WebElement ele = driver.findElement(element);
-		        ele.click();}
+		        ele.click();
+				System.out.println("Clicked On "+element);
+			}
 		    
 		    public static void SendKeys(By element, String value) {
 		        wait.until(ExpectedConditions.visibilityOfElementLocated(element));

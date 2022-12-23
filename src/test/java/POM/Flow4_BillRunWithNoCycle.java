@@ -20,8 +20,7 @@ public class Flow4_BillRunWithNoCycle extends TestLogin {
 		Flow5_AddCustomer.FirstCustomer.FirstResidentialCustomer();
 		Flow6_7AddingServiceAndMeter.X_AddService.AddThirdService();
 		Flow6_7AddingServiceAndMeter.X_AddService.EditThirdService();
-
-		Flow6_7AddingServiceAndMeter.X_AddService.AddMeter_MeterRegisterR();
+		Flow6_7AddingServiceAndMeter.X_AddService.Service_MeterR();
 
 		
 	}
@@ -61,8 +60,8 @@ public class Flow4_BillRunWithNoCycle extends TestLogin {
 			WebDriverWaits.ClickOn(Select_BillRun_EndDate_Datepicker);
 			WebDriverWaits.ClickOn(BillRun_IssueDate_Datepicker);
 			WebDriverWaits.ClickOn(Select_BillRun_IssueDate_Datepicker);
-			WebDriverWaits.ClickOn(BillRun_DueDate_Datepicker);
-			WebDriverWaits.ClickOn(Select_BillRun_DueDate_Datepicker);
+//			WebDriverWaits.ClickOn(BillRun_DueDate_Datepicker);
+//			WebDriverWaits.ClickOn(Select_BillRun_DueDate_Datepicker);
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 			WebDriverWaits.ClickOn(BillRun_Button);
 			WebDriverWaits.ClickOn(Continue_Button);

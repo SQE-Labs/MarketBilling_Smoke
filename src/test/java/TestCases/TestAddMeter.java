@@ -1,9 +1,10 @@
 package TestCases;
 
+import ExtentReport.ExtentReportClass;
 import org.testng.annotations.Test;
 import POM.Flow6_7AddingServiceAndMeter;
 
-public class TestAddMeter extends TestLogin{
+public class TestAddMeter extends ExtentReportClass {
 
 	@Test(priority = 1)
 	public static void Metering() throws InterruptedException {

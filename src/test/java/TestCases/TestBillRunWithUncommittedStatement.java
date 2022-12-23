@@ -1,11 +1,12 @@
 
 package TestCases;
 
+import ExtentReport.ExtentReportClass;
 import org.testng.annotations.Test;
 
 //import POM.Flow2_3AddTOUFileAndPlan;
 
-public class TestBillRunWithUncommittedStatement extends TestLogin{
+public class TestBillRunWithUncommittedStatement extends ExtentReportClass {
 	
 	
 	@Test(priority = 1) 

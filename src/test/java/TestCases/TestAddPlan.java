@@ -1,10 +1,11 @@
 package TestCases;
 
+import ExtentReport.ExtentReportClass;
 import org.testng.annotations.Test;
 
 import POM.Flow2_3AddTOUFileAndPlan;
 
-public class TestAddPlan extends TestLogin{
+public class TestAddPlan extends ExtentReportClass {
 	
 	
 	
@@ -37,15 +38,15 @@ public class TestAddPlan extends TestLogin{
 		extentTest.setDescription(" Verify that User is able to add plan with Demand TOU definition ");
 		Flow2_3AddTOUFileAndPlan.Plans.PlanwithDemandTOUdefinition_Network_and_Retail_Trf();
 	}
-	
-	@Test(priority = 4)
+//Issue opened
+	@Test(priority = 5)
 	public static void OtherPlan() throws InterruptedException {
 		extentTest = extent.startTest(" OtherPlan ");
 		extentTest.setDescription(" Verify that User is able to add other plan ");
 		Flow2_3AddTOUFileAndPlan.Plans.OtherPlan();
 	}
 	
-	@Test(priority = 5)
+	@Test(priority = 4)
 	public static void Add_ProRated_Rates() throws InterruptedException {
 		extentTest = extent.startTest(" Add_ProRated_Rates ");
 		extentTest.setDescription(" Verify that User is able to add ProRated Rates ");

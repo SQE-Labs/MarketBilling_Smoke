@@ -1,9 +1,9 @@
 package ExtentReport;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
-
+import BrowsersBase.BrowsersInvoked;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -13,16 +13,15 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
-
-import BrowsersBase.BrowsersInvoked;
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
 
 public class ExtentReportClass extends BrowsersInvoked {
 
 	public static ExtentReports extent;
 	public static ExtentTest extentTest;
+
 
 	@BeforeSuite
 	public void setExtent() throws InterruptedException, IOException {
@@ -30,6 +29,7 @@ public class ExtentReportClass extends BrowsersInvoked {
 		extent.addSystemInfo("Environment", "QA");
 		extent.loadConfig(new File(System.getProperty("user.dir") + "/extent-config.xml"));
 	}
+
 
 	@AfterSuite
 	public void endReport() {

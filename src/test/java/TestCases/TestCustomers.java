@@ -1,9 +1,10 @@
 package TestCases;
 
+import ExtentReport.ExtentReportClass;
 import org.testng.annotations.Test;
 import POM.Flow5_AddCustomer;
 
-public class TestCustomers extends TestLogin{
+public class TestCustomers extends ExtentReportClass {
 
 	@Test(priority = 1)
 	public static void Customer() throws InterruptedException {
