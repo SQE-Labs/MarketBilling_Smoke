@@ -1,9 +1,9 @@
 package TestCases;
 
-import org.testng.annotations.Test;
 import POM.Flow6_7AddingServiceAndMeter;
+import org.testng.annotations.Test;
 
-public class TestAddService extends TestLogin{
+public class TestAddService extends TestLogin {
 
 	@Test(priority = 1)
 	public static void Service() throws InterruptedException {

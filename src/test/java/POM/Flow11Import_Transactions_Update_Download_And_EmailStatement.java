@@ -1,34 +1,28 @@
 package POM;
 //Cash Payment Method
 
-	import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
+import CommonMethods.RandomStrings;
+import CommonMethods.WebDriverWaits;
+import POM.Flow2_3AddTOUFileAndPlan.TouImport;
+import POM.Flow6_7AddingServiceAndMeter.X_AddService;
+import TestCases.TestLogin;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvException;
+import junit.framework.Assert;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.openqa.selenium.By;
-	import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-//import org.openqa.selenium.WebDriver;
-//	import org.openqa.selenium.WebElement;
-//	import org.openqa.selenium.support.ui.Select;
-	import org.testng.asserts.SoftAssert;
+import org.testng.asserts.SoftAssert;
 
-import com.opencsv.CSVWriter;
-
-import CommonMethods.RandomStrings;
-	import CommonMethods.WebDriverWaits;
-import POM.Flow2_3AddTOUFileAndPlan.TouImport;
-//	import POM.Flow4_BillRunWithNoCycle.Billrun;
-import POM.Flow6_7AddingServiceAndMeter.X_AddService;
-import TestCases.TestLogin;
-import junit.framework.Assert;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 	public class Flow11Import_Transactions_Update_Download_And_EmailStatement extends TestLogin {
 		public static JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -47,10 +41,14 @@ import junit.framework.Assert;
 			
 			public static By MeterNumbersIcon = By.xpath("//p[text()='Meter Numbers']");
 
-			public static void MeterNumberImportFile() throws IOException, InterruptedException {
+			public static void MeterNumberImportFile() throws IOException, InterruptedException, CsvException {
+				String filePath = System.getProperty("user.dir") + "/TestData/Electricity - Meter Import Template.csv";
+
 				WebDriverWaits.ClickOn(Flow2_3AddTOUFileAndPlan.TouImport.AdminIcon);
 				WebDriverWaits.ClickOn(MeterNumbersIcon);
-				CSVFileOverwrite();
+				//CSVFileOverwrite();
+				csvFileReplace(filePath,Flow6_7AddingServiceAndMeter.ServiceIDLater3,1,0);
+
 				Thread.sleep(2000);
 				WebElement BrowseFile = driver.findElement(By.xpath("//input[@id='attFile']"));
 				BrowseFile.sendKeys(System.getProperty("user.dir") + "/TestData/Electricity - Meter Import Template.csv");
@@ -104,10 +102,28 @@ import junit.framework.Assert;
 		        list.add(record1);
 		        return list;
 
-		    }    
-		    
-		    
-		
+		    }
+
+
+		public static void csvFileReplace(String fileToUpdate, String replace, int row, int col) throws IOException, CsvException {
+
+			File inputFile = new File(fileToUpdate);
+
+// Read existing file
+			CSVReader reader = new CSVReader(new FileReader(inputFile));
+			List<String[]> csvBody = reader.readAll();
+// get CSV row column  and replace with by using row and column
+			csvBody.get(row)[col] = replace;
+			// csvBody.get(row)[19] = DateAndTime.DateGenerator();
+
+			reader.close();
+
+// Write to CSV file which is open
+			CSVWriter writer = new CSVWriter(new FileWriter(inputFile), CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+			writer.writeAll(csvBody);
+			writer.flush();
+			writer.close();
+		}
 	
 		public static void BillRunPrerequiste() throws InterruptedException {
 		

@@ -4,7 +4,6 @@
 	<test  name="REGRESSION">
 		<classes>
 
-			<class name="TestCases.Imports"/>
 			<class name="TestCases.TestLogin"/>
 			<class name="TestCases.TestAddMeter"/>
 			<class name="TestCases.TestAddPlan"/>
@@ -16,6 +15,7 @@
 			<class name="TestCases.TestLargeBillRun"/>
 			<class name="TestCases.TestSingleCustomerBillRun"/>
 			<class name="TestCases.TestTwoCustomerBillRun"/>
+			<class name="TestCases.Imports"/>
 
 
 		</classes>

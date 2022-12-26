@@ -1,8 +1,8 @@
 package TestCases;
 
-import org.testng.annotations.Test;
 import ExtentReport.ExtentReportClass;
 import POM.Flow1Login;
+import org.testng.annotations.Test;
 
 public class TestLogin extends ExtentReportClass {
 

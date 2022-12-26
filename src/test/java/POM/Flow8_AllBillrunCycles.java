@@ -97,8 +97,8 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_EndDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.BillRun_IssueDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_IssueDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
+		//WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
+		//WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
 		WebDriverWaits.ClickOn(BillRunCycle_Dropdown);
 		//WebDriverWaits.ClickOn(BillRunCycle_DropdownOpn);
 		Thread.sleep(2000);
@@ -143,8 +143,9 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_EndDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.BillRun_IssueDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_IssueDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
+		//*Auto due date is enabled for the following customer category(Commercial,Residential,Business)
+		//WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
+		//WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
 		//WebDriverWaits.ClickOn(BillRunCycle_Dropdown);
 		//Thread.sleep(2000);
 		Thread.sleep(2000);
@@ -196,7 +197,15 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 
 	public static void SmallBillRunWithTwoCustomer() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		driver.navigate().refresh();
+		try{
+			driver.navigate().refresh();
+			System.out.println(driver.getCurrentUrl());
+		}
+		catch(Exception e){
+			driver.navigate().refresh();
+		}
+
+
 		jse.executeScript("window.scrollBy(0,-500)", "");
 
 		WebDriverWaits.ClickOn(Admin_Tab);
@@ -251,8 +260,8 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_EndDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.BillRun_IssueDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_IssueDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
+		//WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
+		//WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
 		WebDriverWaits.ClickOn(BillRunCycle_Dropdown);
 		//WebDriverWaits.ClickOn(BillRunCycle_DropdownOpn);
 		Thread.sleep(2000);
@@ -398,8 +407,8 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_EndDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.BillRun_IssueDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_IssueDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
+		//WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
+		//WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
 		WebDriverWaits.ClickOn(BillRunCycle_Dropdown);
 		//WebDriverWaits.ClickOn(BillRunCycle_DropdownOpn);
 		Thread.sleep(2000);
@@ -440,8 +449,8 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_EndDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.BillRun_IssueDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_IssueDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
+	//	WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
+//		WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
 		//WebDriverWaits.ClickOn(BillRunCycle_Dropdown);
 		//Thread.sleep(2000);
 		Thread.sleep(2000);

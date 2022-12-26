@@ -1,19 +1,16 @@
 package POM;
 
-import java.util.List;
-
-//import java.util.ArrayList;
-
+import CommonMethods.RandomStrings;
+import CommonMethods.WebDriverWaits;
+import TestCases.TestLogin;
+import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
 
-import CommonMethods.RandomStrings;
-import CommonMethods.WebDriverWaits;
-import TestCases.TestLogin;
-import junit.framework.Assert;
+import java.util.List;
 //import junit.framework.Assert;
 
 public class Flow2_3AddTOUFileAndPlan extends TestLogin {
@@ -91,7 +88,9 @@ public class Flow2_3AddTOUFileAndPlan extends TestLogin {
 		// public static By Trf_SearchField =
 		// By.xpath("//*[@id='datatablePreview_wrapper']/div[1]/label/input");
 		public static By Publish_Button = By.xpath("//*[@id='publishBtn']");
-		public static By Cross_icon = By.xpath("//*[@class='icon-remove']");
+//		public static By Cross_icon = By.xpath("//*[@class='icon-remove']");
+		public static By Cross_icon = By.id("closePlnBtn");
+
 		public static By Plan_Search_Field = By.xpath("(//label[text()='Search:'])[1]/input");
 		public static By SearchResultForPlanName = By.xpath("//tbody[@id='plnListBody']/tr/td[2]");
 
@@ -206,6 +205,8 @@ public class Flow2_3AddTOUFileAndPlan extends TestLogin {
 			// select.selectByIndex(2);
 			WebDriverWaits.ClickOn(NameField);
 			String RandomName2 = "MktPlan_NetworkRate" + RandomStrings.RequiredCharacters(4);
+			System.out.println("RandomName2 "+RandomName2);
+
 			WebDriverWaits.SendKeys(NameField, RandomName2);
 			WebDriverWaits.ClickOn(Usage_TOU_Definition_Dropdown);
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -492,8 +493,7 @@ public class Flow2_3AddTOUFileAndPlan extends TestLogin {
 			SoftAssert softAssert = new SoftAssert();
 			driver.navigate().refresh();
 			Thread.sleep(4000);
-			driver.navigate().refresh();
-			Thread.sleep(4000);
+
 //			WebDriverWaits.ClickOn(PlanSearchField);
 //			WebDriverWaits.SendKeys(PlanSearchField, RandomName1); // search tou network plan
 //			WebDriverWaits.ClickOn(EditPlan);

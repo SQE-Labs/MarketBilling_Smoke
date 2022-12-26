@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 //import POM.Flow2_3AddTOUFileAndPlan; //
 
-public class TestAutoDueDate extends TestLogin{
+public class TestAutoDueDate extends TestLogin {
 	
 	@Test(priority = 1) 
 	public static void M_EnableDueDate() throws InterruptedException { 
@@ -21,12 +21,12 @@ public class TestAutoDueDate extends TestLogin{
 		POM.Flow9_Auto_Due_Date.AutoDueDate(); 
 		
 	}
-	
-	@Test(priority = 3)
+	//to-do
+	@Test(priority = 3,enabled = false)
 	public static void BillRunWithSingleCustomer() throws InterruptedException {
 		extentTest = extent.startTest(" BillRunWithSingleCustomer ");
 		extentTest.setDescription(" Verify that User is able to run the bill with cycle ");
-		POM.Flow9_Auto_Due_Date.BillRunWithSingleCustomer();
+		//POM.Flow9_Auto_Due_Date.BillRunWithSingleCustomer();
 		
 	}
 	
