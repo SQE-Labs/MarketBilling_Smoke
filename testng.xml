@@ -10,102 +10,104 @@
 				</methods>
 
 			</class>
-<!--							<class name="TestCases.TestAddPlan">-->
-<!--				<methods>-->
-<!--					<include name="TouImport" />-->
-<!--					<include name="AddPlanwithoutTOUDefinition" />-->
-<!--					<include name="PlanwithTOUDefinition_Network_and_Retail_Trf" />-->
-<!--					<include name="PlanwithDemandTOUdefinition_Network_and_Retail_Trf" />-->
-<!--					<include name="Add_ProRated_Rates" />-->
-<!--					<include name="OtherPlan" />-->
+							<class name="TestCases.TestAddPlan">
+				<methods>
+					<include name="TouImport" />
+					<include name="AddPlanwithoutTOUDefinition" />
+					<include name="PlanwithTOUDefinition_Network_and_Retail_Trf" />
+					<include name="PlanwithDemandTOUdefinition_Network_and_Retail_Trf" />
+					<include name="Add_ProRated_Rates" />
+					<include name="OtherPlan" />
 
-<!--				</methods>-->
-<!--			</class>-->
-
-
+				</methods>
+			</class>
 
 
 
-<!--		<class name="TestCases.TestCustomers">-->
-<!--				<methods>-->
-<!--					<include name="Customer" />-->
-<!--					<include name="SecondCustomer" />-->
-<!--					<include name="ThirdCustomer" />-->
-<!--				</methods>-->
-<!--			</class>-->
 
 
-<!--			<class name="TestCases.TestAddService">-->
-<!--				<methods>-->
-<!--					<include name="Service" />-->
-<!--					<include name="EditService" />-->
-<!--					<include name="AddMeter_MeterRegisterR" />-->
-
-<!--					<include name="SecondService" />-->
-<!--					<include name="EditSecondService" />-->
-<!--					<include name="BAddMeter_MeterRegister" />-->
-
-<!--					<include name="AddThirdService" />-->
-<!--					<include name="EditThirdService" />-->
-<!--					<include name="AddMeter_MeterRegisterC" />-->
-
-<!--					<include name="addSitePlans" />-->
-<!--					<include name="addSiteParameters" />-->
-<!--				</methods>-->
-<!--			</class>-->
+		<class name="TestCases.TestCustomers">
+				<methods>
+					<include name="Customer" />
+					<include name="SecondCustomer" />
+					<include name="ThirdCustomer" />
+				</methods>
+			</class>
 
 
-<!--			<class name="TestCases.TransactionsTest">-->
-<!--				<methods>-->
-<!--					<include name="cashPayment" />-->
-<!--					<include name="creditCardPayment"/>-->
-<!--				</methods>-->
-<!--			</class>-->
+			<class name="TestCases.TestAddService">
+				<methods>
+					<include name="Service" />
+					<include name="EditService" />
+					<include name="AddMeter_MeterRegisterR" />
 
-<!--			<class name="TestCases.TestTwoCustomerBillRun">-->
-<!--				<methods>-->
-<!--					<include name="Flow8_AllBillrunCycles" />-->
-<!--				</methods>-->
-<!--			</class>-->
+					<include name="SecondService" />
+					<include name="EditSecondService" />
+					<include name="BAddMeter_MeterRegister" />
+
+					<include name="AddThirdService" />
+					<include name="EditThirdService" />
+					<include name="AddMeter_MeterRegisterC" />
+
+					<include name="addSitePlans" />
+					<include name="addSiteParameters" />
+				</methods>
+			</class>
 
 
-<!--			<class name="TestCases.TestLargeBillRun">-->
-<!--				<methods>-->
-<!--					<include name="Flow8_AllBillrunCycles" />-->
-<!--				</methods>-->
-<!--			</class>-->
+			<class name="TestCases.TransactionsTest">
+				<methods>
+					<include name="cashPayment" />
+					<include name="creditCardPayment"/>
+				</methods>
+			</class>
 
-<!--			<class name="TestCases.TestBillRunWithUncommittedStatement">-->
-<!--				<methods>-->
-<!--				<include name="BillRunPrerequiste" />-->
-<!--					<include name="BillRunWithUncommittedStatement" />-->
-<!--				</methods>-->
-<!--			</class>-->
+			<class name="TestCases.TestTwoCustomerBillRun">
+				<methods>
+					<include name="Flow8_AllBillrunCycles" />
+				</methods>
+			</class>
 
-<!--			<class name="TestCases.TestBillRunWithNoCycle">-->
-<!--				<methods>-->
-<!--					<include name="BillRunWithNoCycle" />-->
-<!--					<include name="BillrunMethod_NoCycle" />-->
-<!--				</methods>-->
-<!--			</class>-->
 
-<!--		<class name="TestCases.Imports">-->
-<!--				<methods>-->
-<!--					<include name="CustomerPrerequiste" />-->
-<!--					<include name="MeterNumberImport"/>-->
-<!--				</methods>-->
-<!--			</class>-->
+			<class name="TestCases.TestLargeBillRun">
+				<methods>
+					<include name="TestLargeBillRun" />
+				</methods>
+			</class>
 
-<!--			<class name="TestCases.TestSingleCustomerBillRun">-->
-<!--				<methods>-->
-<!--					<include name="X_BillrunCycle" />-->
-<!--					<include name="SmallBillRunWithSingleCustomer" />-->
-<!--					<include name="Rollback_SmallBillRunWithSingleCustomer" />-->
-<!--				</methods>-->
-<!--			</class>-->
+			<class name="TestCases.TestBillRunWithUncommittedStatement">
+				<methods>
+				<include name="BillRunPrerequiste" />
+					<include name="BillRunWithUncommittedStatement" />
+				</methods>
+			</class>
+
+			<class name="TestCases.TestBillRunWithNoCycle">
+				<methods>
+					<include name="BillRunWithNoCycle" />
+					<include name="BillrunMethod_NoCycle" />
+				</methods>
+			</class>
+
+		<class name="TestCases.Imports">
+				<methods>
+					<include name="CustomerPrerequiste" />
+					<include name="MeterNumberImport"/>
+				</methods>
+			</class>
+
+			<class name="TestCases.TestSingleCustomerBillRun">
+				<methods>
+					<include name="CreateCustomerFor_BillrunCycle" />
+					<include name="SmallBillRunWithSingleCustomer" />
+					<include name="Rollback_SmallBillRunWithSingleCustomer" />
+				</methods>
+			</class>
 			<class name="TestCases.TestAutoDueDate">
 				<methods>
 					<include name="BillRun_after_EnableDueDate_CalendarDays" />
+					<include name="BillRun_after_EnableDueDate_BusinessDays" />
+					<include name="BillRun_after_EnableDueDate_EndOfMonth" />
 
 				</methods>
 			</class>

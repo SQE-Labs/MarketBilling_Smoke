@@ -50,7 +50,6 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 	
 	public static void M_BillRunCycle() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-
 		WebDriverWaits.ClickOn(Admin_Tab);
 		jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 		WebDriverWaits.ClickOn(BillRunCycles_Subtab);
@@ -60,6 +59,7 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		WebDriverWaits.ClickOn(CycleName_Field);
 		RandomCycleName1 = RandomStrings.RequiredCharacters(6);
 		WebDriverWaits.SendKeys(CycleName_Field, RandomCycleName1);
+		System.out.println("Bill Cycle name --------- "+RandomCycleName1);
 		WebDriverWaits.ClickOn(CustomerListFilter);
 		WebDriverWaits.SendKeys(CustomerListFilter, CustomerID01R);
 		Thread.sleep(2000);
@@ -118,20 +118,40 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		//WebDriverWaits.ClickOn(Billrun.View_Button);
 		WebDriverWaits.ClickAfter5mins(Billrun.View_Button);
 		Thread.sleep(2000);
+		WebDriverWaits.ClickOn(Billrun.Cancel_Button);
+		Thread.sleep(2000);
+		WebDriverWaits.ClickOn(Billrun.Yes_Button);
 		
 	}
 	
 	public static void Rollback_SmallBillRunWithSingleCustomer() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
+		WebDriverWaits.ClickOn(X_AddService.SearchIcon);
+		WebDriverWaits.ClickOn(X_AddService.SearchField);
+		WebDriverWaits.SendKeys(X_AddService.SearchField,CustomerID01R);
+		WebDriverWaits.ClickOn(X_AddService.SearchIcon);
+		Thread.sleep(2000);
+		WebDriverWaits.ClickOn(Statement_Subtab);
+		WebDriverWaits.ClickOn(ViewDetails_Icon);
+		WebDriverWaits.ClickOn(Rollback_Button);
+		WebDriverWaits.ClickOn(RollbackReason_Field);
+		WebDriverWaits.SendKeys(RollbackReason_Field,"Kindly rollback the statement.");
+		WebDriverWaits.ClickOn(Ok_Button);
+       
+        //Assert 	Rollback for customer 40037 and statement 7899 has been successful.
+        Thread.sleep(10000);
+        WebDriverWaits.ClickOn(RollbackCross_Icon);
+        Thread.sleep(3000);
 
-		WebDriverWaits.ClickOn(Rollback_and_Fix_Tab);
-		WebDriverWaits.ClickOn(Continue_rollback_Button);
-		Thread.sleep(5000);
-		String ActualMsg1 = WebDriverWaits.GetText(RollbackCompleteSuccessMsg);
-		String ExpectedMsg2 = "Rollback complete.";
-		softAssert.assertEquals(ExpectedMsg2, ActualMsg1);
-		System.out.println("Successfully Rollback completed for single customer.");
-		WebDriverWaits.ClickOn(Cancel_Button);
+
+//		WebDriverWaits.ClickOn(Rollback_and_Fix_Tab);
+//		WebDriverWaits.ClickOn(Continue_rollback_Button);
+//		Thread.sleep(5000);
+//		String ActualMsg1 = WebDriverWaits.GetText(RollbackCompleteSuccessMsg);
+//		String ExpectedMsg2 = "Rollback complete.";
+//		softAssert.assertEquals(ExpectedMsg2, ActualMsg1);
+//		System.out.println("Successfully Rollback completed for single customer.");
+//		WebDriverWaits.ClickOn(Cancel_Button);
 		Thread.sleep(2000);
 		//Run bill again
 		WebDriverWaits.ClickOn(Billrun.BillRun_Tab);
@@ -157,33 +177,15 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		Thread.sleep(2000);
 		jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 		WebDriverWaits.ClickOn(Billrun.BillRun_Button);
-	 //	WebDriverWaits.ClickOn(Billrun.Continue_Button);
-	//	WebDriverWaits.ClickOn(Billrun.OK_Button);
-   //	Thread.sleep(200000);
-  //	WebDriverWaits.ClickOn(Billrun.View_Button);
+		//	WebDriverWaits.ClickOn(Billrun.Continue_Button);
+		//	WebDriverWaits.ClickOn(Billrun.OK_Button);
+		//	Thread.sleep(200000);
+		//	WebDriverWaits.ClickOn(Billrun.View_Button);
 		WebDriverWaits.ClickAfter5mins(Billrun.View_Button);
 		Thread.sleep(2000);
 		WebDriverWaits.ClickOn(Billrun.Cancel_Button);
 		WebDriverWaits.ClickOn(Billrun.Yes_Button);
 		Thread.sleep(2000);
-		
-		WebDriverWaits.ClickOn(X_AddService.SearchIcon);
-		WebDriverWaits.ClickOn(X_AddService.SearchField);
-		WebDriverWaits.SendKeys(X_AddService.SearchField,CustomerID01R);
-		WebDriverWaits.ClickOn(X_AddService.SearchIcon);
-		Thread.sleep(2000);
-		WebDriverWaits.ClickOn(Statement_Subtab);
-		WebDriverWaits.ClickOn(ViewDetails_Icon);
-		WebDriverWaits.ClickOn(Rollback_Button);
-		WebDriverWaits.ClickOn(RollbackReason_Field);
-		WebDriverWaits.SendKeys(RollbackReason_Field,"Kindly rollback the statement.");
-		WebDriverWaits.ClickOn(Ok_Button);
-       
-        //Assert 	Rollback for customer 40037 and statement 7899 has been successful.
-        Thread.sleep(100000);
-        WebDriverWaits.ClickOn(RollbackCross_Icon);
-        Thread.sleep(3000);
-		
 
 		
 		

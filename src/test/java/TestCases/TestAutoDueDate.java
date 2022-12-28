@@ -1,5 +1,6 @@
 package TestCases;
 
+import POM.Flow5_AddCustomer;
 import POM.Flow6_7AddingServiceAndMeter;
 import POM.Flow8_AllBillrunCycles;
 import org.testng.annotations.Test;
@@ -13,10 +14,13 @@ public class TestAutoDueDate extends TestLogin {
 		extentTest = extent.startTest("BillRun_after_EnableDueDate_CalendarDays");
 		extentTest.setDescription(" Verify that User is able to Run Bill after enabling  due date by Payment term method as Calendar Days ");
 		POM.Flow9_Auto_Due_Date.X_EnableDueDate.M_EnableDueDate("Calendar days");
+		Flow5_AddCustomer.FirstCustomer.FirstResidentialCustomer();
 		Flow6_7AddingServiceAndMeter.X_AddService.M_AddService();
-		Flow6_7AddingServiceAndMeter.X_AddService.Service_MeterC();
+		Flow6_7AddingServiceAndMeter.X_AddService.EditService();
+		Flow6_7AddingServiceAndMeter.Metering.AddMeter();
+		Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle();
 		Flow8_AllBillrunCycles.X_BillrunCycle.SmallBillRunWithSingleCustomer();
-
+		POM.Flow8_AllBillrunCycles.X_BillrunCycle.Rollback_SmallBillRunWithSingleCustomer();
 
 
 	}
@@ -24,11 +28,13 @@ public class TestAutoDueDate extends TestLogin {
 	public static void BillRun_after_EnableDueDate_BusinessDays() throws InterruptedException {
 		extentTest = extent.startTest("BillRun_after_EnableDueDate_BusinessDays");
 		extentTest.setDescription(" Verify that User is able to Run Bill after enabling  due date by Payment term method as BusinessDays ");
-		POM.Flow9_Auto_Due_Date.X_EnableDueDate.M_EnableDueDate("Business days");
+		Flow5_AddCustomer.FirstCustomer.FirstResidentialCustomer();
 		Flow6_7AddingServiceAndMeter.X_AddService.M_AddService();
-		Flow6_7AddingServiceAndMeter.X_AddService.Service_MeterC();
+		Flow6_7AddingServiceAndMeter.X_AddService.EditService();
+		Flow6_7AddingServiceAndMeter.Metering.AddMeter();
+		Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle();
 		Flow8_AllBillrunCycles.X_BillrunCycle.SmallBillRunWithSingleCustomer();
-
+		//POM.Flow8_AllBillrunCycles.X_BillrunCycle.Rollback_SmallBillRunWithSingleCustomer();
 
 
 	}
@@ -36,11 +42,13 @@ public class TestAutoDueDate extends TestLogin {
 	public static void BillRun_after_EnableDueDate_EndOfMonth() throws InterruptedException {
 		extentTest = extent.startTest("BillRun_after_EnableDueDate_CalendarDays");
 		extentTest.setDescription(" Verify that User is able to Run Bill after enabling  due date by Payment term method as Calendar Days ");
-		POM.Flow9_Auto_Due_Date.X_EnableDueDate.M_EnableDueDate("End of month");
+		Flow5_AddCustomer.FirstCustomer.FirstResidentialCustomer();
 		Flow6_7AddingServiceAndMeter.X_AddService.M_AddService();
-		Flow6_7AddingServiceAndMeter.X_AddService.Service_MeterC();
+		Flow6_7AddingServiceAndMeter.X_AddService.EditService();
+		Flow6_7AddingServiceAndMeter.Metering.AddMeter();
+		Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle();
 		Flow8_AllBillrunCycles.X_BillrunCycle.SmallBillRunWithSingleCustomer();
-
+	//	POM.Flow8_AllBillrunCycles.X_BillrunCycle.Rollback_SmallBillRunWithSingleCustomer();
 
 
 	}

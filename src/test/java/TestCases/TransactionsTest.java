@@ -17,7 +17,6 @@ public class TransactionsTest  extends  TestLogin{
         extentTest = extent.startTest(" Transaction for payment type Cash ");
         extentTest.setDescription(" Verify that User is able to pay usinhg Card pay method");
         ManageServiceNumber.clickTxnTab();
-
         Transactions.addPaymentDetails("Payment","Credit Card","12199.06");
 
     }

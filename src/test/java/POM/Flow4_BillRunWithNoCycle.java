@@ -17,10 +17,6 @@ public class Flow4_BillRunWithNoCycle extends TestLogin {
 
 	public static void BillRunWithNoCycle() throws InterruptedException {
 		Thread.sleep(2000);
-		Flow5_AddCustomer.FirstCustomer.FirstResidentialCustomer();
-		Flow6_7AddingServiceAndMeter.X_AddService.AddThirdService();
-		Flow6_7AddingServiceAndMeter.X_AddService.EditThirdService();
-		Flow6_7AddingServiceAndMeter.X_AddService.Service_MeterR();
 
 		
 	}

@@ -2,6 +2,7 @@ package POM;
 
 //import java.util.ArrayList;
 
+import CommonMethods.DateAndTime;
 import org.openqa.selenium.By;
 import org.testng.asserts.SoftAssert;
 
@@ -37,7 +38,7 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
 
 		// Select the Residential/Business/Commercial customer created in add customer
 		public static By TwosearchResults= By.xpath("//*[@class='icon-edit ']");
-		public static By selectResidentialCustomer_Record = By.xpath("(//td[@class='sorting_1']/a)[3]");
+		public static By selectResidentialCustomer_Record = By.xpath("(//td[@class='sorting_1']/a)[1]");
 		public static By selectBusinessCustomer_Record = By.xpath("(//td[@class='sorting_1']/a)[2]");
 		public static By selectBusinessCustomer_Record1 = By.xpath("(//td[@class='sorting_1']/a)[1]"); // Just temporary
 																										// due to issue
@@ -105,6 +106,7 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
 			WebDriverWaits.ClickOn(NMI_Field);
 			ServiceIDLater1 = RandomStrings.RequiredDigits(10);
 			WebDriverWaits.SendKeys(NMI_Field, ServiceIDLater1);
+			System.out.println("SERVICE ID -------- "+ServiceIDLater1);
 
 			Thread.sleep(1000);
 
@@ -115,7 +117,7 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
 			Thread.sleep(1000);
 
 			WebDriverWaits.ClickOn(Move_In_Date_Datepicker); 
-			WebDriverWaits.SendKeys(Move_In_Date_Datepicker, "01/12/2022" );
+			WebDriverWaits.SendKeys(Move_In_Date_Datepicker, DateAndTime.DateTimeGenerator("dd/mm/yyyy"));
 			
 			WebDriverWaits.ClickOn(SelectCurrentDate);
 
@@ -530,8 +532,7 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
 			String ActualSucessMsg = WebDriverWaits.GetText(CustomerSuccessMeterRegister);
 			String ExpectedSucessMsg1 = "Successfully created meter register.";
 			softAssert.assertEquals(ExpectedSucessMsg1, ActualSucessMsg);
-			System.out.println("Successfully saved customer");
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 
 
 			WebDriverWaits.ClickOn(MeterReads_Tab);
