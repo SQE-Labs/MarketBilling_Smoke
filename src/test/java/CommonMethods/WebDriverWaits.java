@@ -62,7 +62,12 @@ public class WebDriverWaits extends BrowsersInvoked {
 		WebElement ele = driver.findElement(element);
 		ele.sendKeys(value);
 	}
-
+	public static void SendKeysWithClear(By element, String value) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+		WebElement ele = driver.findElement(element);
+		ele.clear();
+		ele.sendKeys(value);
+	}
 	public static void ClickOnWE(WebElement element) {
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 		element.click();

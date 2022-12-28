@@ -5,6 +5,8 @@ import POM.Flow6_7AddingServiceAndMeter;
 import POM.Flow8_AllBillrunCycles;
 import org.testng.annotations.Test;
 
+import static POM.Flow5_AddCustomer.CustomerID01R;
+
 //import POM.Flow2_3AddTOUFileAndPlan; //
 
 public class TestAutoDueDate extends TestLogin {
@@ -18,7 +20,7 @@ public class TestAutoDueDate extends TestLogin {
 		Flow6_7AddingServiceAndMeter.X_AddService.M_AddService();
 		Flow6_7AddingServiceAndMeter.X_AddService.EditService();
 		Flow6_7AddingServiceAndMeter.Metering.AddMeter();
-		Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle();
+		Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle(CustomerID01R);
 		Flow8_AllBillrunCycles.X_BillrunCycle.SmallBillRunWithSingleCustomer();
 		POM.Flow8_AllBillrunCycles.X_BillrunCycle.Rollback_SmallBillRunWithSingleCustomer();
 
@@ -32,7 +34,7 @@ public class TestAutoDueDate extends TestLogin {
 		Flow6_7AddingServiceAndMeter.X_AddService.M_AddService();
 		Flow6_7AddingServiceAndMeter.X_AddService.EditService();
 		Flow6_7AddingServiceAndMeter.Metering.AddMeter();
-		Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle();
+		Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle(CustomerID01R);
 		Flow8_AllBillrunCycles.X_BillrunCycle.SmallBillRunWithSingleCustomer();
 		//POM.Flow8_AllBillrunCycles.X_BillrunCycle.Rollback_SmallBillRunWithSingleCustomer();
 
@@ -46,7 +48,7 @@ public class TestAutoDueDate extends TestLogin {
 		Flow6_7AddingServiceAndMeter.X_AddService.M_AddService();
 		Flow6_7AddingServiceAndMeter.X_AddService.EditService();
 		Flow6_7AddingServiceAndMeter.Metering.AddMeter();
-		Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle();
+		Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle(CustomerID01R);
 		Flow8_AllBillrunCycles.X_BillrunCycle.SmallBillRunWithSingleCustomer();
 	//	POM.Flow8_AllBillrunCycles.X_BillrunCycle.Rollback_SmallBillRunWithSingleCustomer();
 

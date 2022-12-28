@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
 
+import static POM.Flow5_AddCustomer.CustomerID03C;
+
 public class Flow10_BillRunWithUncommittedStatement extends TestLogin {
     public static By OK_Button =By.xpath("//*[contains(text(),'OK')]");
     public static By ConfirmationAssertion = By.xpath("//*[@class='bootstrap-dialog-message']");
@@ -18,13 +20,7 @@ public class Flow10_BillRunWithUncommittedStatement extends TestLogin {
 //		Flow6_7AddingServiceAndMeter.X_AddService.Service_MeterR();
 		driver.navigate().refresh();
 		Thread.sleep(2000);
-		Flow5_AddCustomer.FirstCustomer.FirstResidentialCustomer();
-		Flow6_7AddingServiceAndMeter.X_AddService.AddThirdService();
-		Flow6_7AddingServiceAndMeter.X_AddService.EditThirdService();
-		Flow6_7AddingServiceAndMeter.X_AddService.Service_MeterC();
-		
-		Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle();
-		Flow8_AllBillrunCycles.X_BillrunCycle.SmallBillRunWithSingleCustomer();
+
 		
 	}
 
@@ -32,12 +28,11 @@ public class Flow10_BillRunWithUncommittedStatement extends TestLogin {
 		SoftAssert softAssert = new SoftAssert();
 		driver.navigate().refresh();
 
-		Thread.sleep(5000);
-//		WebDriverWaits.ClickOn(X_BillrunCycle.Bill_Run_Complete_CloseButton);
-		WebDriverWaits.ClickOn(Billrun.Cancel_Button);
-		WebDriverWaits.ClickOn(Billrun.Yes_Button);
+////		WebDriverWaits.ClickOn(X_BillrunCycle.Bill_Run_Complete_CloseButton);
+//		WebDriverWaits.ClickOn(Billrun.Cancel_Button);
+//		WebDriverWaits.ClickOn(Billrun.Yes_Button);
 		Thread.sleep(2000);
-		WebDriverWaits.ClickOn(Billrun.BillRun_Tab);
+		//WebDriverWaits.ClickOn(Billrun.BillRun_Tab);
 		jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 		WebDriverWaits.ClickOn(Billrun.RunTheBills_Button);
 		WebDriverWaits.ClickOn(Billrun.BillRun_StartDate_Datepicker);
@@ -63,11 +58,13 @@ public class Flow10_BillRunWithUncommittedStatement extends TestLogin {
 		// Assert Warning: Customer 40113 previously billed on uncommitted statement. Do you want to proceed?
 		Thread.sleep(2000);
 		String ActualMsg = WebDriverWaits.GetText(ConfirmationAssertion);
-		String ExpectedMsg1 = "Customer 40113 previously billed on uncommitted statement. Do you want to proceed?";
+		String ExpectedMsg1 = "Customer "+CustomerID03C+"previously billed on uncommitted statement. Do you want to proceed?";
 		softAssert.assertEquals(ExpectedMsg1, ActualMsg);
 		System.out.println("Successfully asserted the popup text while bill run with uncomitted statement.");
 		Thread.sleep(4000);
-		
+		WebDriverWaits.ClickOn(Billrun.OK_Button);
+		Thread.sleep(10000);
+
 	}
 	
 	}

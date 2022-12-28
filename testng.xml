@@ -8,19 +8,19 @@
 				<methods>
 					<include name="ValidLogin" />
 				</methods>
-
 			</class>
-							<class name="TestCases.TestAddPlan">
-				<methods>
-					<include name="TouImport" />
-					<include name="AddPlanwithoutTOUDefinition" />
-					<include name="PlanwithTOUDefinition_Network_and_Retail_Trf" />
-					<include name="PlanwithDemandTOUdefinition_Network_and_Retail_Trf" />
-					<include name="Add_ProRated_Rates" />
-					<include name="OtherPlan" />
 
-				</methods>
-			</class>
+<!--							<class name="TestCases.TestAddPlan">-->
+<!--				<methods>-->
+<!--					<include name="TouImport" />-->
+<!--					<include name="AddPlanwithoutTOUDefinition" />-->
+<!--					<include name="PlanwithTOUDefinition_Network_and_Retail_Trf" />-->
+<!--					<include name="PlanwithDemandTOUdefinition_Network_and_Retail_Trf" />-->
+<!--					<include name="Add_ProRated_Rates" />-->
+<!--					<include name="OtherPlan" />-->
+
+<!--				</methods>-->
+<!--			</class>-->
 
 
 
@@ -77,7 +77,6 @@
 
 			<class name="TestCases.TestBillRunWithUncommittedStatement">
 				<methods>
-				<include name="BillRunPrerequiste" />
 					<include name="BillRunWithUncommittedStatement" />
 				</methods>
 			</class>

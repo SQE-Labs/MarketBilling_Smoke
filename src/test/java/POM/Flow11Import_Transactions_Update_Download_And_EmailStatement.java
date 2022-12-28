@@ -125,12 +125,7 @@ import java.util.List;
 			writer.close();
 		}
 	
-		public static void BillRunPrerequiste() throws InterruptedException {
-		
-			Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle();
-			Flow8_AllBillrunCycles.X_BillrunCycle.SmallBillRunWithSingleCustomer();
-			
-		}
+
 		
 		public static void SearchCustomer() throws InterruptedException {
 			

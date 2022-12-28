@@ -508,7 +508,7 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
 			//Create register
 			WebDriverWaits.ClickOn(RegisterID_Field);
 			Thread.sleep(2000);
-			String RandomNumber2 = "12345"+RandomStrings.RequiredDigits(5);
+			String RandomNumber2 = "99345"+RandomStrings.RequiredDigits(5);
 			WebDriverWaits.SendKeys(RegisterID_Field, RandomNumber2);
 			WebDriverWaits.ClickOn(NetworkTariffCode_Field);
 			WebDriverWaits.SendKeys(NetworkTariffCode_Field, "Na");

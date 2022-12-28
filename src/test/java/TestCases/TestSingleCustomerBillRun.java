@@ -3,7 +3,10 @@ package TestCases;
 import ExtentReport.ExtentReportClass;
 import POM.Flow5_AddCustomer;
 import POM.Flow6_7AddingServiceAndMeter;
+import POM.Flow8_AllBillrunCycles;
 import org.testng.annotations.Test;
+
+import static POM.Flow5_AddCustomer.CustomerID01R;
 
 //import POM.Flow2_3AddTOUFileAndPlan; //TestTwoCustomerBillRun
 
@@ -23,7 +26,8 @@ public class TestSingleCustomerBillRun extends ExtentReportClass {
 		public static void SmallBillRunWithSingleCustomer() throws InterruptedException { 
 			extentTest = extent.startTest(" Small Cycle Bill run with 1 customer ");
 			extentTest.setDescription(" Verify that User is able to run the small bill run with 1 customer ");
-			POM.Flow8_AllBillrunCycles.X_BillrunCycle.SmallBillRunWithSingleCustomer(); 
+			Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle(CustomerID01R);
+			POM.Flow8_AllBillrunCycles.X_BillrunCycle.SmallBillRunWithSingleCustomer();
 			
 		}	
 		@Test(priority = 3) 
@@ -31,7 +35,7 @@ public class TestSingleCustomerBillRun extends ExtentReportClass {
 			public static void Rollback_SmallBillRunWithSingleCustomer() throws InterruptedException { 
 				extentTest = extent.startTest(" Small Cycle Bill run with 1 customer ");
 				extentTest.setDescription(" Verify that User is able to run the small bill run with 1 customer ");
-				POM.Flow8_AllBillrunCycles.X_BillrunCycle.Rollback_SmallBillRunWithSingleCustomer();
+		    	POM.Flow8_AllBillrunCycles.X_BillrunCycle.Rollback_SmallBillRunWithSingleCustomer();
 			
 	}
 	

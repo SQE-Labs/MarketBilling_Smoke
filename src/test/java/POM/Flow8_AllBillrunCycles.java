@@ -48,7 +48,7 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 	public static By Bill_Run_Complete_CloseButton =By.xpath("(//*[@class='btn btn-primary'])[3]");
 	
 	
-	public static void M_BillRunCycle() throws InterruptedException {
+	public static void M_BillRunCycle(String customerId) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		WebDriverWaits.ClickOn(Admin_Tab);
 		jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -61,7 +61,7 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		WebDriverWaits.SendKeys(CycleName_Field, RandomCycleName1);
 		System.out.println("Bill Cycle name --------- "+RandomCycleName1);
 		WebDriverWaits.ClickOn(CustomerListFilter);
-		WebDriverWaits.SendKeys(CustomerListFilter, CustomerID01R);
+		WebDriverWaits.SendKeys(CustomerListFilter, customerId);
 		Thread.sleep(2000);
 		WebElement CustomerListOption = WebDriverWaits.WaitUntilVisibleWE(CustomerListFilterOpn);
 		Select CustomerList = new Select(CustomerListOption);
@@ -373,8 +373,10 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		SoftAssert softAssert = new SoftAssert();
 		driver.navigate().refresh();
 		jse.executeScript("window.scrollBy(0,-500)", "");
-		
-	
+
+//		CustomerID01R="40801";
+//		CustomerID02B="40803";
+//		CustomerID03C="40542";
 		WebDriverWaits.ClickOn(Admin_Tab);
 		jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 		WebDriverWaits.ClickOn(BillRunCycles_Subtab);
@@ -385,7 +387,10 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		RandomCycleName3 = RandomStrings.RequiredCharacters(6);
 		WebDriverWaits.SendKeys(CycleName_Field, RandomCycleName3);
 		WebDriverWaits.ClickOn(CustomerListFilter);
-		WebDriverWaits.SendKeys(CustomerListFilter, CustomerID01R);
+		System.out.println("Customer 1R -- "+CustomerID01R);
+		System.out.println("Customer 2B -- "+CustomerID02B);
+		System.out.println("Customer 3C -- "+CustomerID03C);
+		WebDriverWaits.SendKeysWithClear(CustomerListFilter, CustomerID01R);
 		Thread.sleep(2000);
 		WebElement CustomerListOption = WebDriverWaits.WaitUntilVisibleWE(CustomerListFilterOpn);
 		Select CustomerList = new Select(CustomerListOption);
@@ -398,28 +403,28 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		Thread.sleep(2000);
 
 		WebDriverWaits.ClickOn(CustomerListFilter);
-		WebDriverWaits.SendKeys(CustomerListFilter, CustomerID02B);
+		WebDriverWaits.SendKeysWithClear(CustomerListFilter, CustomerID02B);
 		Thread.sleep(2000);
-//		WebElement CustomerListOption = WebDriverWaits.WaitUntilVisibleWE(CustomerListFilterOpn);
-//		Select CustomerList = new Select(CustomerListOption);
+		WebElement CustomerListOption2 = WebDriverWaits.WaitUntilVisibleWE(CustomerListFilterOpn);
+		Select CustomerList2 = new Select(CustomerListOption2);
 		Thread.sleep(2000);
 		CustomerList.selectByIndex(0);
 		Thread.sleep(2000);
-		//WebElement CustomerListFirstOp = (WebElement) jse.executeScript("return document.querySelector('#bootstrap-duallistbox-nonselected-list_custnos > option')");
-		WebDriverWaits.ClickOnWE(CustomerListFirstOp);
+		WebElement CustomerListFirstOp2 = (WebElement) jse.executeScript("return document.querySelector('#bootstrap-duallistbox-nonselected-list_custnos > option')");
+		WebDriverWaits.ClickOnWE(CustomerListFirstOp2);
 		WebDriverWaits.ClickOn(ArrowRight);
 		Thread.sleep(2000);
 
 		WebDriverWaits.ClickOn(CustomerListFilter);
-		WebDriverWaits.SendKeys(CustomerListFilter, CustomerID03C);
+		WebDriverWaits.SendKeysWithClear(CustomerListFilter, CustomerID03C);
 		Thread.sleep(2000);
-		//WebElement CustomerListOption = WebDriverWaits.WaitUntilVisibleWE(CustomerListFilterOpn);
-		//Select CustomerList = new Select(CustomerListOption);
+		WebElement CustomerListOption3 = WebDriverWaits.WaitUntilVisibleWE(CustomerListFilterOpn);
+		Select CustomerList3 = new Select(CustomerListOption3);
 		Thread.sleep(2000);
 		CustomerList.selectByIndex(0);
 		Thread.sleep(2000);
-		//WebElement CustomerListFirstOp = (WebElement) jse.executeScript("return document.querySelector('#bootstrap-duallistbox-nonselected-list_custnos > option')");
-		WebDriverWaits.ClickOnWE(CustomerListFirstOp);
+		WebElement CustomerListFirstOp3 = (WebElement) jse.executeScript("return document.querySelector('#bootstrap-duallistbox-nonselected-list_custnos > option')");
+		WebDriverWaits.ClickOnWE(CustomerListFirstOp3);
 		WebDriverWaits.ClickOn(ArrowRight);
 		Thread.sleep(2000);
 
@@ -460,69 +465,69 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 	//	WebDriverWaits.ClickOn(Billrun.Continue_Button);
 	//	WebDriverWaits.ClickOn(Billrun.OK_Button);
 	//	Thread.sleep(300000);
-		WebDriverWaits.ClickAfter5mins(Billrun.View_Button);
-		Thread.sleep(2000);
-//		WebDriverWaits.WaitUntilInvisible(Spinner_Icon);
-	//	WebDriverWaits.ClickOn(Billrun.View_Button);
-		Thread.sleep(2000);
-		WebDriverWaits.ClickOn(Rollback_and_Fix_Tab);
-		WebDriverWaits.ClickOn(Continue_rollback_Button);
-		Thread.sleep(5000);
-		//Assertion: Rollback 
-		String ActualMsg1 = WebDriverWaits.GetText(RollbackCompleteSuccessMsg);
-		String ExpectedMsg2 = "Rollback complete.";
-		softAssert.assertEquals(ExpectedMsg2, ActualMsg1);
-		System.out.println("Successfully Rollback completed for more than three customers.");
-		WebDriverWaits.ClickOn(Cancel_Button);
-		Thread.sleep(2000);
-		//Run bill again
-		WebDriverWaits.ClickOn(Billrun.BillRun_Tab);
-		jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-		WebDriverWaits.ClickOn(Billrun.RunTheBills_Button);
-		WebDriverWaits.ClickOn(Billrun.BillRun_StartDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.Select_BillRun_StartDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.BillRun_EndDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.Select_BillRun_EndDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.BillRun_IssueDate_Datepicker);
-		WebDriverWaits.ClickOn(Billrun.Select_BillRun_IssueDate_Datepicker);
-	//	WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
-//		WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
-		//WebDriverWaits.ClickOn(BillRunCycle_Dropdown);
-		//Thread.sleep(2000);
-		Thread.sleep(2000);
-		WebElement BillRunCycOption2 = WebDriverWaits.WaitUntilVisibleWE(BillRunCycleOption);
-		Select select2 = new Select(BillRunCycOption2);
-		Thread.sleep(2000);
-		select2.selectByVisibleText(RandomCycleName1);
-		//driver.findElement(By.xpath("//option[text()='" + RandomCycleName1+ "']"));
-		Thread.sleep(2000);
-		jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-		WebDriverWaits.ClickOn(Billrun.BillRun_Button);
-	//	WebDriverWaits.ClickOn(Billrun.Continue_Button);
-	//	WebDriverWaits.ClickOn(Billrun.OK_Button);
-//		Thread.sleep(200000);
-//		WebDriverWaits.ClickOn(Billrun.View_Button);
-		WebDriverWaits.ClickAfter5mins(Billrun.View_Button);
-		Thread.sleep(2000);
+//		WebDriverWaits.ClickAfter5mins(Billrun.View_Button);
+//		Thread.sleep(2000);
+////		WebDriverWaits.WaitUntilInvisible(Spinner_Icon);
+//	//	WebDriverWaits.ClickOn(Billrun.View_Button);
+//		Thread.sleep(2000);
+//		WebDriverWaits.ClickOn(Rollback_and_Fix_Tab);
+//		WebDriverWaits.ClickOn(Continue_rollback_Button);
+//		Thread.sleep(5000);
+//		//Assertion: Rollback
+//		String ActualMsg1 = WebDriverWaits.GetText(RollbackCompleteSuccessMsg);
+//		String ExpectedMsg2 = "Rollback complete.";
+//		softAssert.assertEquals(ExpectedMsg2, ActualMsg1);
+//		System.out.println("Successfully Rollback completed for more than three customers.");
+//		WebDriverWaits.ClickOn(Cancel_Button);
+//		Thread.sleep(2000);
+//		//Run bill again
+//		WebDriverWaits.ClickOn(Billrun.BillRun_Tab);
+//		jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+//		WebDriverWaits.ClickOn(Billrun.RunTheBills_Button);
+//		WebDriverWaits.ClickOn(Billrun.BillRun_StartDate_Datepicker);
+//		WebDriverWaits.ClickOn(Billrun.Select_BillRun_StartDate_Datepicker);
+//		WebDriverWaits.ClickOn(Billrun.BillRun_EndDate_Datepicker);
+//		WebDriverWaits.ClickOn(Billrun.Select_BillRun_EndDate_Datepicker);
+//		WebDriverWaits.ClickOn(Billrun.BillRun_IssueDate_Datepicker);
+//		WebDriverWaits.ClickOn(Billrun.Select_BillRun_IssueDate_Datepicker);
+//	//	WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
+////		WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
+//		//WebDriverWaits.ClickOn(BillRunCycle_Dropdown);
+//		//Thread.sleep(2000);
+//		Thread.sleep(2000);
+//		WebElement BillRunCycOption2 = WebDriverWaits.WaitUntilVisibleWE(BillRunCycleOption);
+//		Select select2 = new Select(BillRunCycOption2);
+//		Thread.sleep(2000);
+//		select2.selectByVisibleText(RandomCycleName1);
+//		//driver.findElement(By.xpath("//option[text()='" + RandomCycleName1+ "']"));
+//		Thread.sleep(2000);
+//		jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+//		WebDriverWaits.ClickOn(Billrun.BillRun_Button);
+//	//	WebDriverWaits.ClickOn(Billrun.Continue_Button);
+//	//	WebDriverWaits.ClickOn(Billrun.OK_Button);
+////		Thread.sleep(200000);
+////		WebDriverWaits.ClickOn(Billrun.View_Button);
+//		WebDriverWaits.ClickAfter5mins(Billrun.View_Button);
+//		Thread.sleep(2000);
 		WebDriverWaits.ClickOn(Billrun.Cancel_Button);
-		WebDriverWaits.ClickOn(Billrun.Yes_Button);
+		//WebDriverWaits.ClickOn(Billrun.Yes_Button);
 		Thread.sleep(2000);
-		
-		WebDriverWaits.ClickOn(X_AddService.SearchIcon);
-		WebDriverWaits.ClickOn(X_AddService.SearchField);
-		WebDriverWaits.SendKeys(X_AddService.SearchField,CustomerID01R);
-		WebDriverWaits.ClickOn(X_AddService.SearchIcon);
-		Thread.sleep(2000);
-		WebDriverWaits.ClickOn(Statement_Subtab);
-		WebDriverWaits.ClickOn(ViewDetails_Icon);
-		WebDriverWaits.ClickOn(Rollback_Button);
-		WebDriverWaits.ClickOn(RollbackReason_Field);
-		WebDriverWaits.SendKeys(RollbackReason_Field,"Kindly rollback the statement.");
-		WebDriverWaits.ClickOn(Ok_Button);
-		Thread.sleep(100000);
-        //Assert Rollback for customer 40027 and statement 7892 has been successful.
-
-		WebDriverWaits.ClickOn(RollbackCross_Icon);
+//
+//		WebDriverWaits.ClickOn(X_AddService.SearchIcon);
+//		WebDriverWaits.ClickOn(X_AddService.SearchField);
+//		WebDriverWaits.SendKeys(X_AddService.SearchField,CustomerID01R);
+//		WebDriverWaits.ClickOn(X_AddService.SearchIcon);
+//		Thread.sleep(2000);
+//		WebDriverWaits.ClickOn(Statement_Subtab);
+//		WebDriverWaits.ClickOn(ViewDetails_Icon);
+//		WebDriverWaits.ClickOn(Rollback_Button);
+//		WebDriverWaits.ClickOn(RollbackReason_Field);
+//		WebDriverWaits.SendKeys(RollbackReason_Field,"Kindly rollback the statement.");
+//		WebDriverWaits.ClickOn(Ok_Button);
+//		Thread.sleep(100000);
+//        //Assert Rollback for customer 40027 and statement 7892 has been successful.
+//
+//		WebDriverWaits.ClickOn(RollbackCross_Icon);
 		
 	}
 	
