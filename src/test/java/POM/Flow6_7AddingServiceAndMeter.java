@@ -171,13 +171,13 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
 //			softAssert.assertEquals(ExpectedMsg1, ActualMsg);
 			System.out.println("Successfully edited customer");
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-			Metering.AddMeter();
+			//Metering.AddMeter();
 //			Thread.sleep(2000);
 		}
 		
 		public static void Service_MeterR() throws InterruptedException {
 			X_AddService.M_AddService();
-			X_AddService.EditService();
+			//X_AddService.EditService();
 		    //Metering.AddMeter();
 			Thread.sleep(2000);
 	}
@@ -284,8 +284,8 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
 		
 		public static void Service_MeterB() throws InterruptedException {
 			X_AddService.AddSecondService();
-			X_AddService.EditSecondService();
-		    Metering.AddMeter();
+			//X_AddService.EditSecondService();
+		  //  Metering.AddMeter();
 			Thread.sleep(2000);
 	}
 
@@ -389,6 +389,10 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
 		}
+		public static void addSiteParameters()  {
+
+
+		}
 //		public static void AddMeter_MeterRegisterC() throws InterruptedException {
 //			
 //			Metering.AddMeter();
@@ -397,8 +401,8 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
 //}
 		public static void Service_MeterC() throws InterruptedException {
 			X_AddService.AddThirdService();
-			X_AddService.EditThirdService();
-		    Metering.AddMeter();
+			//X_AddService.EditThirdService();
+		   // Metering.AddMeter();
 			Thread.sleep(2000);
 	}
 		

@@ -33,7 +33,7 @@ public class TestAddPlan extends ExtentReportClass {
 	}
 	
 	@Test(priority = 3)
-	public static void PlanwithDemandTOUdefinition_Network_and_Retail_Trf() throws InterruptedException {
+	public static void 	PlanwithDemandTOUdefinition_Network_and_Retail_Trf() throws InterruptedException {
 		extentTest = extent.startTest(" PlanwithDemandTOUdefinition_Network_and_Retail_Trf ");
 		extentTest.setDescription(" Verify that User is able to add plan with Demand TOU definition ");
 		Flow2_3AddTOUFileAndPlan.Plans.PlanwithDemandTOUdefinition_Network_and_Retail_Trf();

@@ -44,27 +44,36 @@ public class Flow9_Auto_Due_Date extends TestLogin {
 		public static By ToggleButton_opn1_Commercial = By.xpath("(//*[@name='ptCategory'])[1]");
 		public static By ToggleButton_opn2_Residential = By.xpath("(//*[@name='ptCategory'])[2]");
 		public static By ToggleButton_opn3_Business = By.xpath("(//*[@name='ptCategory'])[3]");
+
+		public static By g_payment_term_method = By.id("g_payment_term_method");
+
 		public static By PaymentTermNumberofDays_Field = By.xpath("//*[@name='g_term_days']");
 		public static By SaveChanges_Button = By.xpath("//*[@id='saveChangesBtn']");
 		public static By Save_Button = By.xpath("//button[contains(text(),'Save')]");
 		public static By EditGroupSuccessMsg = By.xpath("//div[@class='alert alert-success']");
 
-		public static void M_EnableDueDate() throws InterruptedException {
+		public static void M_EnableDueDate(String paymentMethod) throws InterruptedException {
 			SoftAssert softAssert = new SoftAssert();
 			WebDriverWaits.ClickOn(Admin_Tab);
 			WebDriverWaits.ClickOn(EditGroup_SubTab);
 			// jse.executeScript("arguments[0].scrollIntoView(true);", MinimumDaystoBill);
 			jse.executeScript("window.scrollBy(0,2400)", "");
 			// jse.executeScript("window.scrollIntoView(MinimumDaystoBill)");
-			WebDriverWaits.ClickOn(DueDatebyPaymentTerms_ToggleButton);
-			WebDriverWaits.ClickOn(ToggleButton_opn1_Commercial);
-			WebDriverWaits.ClickOn(ToggleButton_opn2_Residential);
-			WebDriverWaits.ClickOn(ToggleButton_opn3_Business);
+			if ( driver.findElement(By.id("payTermOption")).getAttribute("style").contains("none")){
+				WebDriverWaits.ClickOn(DueDatebyPaymentTerms_ToggleButton);
+
+			}
+			WebDriverWaits.selectCheckBox(ToggleButton_opn1_Commercial);
+			WebDriverWaits.selectCheckBox(ToggleButton_opn2_Residential);
+			WebDriverWaits.selectCheckBox(ToggleButton_opn3_Business);
 			jse.executeScript("window.scrollBy(0,100)", "");
-			WebDriverWaits.ClickOn(PaymentTermNumberofDays_Field);
-			WebElement Field = WebDriverWaits.WaitUntilVisibleWE(PaymentTermNumberofDays_Field);
-			Field.clear();
-			WebDriverWaits.SendKeys(PaymentTermNumberofDays_Field, "10");
+			WebDriverWaits.selectByVisibleText(g_payment_term_method,paymentMethod);
+			if(paymentMethod!="End of month"){
+				WebElement Field = WebDriverWaits.WaitUntilVisibleWE(PaymentTermNumberofDays_Field);
+				Field.clear();
+				WebDriverWaits.SendKeys(PaymentTermNumberofDays_Field, "10");
+			}
+
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 			WebDriverWaits.ClickOn(SaveChanges_Button);
 			WebDriverWaits.ClickOn(Save_Button);

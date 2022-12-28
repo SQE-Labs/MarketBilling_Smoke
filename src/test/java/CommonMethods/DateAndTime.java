@@ -13,4 +13,10 @@ public class DateAndTime {
 		date1 = dateFormat.format(date);
 		System.out.println(date1);
 	}
+	public static String DateTimeGenerator(String format) {
+		DateFormat dateFormat = new SimpleDateFormat(format);
+		Date date = new Date();
+		date1 = dateFormat.format(date);
+		return  date1;
+	}
 }
