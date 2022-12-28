@@ -54,7 +54,11 @@
 				</methods>
 			</class>
 
-
+			<class name="TestCases.TestLargeBillRun">
+				<methods>
+					<include name="TestLargeBillRun" />
+				</methods>
+			</class>
 			<class name="TestCases.TransactionsTest">
 				<methods>
 					<include name="cashPayment" />
@@ -69,11 +73,7 @@
 			</class>
 
 
-			<class name="TestCases.TestLargeBillRun">
-				<methods>
-					<include name="TestLargeBillRun" />
-				</methods>
-			</class>
+
 
 			<class name="TestCases.TestBillRunWithUncommittedStatement">
 				<methods>

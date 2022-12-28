@@ -361,7 +361,14 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		Flow6_7AddingServiceAndMeter.X_AddService.M_AddService();
 	}
 	
-	
+	public static void LargeBillRun_RollBack(){
+
+
+	}
+		public static void createBillCycle(){
+
+
+		}
 	public static void LargeBillRun() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		driver.navigate().refresh();
@@ -389,6 +396,33 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		WebDriverWaits.ClickOnWE(CustomerListFirstOp);
         WebDriverWaits.ClickOn(ArrowRight);
 		Thread.sleep(2000);
+
+		WebDriverWaits.ClickOn(CustomerListFilter);
+		WebDriverWaits.SendKeys(CustomerListFilter, CustomerID02B);
+		Thread.sleep(2000);
+//		WebElement CustomerListOption = WebDriverWaits.WaitUntilVisibleWE(CustomerListFilterOpn);
+//		Select CustomerList = new Select(CustomerListOption);
+		Thread.sleep(2000);
+		CustomerList.selectByIndex(0);
+		Thread.sleep(2000);
+		//WebElement CustomerListFirstOp = (WebElement) jse.executeScript("return document.querySelector('#bootstrap-duallistbox-nonselected-list_custnos > option')");
+		WebDriverWaits.ClickOnWE(CustomerListFirstOp);
+		WebDriverWaits.ClickOn(ArrowRight);
+		Thread.sleep(2000);
+
+		WebDriverWaits.ClickOn(CustomerListFilter);
+		WebDriverWaits.SendKeys(CustomerListFilter, CustomerID03C);
+		Thread.sleep(2000);
+		//WebElement CustomerListOption = WebDriverWaits.WaitUntilVisibleWE(CustomerListFilterOpn);
+		//Select CustomerList = new Select(CustomerListOption);
+		Thread.sleep(2000);
+		CustomerList.selectByIndex(0);
+		Thread.sleep(2000);
+		//WebElement CustomerListFirstOp = (WebElement) jse.executeScript("return document.querySelector('#bootstrap-duallistbox-nonselected-list_custnos > option')");
+		WebDriverWaits.ClickOnWE(CustomerListFirstOp);
+		WebDriverWaits.ClickOn(ArrowRight);
+		Thread.sleep(2000);
+
         WebDriverWaits.ClickOn(SaveButton);
 		// Assertion: Successfully added new bill run cycle.
         Thread.sleep(2000);

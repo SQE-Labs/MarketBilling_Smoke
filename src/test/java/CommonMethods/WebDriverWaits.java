@@ -14,7 +14,7 @@ import java.util.List;
 public class WebDriverWaits extends BrowsersInvoked {
 	static WebDriverWait wait = new WebDriverWait(driver, 10);
 	static WebDriverWait wait20 = new WebDriverWait(driver, 20);
-	static WebDriverWait wait5mins = new WebDriverWait(driver, 300);
+	static WebDriverWait wait5mins = new WebDriverWait(driver, 120);
 
 	public static void WaitUntilPresent(By element) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(element));
