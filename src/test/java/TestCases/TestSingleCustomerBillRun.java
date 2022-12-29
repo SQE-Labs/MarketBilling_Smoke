@@ -1,6 +1,8 @@
 package TestCases;
 
 import ExtentReport.ExtentReportClass;
+import POM.Flow5_AddCustomer;
+import POM.Flow6_7AddingServiceAndMeter;
 import org.testng.annotations.Test;
 
 //import POM.Flow2_3AddTOUFileAndPlan; //TestTwoCustomerBillRun
