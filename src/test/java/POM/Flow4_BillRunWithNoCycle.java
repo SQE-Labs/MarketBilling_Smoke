@@ -56,8 +56,8 @@ public class Flow4_BillRunWithNoCycle extends TestLogin {
 			WebDriverWaits.ClickOn(Select_BillRun_EndDate_Datepicker);
 			WebDriverWaits.ClickOn(BillRun_IssueDate_Datepicker);
 			WebDriverWaits.ClickOn(Select_BillRun_IssueDate_Datepicker);
-//			WebDriverWaits.ClickOn(BillRun_DueDate_Datepicker);
-//			WebDriverWaits.ClickOn(Select_BillRun_DueDate_Datepicker);
+			WebDriverWaits.ClickOn(BillRun_DueDate_Datepicker);
+			WebDriverWaits.ClickOn(Select_BillRun_DueDate_Datepicker);
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 			WebDriverWaits.ClickOn(BillRun_Button);
 			WebDriverWaits.ClickOn(Continue_Button);

@@ -13,5 +13,6 @@ public class TestLogin extends ExtentReportClass {
 		extentTest = extent.startTest(" ValidLogin ");
 		extentTest.setDescription(" Verify that User is able to login successfully. ");
 		Flow1Login.ValidLogin();
+		//Thread.sleep(6000);
 	}
 }

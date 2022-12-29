@@ -97,8 +97,8 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_EndDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.BillRun_IssueDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_IssueDate_Datepicker);
-		//WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
-		//WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
+		WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
+		WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
 		WebDriverWaits.ClickOn(BillRunCycle_Dropdown);
 		//WebDriverWaits.ClickOn(BillRunCycle_DropdownOpn);
 		Thread.sleep(2000);
@@ -164,8 +164,8 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		WebDriverWaits.ClickOn(Billrun.BillRun_IssueDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_IssueDate_Datepicker);
 		//*Auto due date is enabled for the following customer category(Commercial,Residential,Business)
-		//WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
-		//WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
+		WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
+		WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
 		//WebDriverWaits.ClickOn(BillRunCycle_Dropdown);
 		//Thread.sleep(2000);
 		Thread.sleep(2000);
@@ -262,8 +262,8 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_EndDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.BillRun_IssueDate_Datepicker);
 		WebDriverWaits.ClickOn(Billrun.Select_BillRun_IssueDate_Datepicker);
-		//WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
-		//WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
+		WebDriverWaits.ClickOn(Billrun.BillRun_DueDate_Datepicker);
+		WebDriverWaits.ClickOn(Billrun.Select_BillRun_DueDate_Datepicker);
 		WebDriverWaits.ClickOn(BillRunCycle_Dropdown);
 		//WebDriverWaits.ClickOn(BillRunCycle_DropdownOpn);
 		Thread.sleep(2000);
@@ -509,7 +509,7 @@ public class Flow8_AllBillrunCycles extends Flow5_AddCustomer {
 ////		WebDriverWaits.ClickOn(Billrun.View_Button);
 //		WebDriverWaits.ClickAfter5mins(Billrun.View_Button);
 //		Thread.sleep(2000);
-		WebDriverWaits.ClickOn(Billrun.Cancel_Button);
+		//WebDriverWaits.ClickOn(Billrun.Cancel_Button);
 		//WebDriverWaits.ClickOn(Billrun.Yes_Button);
 		Thread.sleep(2000);
 //
