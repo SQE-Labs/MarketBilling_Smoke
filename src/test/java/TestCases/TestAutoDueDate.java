@@ -1,35 +1,69 @@
 package TestCases;
 
+import CommonMethods.BaseTest;
+import POM.BillRun;
+import POM.Customer;
+import POM.Metering;
+import POM.Services;
 import org.testng.annotations.Test;
 
-//import POM.Flow2_3AddTOUFileAndPlan; //
+import java.util.ArrayList;
+import java.util.List;
 
-public class TestAutoDueDate extends TestLogin {
-	
-	@Test(priority = 1) 
-	public static void M_EnableDueDate() throws InterruptedException { 
-		extentTest = extent.startTest(" Auto Due Date ");
-		extentTest.setDescription(" Verify that User is able to Enable due date by Payment terms ");
-		POM.Flow9_Auto_Due_Date.X_EnableDueDate.M_EnableDueDate(); 
-		
+public class TestAutoDueDate extends BaseTest {
+
+	@Test(priority = 1,enabled = false)
+	public  void BillRun_after_EnableDueDate_CalendarDays() throws InterruptedException {
+		extentTest = extent.startTest("BillRun_after_EnableDueDate_CalendarDays");
+		extentTest.setDescription(" Verify that User is able to Run Bill after enabling  due date by Payment term method as Calendar Days ");
+		POM.Flow9_Auto_Due_Date.X_EnableDueDate.M_EnableDueDate("Calendar days");
+		String customerId = Customer.createCustomer("Tenant", "Residential", "business123@yopmail.com");
+		String serviceId=Services.M_AddService(customerId);
+		Services.EditService();
+		String 	meterId =Metering.AddMeter();
+		String 	registerId =Metering.createRegister();
+		Metering.addMeterReads("Initial","150","200","300");
+		Metering.addMeterReads("Actual Read","200","400","650");
+		List<String> customerList = new ArrayList<String>();
+		customerList.add(customerId);
+		String billRunCycle=BillRun.createBillCycle(customerList);
+		BillRun.runBillCycle(billRunCycle);
 	}
-	
-	@Test(priority = 2) 
-	public static void AutoDueDate() throws InterruptedException { 
-		extentTest = extent.startTest(" Auto Due Date ");
-		extentTest.setDescription(" Verify that User is able to run the bill run with 1 customer after updating auto due date ");
-		POM.Flow9_Auto_Due_Date.AutoDueDate(); 
-		
+	@Test(priority = 2,enabled = false)
+	public  void BillRun_after_EnableDueDate_BusinessDays() throws InterruptedException {
+		extentTest = extent.startTest("BillRun_after_EnableDueDate_BusinessDays");
+		extentTest.setDescription(" Verify that User is able to Run Bill after enabling  due date by Payment term method as BusinessDays ");
+		POM.Flow9_Auto_Due_Date.X_EnableDueDate.M_EnableDueDate("Business days");
+		String customerId = Customer.createCustomer("Tenant", "Business", "business123@yopmail.com");
+		String serviceId=Services.M_AddService(customerId);
+		Services.EditService();
+	    String 	meterId =Metering.AddMeter();
+      	String 	registerId =Metering.createRegister();
+		Metering.addMeterReads("Initial","150","200","300");
+		Metering.addMeterReads("Actual Read","200","400","650");
+
+		List<String> customerList = new ArrayList<String>();
+		customerList.add(customerId);
+		String billRunCycle=BillRun.createBillCycle(customerList);
+		BillRun.runBillCycle(billRunCycle);
+
 	}
-	//to-do
-	@Test(priority = 3,enabled = false)
-	public static void BillRunWithSingleCustomer() throws InterruptedException {
-		extentTest = extent.startTest(" BillRunWithSingleCustomer ");
-		extentTest.setDescription(" Verify that User is able to run the bill with cycle ");
-		//POM.Flow9_Auto_Due_Date.BillRunWithSingleCustomer();
-		
-	}
-	
+	@Test(priority = 3)
+	public  void BillRun_after_EnableDueDate_EndOfMonth() throws InterruptedException {
+		extentTest = extent.startTest("BillRun_after_EnableDueDate_EndOfMonth");
+		extentTest.setDescription(" Verify that User is able to Run Bill after enabling  due date by Payment term method as End of Month");
+		POM.Flow9_Auto_Due_Date.X_EnableDueDate.M_EnableDueDate("End of month");
+		String customerId = Customer.createCustomer("Tenant", "Commercial", "residential123@yopmail.com");
+		String serviceId=Services.M_AddService(customerId);
+		Services.EditService();
+		String 	meterId =Metering.AddMeter();
+		String 	registerId =Metering.createRegister();
+		Metering.addMeterReads("Initial","150","200","300");
+		Metering.addMeterReads("Actual Read","200","400","650");
+		List<String> customerList = new ArrayList<String>();
+		customerList.add(customerId);
+		String billRunCycle=BillRun.createBillCycle(customerList);
+		BillRun.runBillCycle(billRunCycle);	}
+
 
 }
- 

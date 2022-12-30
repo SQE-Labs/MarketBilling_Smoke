@@ -1,5 +1,6 @@
 package POM;
 
+import BrowsersBase.DataInterface;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -21,8 +22,8 @@ import TestCases.TestLogin;
 public class Flow9_Auto_Due_Date extends TestLogin {
 	public static String RandomCycleName4;
 	public static JavascriptExecutor jse = (JavascriptExecutor) driver;
-	
-	
+
+
 	public static void AutoDueDate() throws InterruptedException {
 		Thread.sleep(2000);
 		Flow6_7AddingServiceAndMeter.X_AddService.AddThirdService();
@@ -44,27 +45,37 @@ public class Flow9_Auto_Due_Date extends TestLogin {
 		public static By ToggleButton_opn1_Commercial = By.xpath("(//*[@name='ptCategory'])[1]");
 		public static By ToggleButton_opn2_Residential = By.xpath("(//*[@name='ptCategory'])[2]");
 		public static By ToggleButton_opn3_Business = By.xpath("(//*[@name='ptCategory'])[3]");
+
+		public static By g_payment_term_method = By.id("g_payment_term_method");
+
 		public static By PaymentTermNumberofDays_Field = By.xpath("//*[@name='g_term_days']");
 		public static By SaveChanges_Button = By.xpath("//*[@id='saveChangesBtn']");
 		public static By Save_Button = By.xpath("//button[contains(text(),'Save')]");
 		public static By EditGroupSuccessMsg = By.xpath("//div[@class='alert alert-success']");
 
-		public static void M_EnableDueDate() throws InterruptedException {
+		public static void M_EnableDueDate(String paymentMethod) throws InterruptedException {
 			SoftAssert softAssert = new SoftAssert();
+			driver.get(DataInterface.URL);
 			WebDriverWaits.ClickOn(Admin_Tab);
 			WebDriverWaits.ClickOn(EditGroup_SubTab);
 			// jse.executeScript("arguments[0].scrollIntoView(true);", MinimumDaystoBill);
 			jse.executeScript("window.scrollBy(0,2400)", "");
 			// jse.executeScript("window.scrollIntoView(MinimumDaystoBill)");
-			WebDriverWaits.ClickOn(DueDatebyPaymentTerms_ToggleButton);
-			WebDriverWaits.ClickOn(ToggleButton_opn1_Commercial);
-			WebDriverWaits.ClickOn(ToggleButton_opn2_Residential);
-			WebDriverWaits.ClickOn(ToggleButton_opn3_Business);
+			if ( driver.findElement(By.id("payTermOption")).getAttribute("style").contains("none")){
+				WebDriverWaits.ClickOn(DueDatebyPaymentTerms_ToggleButton);
+
+			}
+			WebDriverWaits.selectCheckBox(ToggleButton_opn1_Commercial);
+			WebDriverWaits.selectCheckBox(ToggleButton_opn2_Residential);
+			WebDriverWaits.selectCheckBox(ToggleButton_opn3_Business);
 			jse.executeScript("window.scrollBy(0,100)", "");
-			WebDriverWaits.ClickOn(PaymentTermNumberofDays_Field);
-			WebElement Field = WebDriverWaits.WaitUntilVisibleWE(PaymentTermNumberofDays_Field);
-			Field.clear();
-			WebDriverWaits.SendKeys(PaymentTermNumberofDays_Field, "10");
+			WebDriverWaits.selectByVisibleText(g_payment_term_method,paymentMethod);
+			if(paymentMethod!="End of month"){
+				WebElement Field = WebDriverWaits.WaitUntilVisibleWE(PaymentTermNumberofDays_Field);
+				Field.clear();
+				WebDriverWaits.SendKeys(PaymentTermNumberofDays_Field, "10");
+			}
+
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 			WebDriverWaits.ClickOn(SaveChanges_Button);
 			WebDriverWaits.ClickOn(Save_Button);
@@ -337,30 +348,30 @@ public class Flow9_Auto_Due_Date extends TestLogin {
 		Thread.sleep(2000);
 
 	}
-	
+
 	public static class EnableDueDate{
-		
+
 		public static int FirstOption(){
 			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_Dropdown);
-			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_DropdownOpnE1);	
-			return 0;	
+			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_DropdownOpnE1);
+			return 0;
 			}
-		
+
 		public static int SecondOption(){
 			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_Dropdown);
 			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_DropdownOpnC2);
-			return 0;	
+			return 0;
 			}
-		
+
 		public static int ThirdOption(){
 			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_Dropdown);
-			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_DropdownOpn_B3);	
-			return 0;	
+			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_DropdownOpn_B3);
+			return 0;
 			}
 
 		public static void Enable_Due_Date() throws InterruptedException {
 			Thread.sleep(2000);
-					
+
 			FirstResidentialCustomer1st();
 			FirstOption();
 			FirstResidentialCustomer2nd();
@@ -370,7 +381,7 @@ public class Flow9_Auto_Due_Date extends TestLogin {
 			ThirdCommercialCustomer1st();
 			FirstOption();
 			ThirdCommercialCustomer2nd();
-			
+
 			FirstResidentialCustomer1st();
 			SecondOption();
 			FirstResidentialCustomer2nd();
@@ -390,8 +401,8 @@ public class Flow9_Auto_Due_Date extends TestLogin {
 			ThirdCommercialCustomer1st();
 			ThirdOption();
 			ThirdCommercialCustomer2nd();
-			
-		
+
+
 			}
 
 	}
