@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import BrowsersBase.DataInterface;
 import CommonMethods.WebDriverWaits;
 
-public class Flow1Login {
+public class Login {
 
 	public static By UsernameField = By.xpath("//input[@name='j_username']");
 	public static By PasswordField = By.xpath("//input[@name='predigpass']");

@@ -8,11 +8,9 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeSuite;
 
 public class BrowsersInvoked {
 	public static WebDriver driver;
@@ -46,10 +44,7 @@ public class BrowsersInvoked {
 			driver = new OperaDriver(operaOptions);
 			break;
 		}
-		case "IEXPLORER": {
-			InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
-			WebDriverManager.iedriver().setup();
-			driver = new InternetExplorerDriver(internetExplorerOptions);
+		default : {
 			break;
 		}
 		}

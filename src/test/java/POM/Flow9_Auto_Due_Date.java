@@ -1,5 +1,6 @@
 package POM;
 
+import BrowsersBase.DataInterface;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -21,8 +22,8 @@ import TestCases.TestLogin;
 public class Flow9_Auto_Due_Date extends TestLogin {
 	public static String RandomCycleName4;
 	public static JavascriptExecutor jse = (JavascriptExecutor) driver;
-	
-	
+
+
 	public static void AutoDueDate() throws InterruptedException {
 		Thread.sleep(2000);
 		Flow6_7AddingServiceAndMeter.X_AddService.AddThirdService();
@@ -54,6 +55,7 @@ public class Flow9_Auto_Due_Date extends TestLogin {
 
 		public static void M_EnableDueDate(String paymentMethod) throws InterruptedException {
 			SoftAssert softAssert = new SoftAssert();
+			driver.get(DataInterface.URL);
 			WebDriverWaits.ClickOn(Admin_Tab);
 			WebDriverWaits.ClickOn(EditGroup_SubTab);
 			// jse.executeScript("arguments[0].scrollIntoView(true);", MinimumDaystoBill);
@@ -346,30 +348,30 @@ public class Flow9_Auto_Due_Date extends TestLogin {
 		Thread.sleep(2000);
 
 	}
-	
+
 	public static class EnableDueDate{
-		
+
 		public static int FirstOption(){
 			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_Dropdown);
-			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_DropdownOpnE1);	
-			return 0;	
+			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_DropdownOpnE1);
+			return 0;
 			}
-		
+
 		public static int SecondOption(){
 			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_Dropdown);
 			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_DropdownOpnC2);
-			return 0;	
+			return 0;
 			}
-		
+
 		public static int ThirdOption(){
 			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_Dropdown);
-			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_DropdownOpn_B3);	
-			return 0;	
+			WebDriverWaits.ClickOn(FirstCustomer.PaymentTermMethod_DropdownOpn_B3);
+			return 0;
 			}
 
 		public static void Enable_Due_Date() throws InterruptedException {
 			Thread.sleep(2000);
-					
+
 			FirstResidentialCustomer1st();
 			FirstOption();
 			FirstResidentialCustomer2nd();
@@ -379,7 +381,7 @@ public class Flow9_Auto_Due_Date extends TestLogin {
 			ThirdCommercialCustomer1st();
 			FirstOption();
 			ThirdCommercialCustomer2nd();
-			
+
 			FirstResidentialCustomer1st();
 			SecondOption();
 			FirstResidentialCustomer2nd();
@@ -399,8 +401,8 @@ public class Flow9_Auto_Due_Date extends TestLogin {
 			ThirdCommercialCustomer1st();
 			ThirdOption();
 			ThirdCommercialCustomer2nd();
-			
-		
+
+
 			}
 
 	}

@@ -3,6 +3,7 @@ package CommonMethods;
 import BrowsersBase.BrowsersInvoked;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -47,14 +48,14 @@ public class WebDriverWaits extends BrowsersInvoked {
 
 	public static void ClickOn(By element) {
 		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 			wait.until(ExpectedConditions.elementToBeClickable(element));
 		} catch (Exception e) {
-
-		}
+				}
 		WebElement ele = driver.findElement(element);
 		ele.click();
-		System.out.println("Clicked On " + element);
+		//System.out.println("Clicked On " + element);
 	}
 
 	public static void SendKeys(By element, String value) {
@@ -107,6 +108,12 @@ public class WebDriverWaits extends BrowsersInvoked {
         ele.click();
 		Select dropdown = new Select(ele);
 		dropdown.selectByValue(value);
+	}
+	public static void scrollIntoView(By element) {
+		 JavascriptExecutor jse = (JavascriptExecutor) driver;
+		 WebElement ele = driver.findElement(element);
+		jse.executeScript("arguments[0].scrollIntoView(true);", ele);
+
 	}
 	public static void selectByVisibleText(By element, String text) {
 		wait.until(ExpectedConditions.elementToBeClickable(element));

@@ -80,7 +80,7 @@
 <!--				</methods>-->
 <!--			</class>-->
 
-<!--			<class name="TestCases.TestBillRunWithNoCycle">-->
+<!--			<class name="TestCases.BillRunTest">-->
 <!--				<methods>-->
 <!--					<include name="BillRunWithNoCycle" />-->
 <!--					<include name="BillrunMethod_NoCycle" />-->

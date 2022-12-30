@@ -1,60 +1,63 @@
 package TestCases;
 
-import ExtentReport.ExtentReportClass;
-import POM.Flow5_AddCustomer;
-import POM.Flow6_7AddingServiceAndMeter;
+import CommonMethods.BaseTest;
+import POM.BillRun;
+import POM.Customer;
+import POM.Metering;
+import POM.Services;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //import POM.Flow2_3AddTOUFileAndPlan; //TestTwoCustomerBillRun
 
-public class TestSingleCustomerBillRun extends ExtentReportClass {
-	
-	
-	@Test(priority = 1) 
-	public static void CreateCustomerFor_BillrunCycle() throws InterruptedException {
-		extentTest = extent.startTest(" Create Customer for bill run with 1 customer ");
-		extentTest.setDescription(" Verify that User is able to run the small bill run with 1 customer ");
-		Flow5_AddCustomer.FirstCustomer.FirstResidentialCustomer();
-		Flow6_7AddingServiceAndMeter.X_AddService.M_AddService();
-		Flow6_7AddingServiceAndMeter.X_AddService.EditService();
-		Flow6_7AddingServiceAndMeter.Metering.AddMeter();
-		Thread.sleep(128000);
+public class TestSingleCustomerBillRun extends BaseTest {
+    String customerId;
+    String serviceId;
+    String meterId;
+    String registerId;
+    String billCycleName;
 
-	}
-		@Test(priority = 2) 
-		public static void SmallBillRunWithSingleCustomer() throws InterruptedException { 
-			extentTest = extent.startTest(" Small Cycle Bill run with 1 customer ");
-			extentTest.setDescription(" Verify that User is able to run the small bill run with 1 customer ");
-		//	Flow8_AllBillrunCycles.X_BillrunCycle.M_BillRunCycle(CustomerID01R);
-		//	POM.Flow8_AllBillrunCycles.X_BillrunCycle.SmallBillRunWithSingleCustomer();
-		Thread.sleep(41000);
-		}	
-		@Test(priority = 3) 
-		
-			public static void Rollback_SmallBillRunWithSingleCustomer() throws InterruptedException { 
-				extentTest = extent.startTest(" Rollback for single customer ");
-				extentTest.setDescription(" Verify that User is able to run rollback single customer ");
-		    	//POM.Flow8_AllBillrunCycles.X_BillrunCycle.Rollback_SmallBillRunWithSingleCustomer();
-			Thread.sleep(18000);
+    @Test(priority = 1,enabled = true)
+    public  void CreateCustomer_For_BillrunCycle() throws InterruptedException {
+        extentTest = extent.startTest(" Create Customer for bill run with 1 customer ");
+        extentTest.setDescription(" Verify that User is able to run the small bill run with 1 customer ");
+         customerId =Customer.createCustomer("Tenant", "Residential", "residential123@yopmail.com");
+         serviceId=Services.M_AddService(customerId);
+         Services.EditService();
+         meterId =Metering.AddMeter();
+         registerId =Metering.createRegister();
+        Metering.addMeterReads("Initial","150","200","300");
+        Metering.addMeterReads("Actual Read","200","400","650");
 
-		}
 
-	@Test(priority = 4)
+    }
 
-	public static void rebill_and_Reuse() throws InterruptedException {
-		extentTest = extent.startTest(" Rebill and Reuse Statement ");
-		extentTest.setDescription(" Verify that User is able to run rebill and reuse and Statement");
-		//POM.Flow8_AllBillrunCycles.X_BillrunCycle.Rollback_SmallBillRunWithSingleCustomer();
-     Thread.sleep(35000);
-	}
-	@Test(priority = 4)
+    @Test(priority = 2,enabled = true)
+    public  void SmallBillRunWithSingleCustomer() throws InterruptedException {
+        extentTest = extent.startTest(" Small Cycle Bill run with 1 customer ");
+        extentTest.setDescription(" Verify that User is able to run the small bill run with 1 customer ");
+        List<String > customer= new ArrayList<String>();
+        customer.add(customerId);
+        billCycleName =BillRun.createBillCycle(customer);
+        BillRun.runBillCycle(billCycleName);
+    }
 
-	public static void rebill_New_statement() throws InterruptedException {
-		extentTest = extent.startTest(" Rebill with  new  Statement ");
-		extentTest.setDescription(" Verify that User is able to run rebill  with new Statement");
-		//POM.Flow8_AllBillrunCycles.X_BillrunCycle.Rollback_SmallBillRunWithSingleCustomer();
-		Thread.sleep(20000);
-	}
+    @Test(priority = 3)
+
+    public  void Rollback_SmallBillRunWithSingleCustomer() throws InterruptedException {
+        extentTest = extent.startTest(" Rollback for single customer ");
+        extentTest.setDescription(" Verify that User is able to run rollback single customer ");
+        //String customerId ="40930";
+        BillRun.Rollback_SmallBillRunWithSingleCustomer(customerId);
+    }
+    @Test(priority = 4)
+
+    public  void rebill_and_Reuse() throws InterruptedException {
+        extentTest = extent.startTest(" Rebill and Reuse Statement ");
+        extentTest.setDescription(" Verify that User is able to run rebill and reuse and Statement");
+        BillRun.rebillSingleCustomer(  billCycleName);
+    }
 
 }
- 

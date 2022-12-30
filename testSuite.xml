@@ -9,7 +9,7 @@
 			<class name="TestCases.TestAddPlan"/>
 			<class name="TestCases.TestAddService"/>
 			<class name="TestCases.TestAutoDueDate"/>
-			<class name="TestCases.TestBillRunWithNoCycle"/>
+			<class name="TestCases.BillRunTest"/>
 			<class name="TestCases.TestBillRunWithUncommittedStatement"/>
 			<class name="TestCases.TestCustomers"/>
 			<class name="TestCases.TestLargeBillRun"/>
