@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TestAutoDueDate extends BaseTest {
 
-	@Test(priority = 1,enabled = false)
+	@Test(priority = 1,enabled = true)
 	public  void BillRun_after_EnableDueDate_CalendarDays() throws InterruptedException {
 		extentTest = extent.startTest("BillRun_after_EnableDueDate_CalendarDays");
 		extentTest.setDescription(" Verify that User is able to Run Bill after enabling  due date by Payment term method as Calendar Days ");
@@ -29,7 +29,7 @@ public class TestAutoDueDate extends BaseTest {
 		String billRunCycle=BillRun.createBillCycle(customerList);
 		BillRun.runBillCycle(billRunCycle);
 	}
-	@Test(priority = 2,enabled = false)
+	@Test(priority = 2,enabled = true)
 	public  void BillRun_after_EnableDueDate_BusinessDays() throws InterruptedException {
 		extentTest = extent.startTest("BillRun_after_EnableDueDate_BusinessDays");
 		extentTest.setDescription(" Verify that User is able to Run Bill after enabling  due date by Payment term method as BusinessDays ");

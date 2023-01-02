@@ -81,7 +81,7 @@ public class Services {
         select = new Select(Option2);
         select.selectByVisibleText("Electricity Template Plan");
         Thread.sleep(1000);
-        WebDriverWaits.ClickOn(Move_In_Date_Datepicker);
+       // WebDriverWaits.ClickOn(Move_In_Date_Datepicker);
         WebDriverWaits.SendKeys(Move_In_Date_Datepicker, DateAndTime.DateTimeGenerator("dd/mm/yyyy"));
         WebDriverWaits.ClickOn(SelectCurrentDate);
         WebDriverWaits.scrollIntoView(Select_Use_Structured_Address_Togglebutton);

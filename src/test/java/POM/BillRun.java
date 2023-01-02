@@ -375,7 +375,7 @@ public class BillRun extends TestLogin {
     }
 
     public static void runBillCycle( String billRunCycleName) throws InterruptedException {
-
+        LandingPage.navigateToHomePage();
         //First Time Bill run
         WebDriverWaits.ClickOn(BillRun_Tab);
         jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
