@@ -1,4 +1,4 @@
-package ExtentReport;
+package CommonMethods;
 
 import BrowsersBase.BrowsersInvoked;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -17,7 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
-public class ExtentReportClass extends BrowsersInvoked {
+public class BaseTest extends BrowsersInvoked {
 
 	public static ExtentReports extent;
 	public static ExtentTest extentTest;
@@ -45,7 +45,7 @@ public class ExtentReportClass extends BrowsersInvoked {
 			extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS " + result.getThrowable());
 			System.out.println("*** Test execution " + result.getMethod().getMethodName() + " failed...");
 
-			String screenshotPath = ExtentReportClass.getScreenshot(driver, result.getName());
+			String screenshotPath = getScreenshot(driver, result.getName());
 			extentTest.log(LogStatus.FAIL, extentTest.addScreenCapture(screenshotPath));
 			// extentTest.log(LogStatus.FAIL, extentTest.addScreencast(screenshotPath));
 		} else if (result.getStatus() == ITestResult.SKIP) {

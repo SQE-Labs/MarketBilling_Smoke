@@ -1,73 +1,86 @@
 package TestCases;
 
+import CommonMethods.BaseTest;
+import POM.AddSitePlans;
+import POM.Customer;
 import POM.Flow6_7AddingServiceAndMeter;
+import POM.Metering;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-public class TestAddService extends TestLogin {
+import static POM.Flow5_AddCustomer.*;
 
-	@Test(priority = 1)
-	public static void Service() throws InterruptedException {
-		extentTest = extent.startTest(" First Service ");
-		extentTest.setDescription(" Verify that User is able to add Service. ");
-		Flow6_7AddingServiceAndMeter.X_AddService.Service_MeterR();
-	}
-	
-//	@Test(priority = 2)
-//	public static void EditService() throws InterruptedException {
-//		extentTest = extent.startTest(" Edit First Service ");
-//		extentTest.setDescription(" Verify that User is able to add Service. ");
-//		Flow6_7AddingServiceAndMeter.X_AddService.EditService();
-//	}
-//	
-//	@Test(priority = 3)
-//	public static void AddMeter_MeterRegisterR() throws InterruptedException {
-//		extentTest = extent.startTest(" AddMeter&MeterRegisterR ");
-//		extentTest.setDescription(" Verify that User is able to add Service. ");
-//		Flow6_7AddingServiceAndMeter.X_AddService.AddMeter_MeterRegisterR();
-//	}
-	
-	@Test(priority = 2)
-	public static void SecondService() throws InterruptedException {
-		extentTest = extent.startTest(" AddSecondService ");
-		extentTest.setDescription(" Verify that User is able to add SecondService. ");
-		Flow6_7AddingServiceAndMeter.X_AddService.Service_MeterB();
-	}
-	
-//	@Test(priority = 5)
-//	public static void EditSecondService() throws InterruptedException {
-//		extentTest = extent.startTest(" EditSecondService ");
-//		extentTest.setDescription(" Verify that User is able to add SecondService. ");
-//		Flow6_7AddingServiceAndMeter.X_AddService.EditSecondService();
-//	}
-	
-//	@Test(priority = 6)
-//	public static void BAddMeter_MeterRegister() throws InterruptedException {
-//		extentTest = extent.startTest(" AddMeter&MeterRegisterB ");
-//		extentTest.setDescription(" Verify that User is able to add SecondService. ");
-//		Flow6_7AddingServiceAndMeter.X_AddService.BAddMeter_MeterRegister();
-//	}
-//	
-	
-	@Test(priority = 3)
-	public static void AddThirdService() throws InterruptedException {
-		extentTest = extent.startTest(" AddThirdService ");
-		extentTest.setDescription(" Verify that User is able to add ThirdService ");
-		Flow6_7AddingServiceAndMeter.X_AddService.Service_MeterC();
-	}
-	
-//	@Test(priority = 7)
-//	public static void EditThirdService() throws InterruptedException {
-//		extentTest = extent.startTest(" EditThirdService ");
-//		extentTest.setDescription(" Verify that User is able to add ThirdService ");
-//		Flow6_7AddingServiceAndMeter.X_AddService.EditThirdService();
-//	}
-//	
-//	@Test(priority = 7)
-//	public static void AddMeter_MeterRegisterC() throws InterruptedException {
-//		extentTest = extent.startTest(" AddMeter&MeterRegisterC ");
-//		extentTest.setDescription(" Verify that User is able to add ThirdService ");
-//		Flow6_7AddingServiceAndMeter.X_AddService.AddMeter_MeterRegisterC();
-//	}
-	
+public class TestAddService extends BaseTest {
+
+    @AfterMethod
+    public void pageRefresh() {
+        driver.navigate().refresh();
+    }
+
+    @Test(priority = 1)
+    public void ResidentialService() throws InterruptedException {
+        extentTest = extent.startTest("Retail Electricity Service for  Residential Customer ");
+        extentTest.setDescription(" Verify that User is able to add Residential Service. ");
+        Customer.searchCustomer(CustomerID01R);
+        Flow6_7AddingServiceAndMeter.X_AddService.M_AddService();
+    }
+
+    @Test(priority = 2)
+    public void EditResidentialService() throws InterruptedException {
+        extentTest = extent.startTest(" Edit Retail Electricity Service for  Residential Customer ");
+        extentTest.setDescription(" Verify that User is able to edit Retail Electricity Service for  Residential Customer. ");
+        Flow6_7AddingServiceAndMeter.X_AddService.EditService();
+    }
+
+    @Test(priority = 3)
+    public void AddMeter_MeterRegisterR() throws InterruptedException {
+        extentTest = extent.startTest(" AddMeter and MRegister  for  service ");
+        extentTest.setDescription(" Verify that User is able to add Service. ");
+        Metering metering = new Metering();
+        metering.AddMeter();
+        metering.createRegister();
+
+    }
+
+    @Test(priority = 4)
+    public void SecondService() throws InterruptedException {
+        extentTest = extent.startTest(" Add and edit Retail Electricity Service for  Business Customer  ");
+        extentTest.setDescription(" Verify that User is able to add SecondService. ");
+        Customer.searchCustomer(CustomerID02B);
+        Flow6_7AddingServiceAndMeter.X_AddService.AddSecondService();
+        Flow6_7AddingServiceAndMeter.X_AddService.EditSecondService();
+        Metering metering = new Metering();
+        metering.AddMeter();
+        metering.createRegister();
+    }
+
+
+    @Test(priority = 5)
+    public void AddThirdService() throws InterruptedException {
+        extentTest = extent.startTest(" Add and edit Retail Electricity Service for  Commercial Customer  ");
+        extentTest.setDescription(" Verify that User is able to add ThirdService ");
+        Customer.searchCustomer(CustomerID03C);
+        Flow6_7AddingServiceAndMeter.X_AddService.AddThirdService();
+        Flow6_7AddingServiceAndMeter.X_AddService.EditThirdService();
+        Metering metering = new Metering();
+        metering.AddMeter();
+        metering.createRegister();
+
+    }
+    @Test(priority = 6)
+    public void addSitePlans() throws InterruptedException {
+        extentTest = extent.startTest(" Add Site Plans ");
+        extentTest.setDescription(" Verify that User is able to add  site plans ");
+        AddSitePlans.addSitePlan();
+
+    }
+
+    @Test(priority = 7)
+    public void addSiteParameters() throws InterruptedException {
+        extentTest = extent.startTest(" Add Site Parameters ");
+        extentTest.setDescription(" Verify that User is able to add  site Paramaters ");
+        AddSitePlans.addSiteParameters();
+
+    }
+
 }
- 
