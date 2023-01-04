@@ -2,11 +2,12 @@ package TestCases;
 
 import CommonMethods.BaseTest;
 import CommonMethods.DateAndTime;
-import POM.*;
+import POM.CSVHelper;
+import POM.Customer;
+import POM.MeterImport;
+import POM.Services;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 
@@ -27,7 +28,7 @@ public class Imports extends BaseTest {
 
 	}
 
-    @Test(priority = 1,enabled = false)
+    @Test(priority = 1,enabled = true)
     public void Import_Meter_Number() throws Exception {
         extentTest = extent.startTest(" Meter Number import ");
         extentTest.setDescription(" Verify that User is able to run meter number import");
@@ -41,7 +42,7 @@ public class Imports extends BaseTest {
         MeterImport.meterNumberImport(meterImport_FilePath);
     }
 
-    @Test(priority = 2,enabled = false)
+    @Test(priority = 2,enabled = true)
     public void Import_Meter_Register() throws Exception {
         extentTest = extent.startTest(" Meter Register Import ");
         extentTest.setDescription(" Verify that User is able to run meter register using Import");
@@ -77,19 +78,6 @@ public class Imports extends BaseTest {
         MeterImport.meterReadsImport(path);
 
     }
-
-
-    @Test(priority = 5,enabled = false)
-    public void BillRun_afterImports() throws Exception {
-        extentTest = extent.startTest("Add_BillRun_Cycle for Imports");
-        List<String> customerList = new ArrayList<String>();
-        customerList.add(customerId);
-        billCycleName=BillRun.createBillCycle(customerList);
-        BillRun.runBillCycle(billCycleName);
-
-    }
-
-
 
 
 

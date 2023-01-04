@@ -79,15 +79,8 @@ public class CSVHelper  extends TestLogin {
 
 				fileWriter.append( Date);
 				fileWriter.append(COMMA_DELIMITER);
-
 				fileWriter.append( Date2);
-			//	fileWriter.append(COMMA_DELIMITER);
-
-				//Add a new line separator after the header
 				fileWriter.append(NEW_LINE_SEPARATOR);
-
-
-
 			System.out.println("CSV file was created successfully !!!");
 
 		} catch (Exception e) {

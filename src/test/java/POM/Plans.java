@@ -453,7 +453,17 @@ public class Plans extends BaseTest {
 			SoftAssert softAssert = new SoftAssert();
 			driver.navigate().refresh();
 			Thread.sleep(4000);
-
+			WebDriverWaits.ClickOn(PlanTab);
+			WebDriverWaits.ClickOn(CreateNewPlan);
+			Thread.sleep(3000);
+			WebDriverWaits.ClickOn(UsageTypeDropdown);
+			WebElement UsageOption = WebDriverWaits.WaitUntilVisibleWE(UsageTypeDropdown);
+			select = new Select(UsageOption);
+			select.selectByVisibleText("Retail Electricity");
+			// select.selectByIndex(2);
+			WebDriverWaits.ClickOn(NameField);
+			String RandomName3 = "MktPlan_NetworkRate" + RandomStrings.RequiredCharacters(4);
+			WebDriverWaits.SendKeys(NameField, RandomName3);
 //			WebDriverWaits.ClickOn(PlanSearchField);
 //			WebDriverWaits.SendKeys(PlanSearchField, RandomName1); // search tou network plan
 //			WebDriverWaits.ClickOn(EditPlan);

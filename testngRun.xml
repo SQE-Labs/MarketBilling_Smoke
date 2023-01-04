@@ -4,16 +4,16 @@
     <test thread-count="1" name="Test">
         <classes>
 
-<!--            <class name="TestCases.TestLogin"></class>-->
-<!--            <class name="TestCases.TestAddPlan"></class>-->
-<!--            <class name="TestCases.TestCustomers"></class>-->
-<!--            <class name="TestCases.TestAddService"></class>-->
-<!--            <class name="TestCases.TransactionsTest"></class>-->
-<!--            <class name="TestCases.TestSingleCustomerBillRun"></class>-->
+            <class name="TestCases.TestLogin"></class>
+            <class name="TestCases.TestCustomers"></class>
+            <class name="TestCases.TestAddService"></class>
+            <class name="TestCases.TestAddMeter"></class>
+            <class name="TestCases.TransactionsTest"></class>
+            <class name="TestCases.TestSingleCustomerBillRun"></class>
             <class name="TestCases.TestAutoDueDate"></class>
-<!--            <class name="TestCases.MultipleCustomerBillRunTest"></class>-->
+            <class name="TestCases.TestAddPlan"></class>
+            <class name="TestCases.MultipleCustomerBillRunTest"></class>
             <class name="TestCases.Imports"></class>
-
-        </classes>
+         </classes>
     </test>
 </suite>

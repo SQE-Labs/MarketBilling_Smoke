@@ -12,7 +12,6 @@ public class MeterImport extends BaseTest {
     public static By MeterNumbersIcon = By.xpath("//p[text()='Meter Numbers']");
     public static By MeterRegisterIcon = By.xpath("//p[text()='Meter Registers']");
     public static By meterReadings = By.xpath("//p[text()='Meter Readings']");
-
     public static By AdminIcon = By.xpath("//a[@title='Administration']/i");
     public static By browseFile = By.xpath("//input[@id='attFile']");
     public static By attDesc = By.id("attDesc");

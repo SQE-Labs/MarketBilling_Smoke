@@ -41,7 +41,7 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
         public static By selectBusinessCustomer_Record = By.xpath("(//td[@class='sorting_1']/a)[2]");
         public static By selectBusinessCustomer_Record1 = By.xpath("(//td[@class='sorting_1']/a)[1]"); // Just temporary
         // due to issue
-        public static By selectCommercialCustomer_Record = By.xpath("(//td[@class='sorting_1']/a)[1]");
+        public static By selectCommercialCustomer_Record = By.xpath("(//td[@class='sorting_1']/a)[3]");
         public static By OverviewTab = By.xpath("//*[@class=\"icon-eye-open\"]"); // //*[contains(text(),'Overview')]
 
         // Add Service for Residential/Business/Commercial customer
@@ -85,7 +85,7 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
 
             String ThirdRecID = WebDriverWaits.GetText(selectResidentialCustomer_Record);
             //		WebDriverWaits.SendKeys(SearchField, CustomerID01R);
-            WebDriverWaits.SendKeys(SearchField, ThirdRecID);
+            WebDriverWaits.SendKeysWithClear(SearchField, ThirdRecID);
 
 
             WebDriverWaits.ClickOn(SearchIcon);
@@ -116,7 +116,7 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
             Thread.sleep(1000);
 
             WebDriverWaits.ClickOn(Move_In_Date_Datepicker);
-            WebDriverWaits.SendKeys(Move_In_Date_Datepicker, DateAndTime.DateTimeGenerator("dd/mm/yyyy"));
+            WebDriverWaits.SendKeys(Move_In_Date_Datepicker, DateAndTime.DateTimeGenerator("dd/MM/yyyy"));
 
             WebDriverWaits.ClickOn(SelectCurrentDate);
 
@@ -383,36 +383,13 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
             WebDriverWaits.ClickOn(SaveChanges_Button);
             WebDriverWaits.ClickOn(OkButton);
             //Assert:  Successfully saved service details.
-//			String ActualMsg = WebDriverWaits.GetText(CustomerSuccessEditMsg);
-//			String ExpectedMsg1 = "Successfully saved service details.";
-//			softAssert.assertEquals(ExpectedMsg1, ActualMsg);
+            String ActualMsg = WebDriverWaits.GetText(CustomerSuccessEditMsg);
+            String ExpectedMsg1 = "Successfully saved service details.";
+            softAssert.assertEquals(ExpectedMsg1, ActualMsg);
             System.out.println("Successfully ediited customer");
             Thread.sleep(4000);
             jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
         }
-
-        public static void addSiteParameters() {
-
-
-        }
-
-        //		public static void AddMeter_MeterRegisterC() throws InterruptedException {
-//			
-//			Metering.AddMeter();
-//			Thread.sleep(2000);
-//			
-//}
-        public static void Service_MeterC() throws InterruptedException {
-            X_AddService.AddThirdService();
-            //X_AddService.EditThirdService();
-            // Metering.AddMeter();
-            Thread.sleep(2000);
-        }
-
-
     }
-
-
-
 }
