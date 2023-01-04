@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
 
 import static BrowsersBase.BrowsersInvoked.driver;
+import static POM.Flow6_7AddingServiceAndMeter.X_AddService.SearchField;
+import static POM.Flow6_7AddingServiceAndMeter.X_AddService.SearchIcon;
 
 public class Customer {
     public static final String SUCCESS_MESG = "Successfully saved customer.";
@@ -87,7 +89,7 @@ public class Customer {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(SUCCESS_MESG, ActualMsg);
         changeCustomerStatus();
-        String customerId=searchCustomer();
+        String customerId=searchRecentCustomer();
         System.out.println("CustomerId generated ------"+customerId);
         return customerId ;
 
@@ -156,6 +158,7 @@ public class Customer {
         jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         WebDriverWaits.ClickOn(ChangeStatusButton);
         WebDriverWaits.ClickOn(NewStatusDropdown);
+        Thread.sleep(4000);
         WebElement ActiveOption = WebDriverWaits.WaitUntilVisibleWE(NewStatusDropdown);
         select = new Select(ActiveOption);
         select.selectByVisibleText("Active");
@@ -166,19 +169,27 @@ public class Customer {
         Thread.sleep(4000);
         WebDriverWaits.ClickOn(Closepopup_icon);
     }
-    public static String searchCustomer() throws InterruptedException {
+    public static String searchRecentCustomer() throws InterruptedException {
         driver.get(DataInterface.AdminURL);
-        Thread.sleep(8000);
-        WebDriverWaits.ClickOn(Flow6_7AddingServiceAndMeter.X_AddService.SearchIcon);
+        WebDriverWaits.ClickOn(SearchIcon);
         Thread.sleep(4000);
         return WebDriverWaits.GetText(Flow6_7AddingServiceAndMeter.X_AddService.selectBusinessCustomer_Record1);
     }
+    public static String searchAndNavigateToRecentCustomer() throws InterruptedException {
+        driver.get(DataInterface.URL);
+        WebDriverWaits.ClickOn(SearchIcon);
+        Thread.sleep(4000);
+        String customerId=WebDriverWaits.GetText(Flow6_7AddingServiceAndMeter.X_AddService.selectBusinessCustomer_Record1);
+        WebDriverWaits.SendKeys(SearchField,customerId);
+        WebDriverWaits.ClickOn(SearchIcon);
+        return  customerId;
+    }
     public static void searchCustomer(String customerID) throws InterruptedException {
-
-        WebDriverWaits.ClickOn(Flow6_7AddingServiceAndMeter.X_AddService.SearchIcon);
-        WebDriverWaits.ClickOn(Flow6_7AddingServiceAndMeter.X_AddService.SearchField);
-        WebDriverWaits.SendKeys(Flow6_7AddingServiceAndMeter.X_AddService.SearchField, customerID);
-        WebDriverWaits.ClickOn(Flow6_7AddingServiceAndMeter.X_AddService.SearchIcon);
+        LandingPage.navigateToHomePage();
+        WebDriverWaits.ClickOn(SearchIcon);
+        WebDriverWaits.ClickOn(SearchField);
+        WebDriverWaits.SendKeys(SearchField, customerID);
+        WebDriverWaits.ClickOn(SearchIcon);
         Thread.sleep(2000);
     }
 }

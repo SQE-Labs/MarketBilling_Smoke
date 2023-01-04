@@ -335,6 +335,7 @@ public class Flow5_AddCustomer extends TestLogin {
             // popup assertion
 
             WebDriverWaits.ClickOn(NewStatusDropdown);
+            Thread.sleep(3000);
             WebElement ActiveOption = WebDriverWaits.WaitUntilVisibleWE(NewStatusDropdown);
             select = new Select(ActiveOption);
             select.selectByVisibleText("Active");

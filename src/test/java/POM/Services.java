@@ -81,9 +81,9 @@ public class Services {
         select = new Select(Option2);
         select.selectByVisibleText("Electricity Template Plan");
         Thread.sleep(1000);
-        WebDriverWaits.ClickOn(Move_In_Date_Datepicker);
-        WebDriverWaits.SendKeys(Move_In_Date_Datepicker, DateAndTime.DateTimeGenerator("dd/mm/yyyy"));
-        WebDriverWaits.ClickOn(SelectCurrentDate);
+       // WebDriverWaits.ClickOn(Move_In_Date_Datepicker);
+        WebDriverWaits.SendKeys(Move_In_Date_Datepicker, DateAndTime.DateTimeGenerator("dd/MM/yyyy"));
+        //WebDriverWaits.ClickOn(SelectCurrentDate);
         WebDriverWaits.scrollIntoView(Select_Use_Structured_Address_Togglebutton);
         WebDriverWaits.ClickOn(Select_Use_Structured_Address_Togglebutton);
         WebDriverWaits.ClickOn(Building_Name_Field);
@@ -135,4 +135,11 @@ public class Services {
         jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
     }
-}
+    public static void navigateToEditServices() throws InterruptedException {
+        WebDriverWaits.ClickOn(ServiceTab);
+        // Search service id ("N" + random+"11"); which is created above
+        WebDriverWaits.ClickOn(Edit_icon);
+        jse.executeScript("window.scrollBy(0,300)", "");
+    }
+
+    }
