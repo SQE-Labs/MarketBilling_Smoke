@@ -1,6 +1,7 @@
 package POM;
 
 import BrowsersBase.DataInterface;
+import CommonMethods.DateAndTime;
 import CommonMethods.RandomStrings;
 import CommonMethods.WebDriverWaits;
 import TestCases.TestLogin;
@@ -40,6 +41,10 @@ public class BillRun extends TestLogin {
     public static By Admin_Tab = By.xpath("//a[@title='Administration']/i");
     public static By BillRunCycles_Subtab = By.xpath("//*[contains(text(),'Bill Run Cycles')]");
     public static By AddBillRunCycleButton_CreateNew = By.xpath("//*[@id='addBtn']");
+    public static By billSearch = By.xpath("//input[@type='search']");
+    public static By editActionBtn = By.xpath("//a[@title='Edit']");
+
+
     public static By CycleName_Field = By.xpath("//*[@id='cyclename']");
     public static By CustomerListFilter = By.xpath("//*[@placeholder='Customer List Filter']");
     public static By CustomerListFilterOpn = By.xpath("(//select[@multiple='multiple'])[1]");
@@ -54,6 +59,11 @@ public class BillRun extends TestLogin {
     // public static By Cancel_Button = By.xpath("//*[@class='bootstrap-dialog-close-button']");
     public static By Statement_Subtab = By.xpath("//*[@class='icon-columns']");
     public static By ViewDetails_Icon = By.xpath("//*[@title='View Details']");
+    public static By EditDetails_Icon = By.xpath("//i[@class='icon-edit']");
+    public static By newIssueDate = By.cssSelector("input#custIssueDate");
+    public static By updateBtn = By.xpath("//button[contains(text(),'Update')]");
+    public static By textIssueDate = By.xpath("//tr/td[3]");
+
     public static By Rollback_Button = By.xpath("//*[@class='btn btn-mini btn-danger']");
     public static By RollbackReason_Field = By.xpath("//*[@id='rollbackReason']");
     public static By Ok_Button = By.xpath("//*[contains(text(),'OK')]");
@@ -373,7 +383,29 @@ public class BillRun extends TestLogin {
         Thread.sleep(4000);
         return billRunCycleName;
     }
+    public static String editBillCycle(String oldBillCycleName) throws InterruptedException {
+        driver.navigate().refresh();
+        jse.executeScript("window.scrollBy(0,-500)", "");
+        WebDriverWaits.ClickOn(Admin_Tab);
+        WebDriverWaits.scrollIntoView(BillRunCycles_Subtab);
+        WebDriverWaits.ClickOn(BillRunCycles_Subtab);
+        Thread.sleep(2000);
+        WebDriverWaits.SendKeysWithClear(billSearch,oldBillCycleName);
+        Thread.sleep(2000);
+        WebDriverWaits.ClickOn(editActionBtn);
+        String billRunCycleNewName = oldBillCycleName+RandomStrings.RequiredCharacters(3);
+        WebDriverWaits.SendKeysWithClear(CycleName_Field, billRunCycleNewName);
+        System.out.println("Bill run cycle renamed with name ---" + billRunCycleNewName);
 
+        WebDriverWaits.ClickOn(SaveButton);
+        Thread.sleep(2000);
+        String ActualMsg = WebDriverWaits.GetText(BillRunCycleSuccessMsg);
+        SoftAssert softAssert=new SoftAssert();
+        softAssert.assertEquals("Successfully updated "+oldBillCycleName+ "cycle.", ActualMsg);
+        System.out.println("Successfully added new bill run cycle for  customers. "+billRunCycleNewName);
+        Thread.sleep(4000);
+        return billRunCycleNewName;
+    }
     public static void runBillCycle( String billRunCycleName) throws InterruptedException {
         LandingPage.navigateToHomePage();
         //First Time Bill run
@@ -439,6 +471,20 @@ public class BillRun extends TestLogin {
         Thread.sleep(2000);
         WebDriverWaits.ClickAfter5mins(View_Button);
         Thread.sleep(2000);
+
+    }
+    public static void updateStatementDate(String customerId) throws InterruptedException {
+        WebDriverWaits.ClickOn(Statement_Subtab);
+        WebDriverWaits.ClickOn(EditDetails_Icon);
+        String issueDate=DateAndTime.getDateWithDays("dd/MM/yyyy",2);
+        WebDriverWaits.SendKeys(newIssueDate, issueDate);
+        WebDriverWaits.ClickOn(updateBtn);
+        Thread.sleep(4000);
+        SoftAssert softAssert = new SoftAssert();
+		String issued = WebDriverWaits.GetText(textIssueDate);
+		softAssert.assertEquals(issueDate, issued);
+        Thread.sleep(2000);
+
 
     }
 }

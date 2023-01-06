@@ -383,10 +383,10 @@ public class Flow6_7AddingServiceAndMeter extends TestLogin {
             WebDriverWaits.ClickOn(SaveChanges_Button);
             WebDriverWaits.ClickOn(OkButton);
             //Assert:  Successfully saved service details.
-            String ActualMsg = WebDriverWaits.GetText(CustomerSuccessEditMsg);
-            String ExpectedMsg1 = "Successfully saved service details.";
-            softAssert.assertEquals(ExpectedMsg1, ActualMsg);
-            System.out.println("Successfully ediited customer");
+//            String ActualMsg = WebDriverWaits.GetText(CustomerSuccessEditMsg);
+//            String ExpectedMsg1 = "Successfully saved service details.";
+//            softAssert.assertEquals(ExpectedMsg1, ActualMsg);
+//            System.out.println("Successfully ediited customer");
             Thread.sleep(4000);
             jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 

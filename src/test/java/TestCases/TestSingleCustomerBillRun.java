@@ -1,16 +1,11 @@
 package TestCases;
 
 import CommonMethods.BaseTest;
-import POM.BillRun;
-import POM.Customer;
-import POM.Metering;
-import POM.Services;
+import POM.*;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-//import POM.Flow2_3AddTOUFileAndPlan; //TestTwoCustomerBillRun
 
 public class TestSingleCustomerBillRun extends BaseTest {
     String customerId;
@@ -33,8 +28,18 @@ public class TestSingleCustomerBillRun extends BaseTest {
 
 
     }
-
     @Test(priority = 2,enabled = true)
+    public  void createAndEditBillCycleName() throws InterruptedException {
+        extentTest = extent.startTest(" Small Cycle Bill run with 1 customer ");
+        extentTest.setDescription(" Verify that User is able to run the small bill run with 1 customer ");
+        //String customerId="40893";
+        List<String > customer= new ArrayList<String>();
+        customer.add(customerId);
+        String billCycleOldName =BillRun.createBillCycle(customer);
+        billCycleName =BillRun.editBillCycle(billCycleOldName);
+
+    }
+    @Test(priority = 3,enabled = true)
     public  void SmallBillRunWithSingleCustomer() throws InterruptedException {
         extentTest = extent.startTest(" Small Cycle Bill run with 1 customer ");
         extentTest.setDescription(" Verify that User is able to run the small bill run with 1 customer ");
@@ -44,20 +49,30 @@ public class TestSingleCustomerBillRun extends BaseTest {
         BillRun.runBillCycle(billCycleName);
     }
 
-    @Test(priority = 3)
+    @Test(priority = 4)
 
     public  void Rollback_SmallBillRunWithSingleCustomer() throws InterruptedException {
         extentTest = extent.startTest(" Rollback for single customer ");
         extentTest.setDescription(" Verify that User is able to run rollback single customer ");
-        //String customerId ="40930";
         BillRun.Rollback_SmallBillRunWithSingleCustomer(customerId);
     }
-    @Test(priority = 4)
+    @Test(priority = 5)
 
     public  void rebill_and_Reuse() throws InterruptedException {
         extentTest = extent.startTest(" Rebill and Reuse Statement ");
         extentTest.setDescription(" Verify that User is able to run rebill and reuse and Statement");
         BillRun.rebillSingleCustomer(  billCycleName);
+    }
+    @Test(priority = 6)
+
+    public  void updateStatementDates() throws InterruptedException {
+        extentTest = extent.startTest(" Update Statement Dates ");
+        extentTest.setDescription(" Verify that User is able to update Statement Dates");
+        Login.ValidLogin();
+        String customerId ="40930";
+        String billCycleName="teoyAGNsdsdsd";
+        Customer.searchCustomer(customerId);
+        BillRun.updateStatementDate(  billCycleName);
     }
 
 }

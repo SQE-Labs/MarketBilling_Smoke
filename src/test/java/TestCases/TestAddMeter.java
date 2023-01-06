@@ -29,7 +29,7 @@ public class TestAddMeter extends BaseTest {
 		extentTest.setDescription(" Verify that User is able to add  Meter Reads ");
 		Metering.addMeterReads("Initial","150","200","300");
 	}
-	@Test(priority = 3)
+	@Test(priority = 4)
 	public  void MeterReadsConsumption() throws InterruptedException {
 		extentTest = extent.startTest(" Meter Reads Consumption Data  ");
 		extentTest.setDescription(" Verify that User is able to add  Meter Reads consumption data ");

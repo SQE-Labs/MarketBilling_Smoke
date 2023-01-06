@@ -1,5 +1,4 @@
 package TestCases;
-
 import CommonMethods.BaseTest;
 import CommonMethods.DateAndTime;
 import POM.CSVHelper;
@@ -7,16 +6,11 @@ import POM.Customer;
 import POM.MeterImport;
 import POM.Services;
 import org.testng.annotations.Test;
-
 import java.util.Random;
-
-
 public class Imports extends BaseTest {
-
     String meterNo;
     String serviceId;
     String customerId;
-    String billCycleName;
     @Test(priority = 0)
     public void Add_Customer_and_Service_for_Imports() throws Exception {
          extentTest = extent.startTest("Add_Customer_and_Service");
@@ -76,9 +70,5 @@ public class Imports extends BaseTest {
         String col = "*Service ID,*Meter Number,*Date of Read,*Meter Read,*Period,*Read Type [I-Initial / A-Actual / C - Consumption / E-Estimate],Notes,Is Read Rollover? [Yes/No],Unit? [GAC-Cubic meter (m3)/GAB-Cubic feet (ft3)/GAA-British thermal unit (btu)/GAD-Kilowatt hour (kWh)/GAE-Mega joules (MJ)/GAF-Therms (th)],Datastream,Special Type";
         CSVHelper.ImportMeterReads(path,col, serviceId,meterNo,readDate,"250","P","C","notes","","","12","");
         MeterImport.meterReadsImport(path);
-
     }
-
-
-
 }

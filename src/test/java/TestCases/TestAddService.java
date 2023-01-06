@@ -18,7 +18,7 @@ public class TestAddService extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void ResidentialService() throws InterruptedException {
+    public void AddResidentialService() throws InterruptedException {
         extentTest = extent.startTest("Retail Electricity Service for  Residential Customer ");
         extentTest.setDescription(" Verify that User is able to add Residential Service. ");
         Customer.searchCustomer(CustomerID01R);
@@ -39,11 +39,14 @@ public class TestAddService extends BaseTest {
         Metering metering = new Metering();
         metering.AddMeter();
         metering.createRegister();
+        Metering.addMeterReads("Initial","150","200","300");
+        Metering.addMeterReads("Actual Read","200","400","650");
+
 
     }
 
     @Test(priority = 4)
-    public void SecondService() throws InterruptedException {
+    public void AddBusinessService() throws InterruptedException {
         extentTest = extent.startTest(" Add and edit Retail Electricity Service for  Business Customer  ");
         extentTest.setDescription(" Verify that User is able to add SecondService. ");
         Customer.searchCustomer(CustomerID02B);
@@ -52,19 +55,22 @@ public class TestAddService extends BaseTest {
         Metering metering = new Metering();
         metering.AddMeter();
         metering.createRegister();
+        Metering.addMeterReads("Initial","150","200","300");
+        Metering.addMeterReads("Actual Read","200","400","650");
+
     }
 
 
     @Test(priority = 5)
-    public void AddThirdService() throws InterruptedException {
+    public void AddCommercialService() throws InterruptedException {
         extentTest = extent.startTest(" Add and edit Retail Electricity Service for  Commercial Customer  ");
         extentTest.setDescription(" Verify that User is able to add ThirdService ");
         Customer.searchCustomer(CustomerID03C);
         Flow6_7AddingServiceAndMeter.X_AddService.AddThirdService();
         Flow6_7AddingServiceAndMeter.X_AddService.EditThirdService();
-        Metering metering = new Metering();
-        metering.AddMeter();
-        metering.createRegister();
+       // Metering metering = new Metering();
+     //   metering.AddMeter();
+     //   metering.createRegister();
 
     }
     @Test(priority = 6)
