@@ -68,10 +68,7 @@ public class TestSingleCustomerBillRun extends BaseTest {
     public  void updateStatementDates() throws InterruptedException {
         extentTest = extent.startTest(" Update Statement Dates ");
         extentTest.setDescription(" Verify that User is able to update Statement Dates");
-        Login.ValidLogin();
-        String customerId ="40930";
-        String billCycleName="teoyAGNsdsdsd";
-        Customer.searchCustomer(customerId);
+         Customer.searchCustomer(customerId);
         BillRun.updateStatementDate(  billCycleName);
     }
 
