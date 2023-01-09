@@ -43,9 +43,6 @@ public class TestSingleCustomerBillRun extends BaseTest {
     public  void SmallBillRunWithSingleCustomer() throws InterruptedException {
         extentTest = extent.startTest(" Small Cycle Bill run with 1 customer ");
         extentTest.setDescription(" Verify that User is able to run the small bill run with 1 customer ");
-        List<String > customer= new ArrayList<String>();
-        customer.add(customerId);
-        billCycleName =BillRun.createBillCycle(customer);
         BillRun.runBillCycle(billCycleName);
     }
 
