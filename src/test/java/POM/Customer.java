@@ -62,6 +62,9 @@ public class Customer {
     public static By Company_Name_Field = By.xpath("//*[@id=\"company\"]");
 
 
+    public static By settingsTab = By.xpath("//a[text()=' Settings']");
+
+
     public static String createCustomer(String type, String category, String email) throws InterruptedException {
         driver.get(DataInterface.URL);
         Thread.sleep(3000);
@@ -191,5 +194,15 @@ public class Customer {
         WebDriverWaits.SendKeys(SearchField, customerID);
         WebDriverWaits.ClickOn(SearchIcon);
         Thread.sleep(2000);
+    }
+    public static Settings navigateTo_CustomerSettings(String customerID) throws InterruptedException {
+        LandingPage.navigateToHomePage();
+        WebDriverWaits.ClickOn(SearchIcon);
+        WebDriverWaits.ClickOn(SearchField);
+        WebDriverWaits.SendKeys(SearchField, customerID);
+        WebDriverWaits.ClickOn(SearchIcon);
+        Thread.sleep(2000);
+        WebDriverWaits.ClickOn(settingsTab);
+        return new Settings();
     }
 }

@@ -16,7 +16,7 @@ import java.util.List;
 import static POM.Flow5_AddCustomer.*;
 
 public class BillRun extends TestLogin {
-   public static JavascriptExecutor jse = (JavascriptExecutor) driver;
+    public static JavascriptExecutor jse = (JavascriptExecutor) driver;
     public static By ConfirmationAssertion = By.xpath("//*[@class='bootstrap-dialog-message']");
     public static By BillRun_Tab = By.xpath("//*[@class='icon-tasks']");
     public static By RunTheBills_Button = By.xpath("//*[@class='btn btn-success']");
@@ -44,6 +44,7 @@ public class BillRun extends TestLogin {
     public static By billSearch = By.xpath("//input[@type='search']");
     public static By editActionBtn = By.xpath("//a[@title='Edit']");
 
+    public static By billRunSearch = By.cssSelector(".box-icon a");
 
     public static By CycleName_Field = By.xpath("//*[@id='cyclename']");
     public static By CustomerListFilter = By.xpath("//*[@placeholder='Customer List Filter']");
@@ -75,7 +76,20 @@ public class BillRun extends TestLogin {
     public static By viewRollBackHistoryBtn = By.xpath("//*[contains(text(),' View Rollback History')]");
     public static By editActionIcon = By.xpath("//*[@class='btn btn-mini btn-success']");
     public static By runBillS = By.cssSelector(".form-group #runBill");
+    public static By customer_checkBox = By.id("chkDelete_0");
 
+    public static By downloadPdf = By.xpath("//button[contains(text(),'Download')]");
+    public static By emailBills = By.xpath("//button[contains(text(),'Email')]");
+    public static By selectedCustomer = By.xpath("//a[contains(text(),'Selected')]");
+    public static By selectedCustomers = By.xpath("(//a[contains(text(),'Selected customers')])[2]");
+
+    public static By continueEmail = By.xpath("//button[contains(text(),'Continue')]");
+    public static By status = By.cssSelector("#emailResultData  td:nth-child(5)");
+    public static By dateSend = By.cssSelector("#emailResultData  td:nth-child(4)");
+
+    public static By close = By.id("sendEmailResultClose");
+    public static By download = By.id("submitSelected");
+    static SoftAssert softAssert = new SoftAssert();
     public static void BillrunMethod_NoCycle() throws InterruptedException {
         // SoftAssert softAssert = new SoftAssert();
 
@@ -329,6 +343,7 @@ public class BillRun extends TestLogin {
 
         WebDriverWaits.ClickOn(RollbackCross_Icon);
     }
+
     public static void statementRebill(String customerId) throws InterruptedException {
         Customer.searchCustomer(customerId);
         WebDriverWaits.ClickOn(Statement_Subtab);
@@ -343,6 +358,7 @@ public class BillRun extends TestLogin {
         Thread.sleep(5000);
 
     }
+
     public static void rollback() throws InterruptedException {
         SoftAssert softAssert = new SoftAssert();
         Thread.sleep(2000);
@@ -377,12 +393,13 @@ public class BillRun extends TestLogin {
         WebDriverWaits.ClickOn(SaveButton);
         Thread.sleep(2000);
         String ActualMsg = WebDriverWaits.GetText(BillRunCycleSuccessMsg);
-        SoftAssert softAssert=new SoftAssert();
+        SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals("Successfully added new bill run cycle.", ActualMsg);
-        System.out.println("Successfully added new bill run cycle for  customers. "+billRunCycleName);
+        System.out.println("Successfully added new bill run cycle for  customers. " + billRunCycleName);
         Thread.sleep(4000);
         return billRunCycleName;
     }
+
     public static String editBillCycle(String oldBillCycleName) throws InterruptedException {
         driver.navigate().refresh();
         jse.executeScript("window.scrollBy(0,-500)", "");
@@ -390,23 +407,24 @@ public class BillRun extends TestLogin {
         WebDriverWaits.scrollIntoView(BillRunCycles_Subtab);
         WebDriverWaits.ClickOn(BillRunCycles_Subtab);
         Thread.sleep(2000);
-        WebDriverWaits.SendKeysWithClear(billSearch,oldBillCycleName);
+        WebDriverWaits.SendKeysWithClear(billSearch, oldBillCycleName);
         Thread.sleep(2000);
         WebDriverWaits.ClickOn(editActionBtn);
-        String billRunCycleNewName = oldBillCycleName+RandomStrings.RequiredCharacters(3);
+        String billRunCycleNewName = oldBillCycleName + RandomStrings.RequiredCharacters(3);
         WebDriverWaits.SendKeysWithClear(CycleName_Field, billRunCycleNewName);
         System.out.println("Bill run cycle renamed with name ---" + billRunCycleNewName);
 
         WebDriverWaits.ClickOn(SaveButton);
         Thread.sleep(2000);
         String ActualMsg = WebDriverWaits.GetText(BillRunCycleSuccessMsg);
-        SoftAssert softAssert=new SoftAssert();
-        softAssert.assertEquals("Successfully updated "+oldBillCycleName+ "cycle.", ActualMsg);
-        System.out.println("Successfully added new bill run cycle for  customers. "+billRunCycleNewName);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals("Successfully updated " + oldBillCycleName + "cycle.", ActualMsg);
+        System.out.println("Successfully added new bill run cycle for  customers. " + billRunCycleNewName);
         Thread.sleep(4000);
         return billRunCycleNewName;
     }
-    public static void runBillCycle( String billRunCycleName) throws InterruptedException {
+
+    public static void runBillCycle(String billRunCycleName) throws InterruptedException {
         LandingPage.navigateToHomePage();
         //First Time Bill run
         WebDriverWaits.ClickOn(BillRun_Tab);
@@ -439,7 +457,8 @@ public class BillRun extends TestLogin {
         WebDriverWaits.ClickOn(Yes_Button);
         Thread.sleep(2000);
     }
-    public static void runBillCycleForRollBack( String billRunCycleName) throws InterruptedException {
+
+    public static void runBillCycleForRollBack(String billRunCycleName) throws InterruptedException {
 
         //First Time Bill run
         WebDriverWaits.ClickOn(BillRun_Tab);
@@ -473,18 +492,69 @@ public class BillRun extends TestLogin {
         Thread.sleep(2000);
 
     }
+
     public static void updateStatementDate(String customerId) throws InterruptedException {
         WebDriverWaits.ClickOn(Statement_Subtab);
         WebDriverWaits.ClickOn(EditDetails_Icon);
-        String issueDate=DateAndTime.getDateWithDays("dd/MM/yyyy",2);
+        String issueDate = DateAndTime.getDateWithDays("dd/MM/yyyy", 2);
         WebDriverWaits.SendKeys(newIssueDate, issueDate);
         WebDriverWaits.ClickOn(updateBtn);
         Thread.sleep(4000);
         SoftAssert softAssert = new SoftAssert();
-		String issued = WebDriverWaits.GetText(textIssueDate);
-		softAssert.assertEquals(issueDate, issued);
+        String issued = WebDriverWaits.GetText(textIssueDate);
+        softAssert.assertEquals(issueDate, issued);
         Thread.sleep(2000);
 
 
+    }
+
+    public static void billRunCycleSearch(String billCycle) throws InterruptedException {
+        Admin.navigateToBillRun();
+        Thread.sleep(2000);
+        WebDriverWaits.ClickOn(billRunSearch);
+        WebDriverWaits.SendKeysWithClear(billSearch, billCycle);
+
+    }
+    public static void viewBillDetails() throws InterruptedException {
+        WebDriverWaits.ClickOn(ViewDetails_Icon);
+
+    }
+    public static void selectCustCheckBox() throws InterruptedException {
+        WebDriverWaits.selectCheckBox(customer_checkBox);
+
+    }
+    public static void clickDownloadPdf() throws InterruptedException {
+        WebDriverWaits.ClickOn(downloadPdf);
+
+    }
+    public static void clickEmailBills() throws InterruptedException {
+        WebDriverWaits.ClickOn(emailBills);
+
+    }
+    public static void clickSelectedCustomer() throws InterruptedException {
+        WebDriverWaits.ClickOn(selectedCustomer);
+
+    }
+    public static void clickSelectedCustomers() throws InterruptedException {
+        WebDriverWaits.ClickOn(selectedCustomers);
+
+    }
+    public static void clickDownload_Popup() throws InterruptedException {
+      WebDriverWaits.WaitUntilVisible(download);
+        WebDriverWaits.ClickOn(download);
+
+    }
+    public static void clickContinueEmail() throws InterruptedException {
+        WebDriverWaits.WaitUntilVisible(continueEmail);
+        WebDriverWaits.ClickOn(continueEmail);
+    }
+    public static void verifyEmailResults() throws InterruptedException {
+        WebDriverWaits.WaitUntilVisible(status);
+        softAssert.assertEquals(WebDriverWaits.GetText(status),"Success");
+        softAssert.assertEquals(WebDriverWaits.GetText(dateSend),DateAndTime.DateTimeGenerator("dd/MM/yyyy"));
+
+    }
+    public static void clickClose() throws InterruptedException {
+        WebDriverWaits.ClickOn(close);
     }
 }

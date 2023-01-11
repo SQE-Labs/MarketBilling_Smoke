@@ -144,4 +144,5 @@ public class WebDriverWaits extends BrowsersInvoked {
 		}
 		return exists;
 	}
+
 }

@@ -1,6 +1,7 @@
 package TestCases;
 
 import CommonMethods.BaseTest;
+import CommonMethods.RandomStrings;
 import POM.*;
 import org.testng.annotations.Test;
 
@@ -13,6 +14,7 @@ public class TestSingleCustomerBillRun extends BaseTest {
     String meterId;
     String registerId;
     String billCycleName;
+    String invoiceTemplate;
 
     @Test(priority = 1,enabled = true)
     public  void CreateCustomer_For_BillrunCycle() throws InterruptedException {
@@ -28,7 +30,25 @@ public class TestSingleCustomerBillRun extends BaseTest {
 
 
     }
-    @Test(priority = 2,enabled = true)
+    @Test(priority = 2)
+
+    public  void create_Customer_invoiceTemplate() throws InterruptedException {
+        extentTest = extent.startTest("Customer Invoice Template");
+        extentTest.setDescription(" Verify that User is able to create Customer Invoice template");
+        Admin.navigateToInvoiceSetup();
+        invoiceTemplate="Customer_Invoice_"+ RandomStrings.RequiredCharacters(4);
+        Invoice.createNewInvoice(invoiceTemplate);
+    }
+    @Test(priority = 3)
+
+    public  void customer_InvoiceSettings() throws InterruptedException {
+        extentTest = extent.startTest("Customer Invoice Settings");
+        extentTest.setDescription(" Verify that User is able to update Customer Invoice Settings");
+        Settings settings=Customer.navigateTo_CustomerSettings(  customerId);
+        settings.invoiceSettings_Customer(invoiceTemplate);
+        settings.clickSave();
+    }
+    @Test(priority = 4,enabled = true)
     public  void createAndEditBillCycleName() throws InterruptedException {
         extentTest = extent.startTest(" Small Cycle Bill run with 1 customer ");
         extentTest.setDescription(" Verify that User is able to run the small bill run with 1 customer ");
@@ -39,34 +59,54 @@ public class TestSingleCustomerBillRun extends BaseTest {
         billCycleName =BillRun.editBillCycle(billCycleOldName);
 
     }
-    @Test(priority = 3,enabled = true)
+    @Test(priority = 5,enabled = true)
     public  void SmallBillRunWithSingleCustomer() throws InterruptedException {
         extentTest = extent.startTest(" Small Cycle Bill run with 1 customer ");
         extentTest.setDescription(" Verify that User is able to run the small bill run with 1 customer ");
         BillRun.runBillCycle(billCycleName);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 6)
 
     public  void Rollback_SmallBillRunWithSingleCustomer() throws InterruptedException {
         extentTest = extent.startTest(" Rollback for single customer ");
         extentTest.setDescription(" Verify that User is able to run rollback single customer ");
         BillRun.Rollback_SmallBillRunWithSingleCustomer(customerId);
     }
-    @Test(priority = 5)
+    @Test(priority = 7)
 
     public  void rebill_and_Reuse() throws InterruptedException {
         extentTest = extent.startTest(" Rebill and Reuse Statement ");
         extentTest.setDescription(" Verify that User is able to run rebill and reuse and Statement");
         BillRun.rebillSingleCustomer(  billCycleName);
     }
-    @Test(priority = 6)
+    @Test(priority = 8)
 
-    public  void updateStatementDates() throws InterruptedException {
-        extentTest = extent.startTest(" Update Statement Dates ");
-        extentTest.setDescription(" Verify that User is able to update Statement Dates");
-         Customer.searchCustomer(customerId);
-        BillRun.updateStatementDate(  billCycleName);
+    public  void emailBills() throws InterruptedException {
+        extentTest = extent.startTest(" Send Email ");
+        extentTest.setDescription(" Verify that User is able to send emails");
+
+         BillRun.billRunCycleSearch(billCycleName);
+        BillRun.viewBillDetails( );
+        BillRun.selectCustCheckBox();
+        BillRun.clickEmailBills();
+        BillRun.clickSelectedCustomers();
+        BillRun.clickContinueEmail();
+        BillRun.verifyEmailResults();
+        BillRun.clickClose();
+    }
+    @Test(priority = 8)
+
+    public  void downloadPdf() throws InterruptedException {
+        extentTest = extent.startTest(" download Pdf ");
+        extentTest.setDescription(" Verify that User is able to download pdf");
+        BillRun.billRunCycleSearch(billCycleName);
+        BillRun.viewBillDetails( );
+        BillRun.selectCustCheckBox();
+        BillRun.clickDownloadPdf();
+        BillRun.clickSelectedCustomer();
+        BillRun.clickDownload_Popup();
+
     }
 
 }
