@@ -13,6 +13,7 @@ public class Admin  extends TestLogin {
     public static By invoiceSetupBtn = By.xpath("//p[text()='Invoice Set-up']");
     public static By groupEditBtn = By.xpath("//p[text()='Edit Group']");
     public static By billRun = By.xpath("//span[text()='Bill Run']");
+    public static By plans = By.xpath("//span[text()='Plans']");
 
     public static void navigateToInvoiceSetup(){
         WebDriverWaits.ClickOn(AdminIcon);
@@ -27,6 +28,11 @@ public class Admin  extends TestLogin {
     public static void navigateToBillRun(){
         WebDriverWaits.ClickOn(AdminIcon);
         WebDriverWaits.ClickOn(billRun);
+
+    }
+    public static void navigateToPlans(){
+        WebDriverWaits.ClickOn(AdminIcon);
+        WebDriverWaits.ClickOn(plans);
 
     }
 }

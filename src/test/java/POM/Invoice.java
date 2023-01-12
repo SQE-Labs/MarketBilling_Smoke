@@ -46,11 +46,14 @@ public class Invoice {
         WebDriverWaits.ClickOn(saveInvoice);
     }
 
-    public static void selectCategory(String name) {
+    public static void selectCategory(String name) throws InterruptedException {
+        WebDriverWaits.WaitUntilVisibleWE(category);
         WebDriverWaits.selectByValue(category, name);
+        Thread.sleep(4000);
     }
 
     public static void enterTemplateText(String txt) {
+
         driver.switchTo().frame(1);
         WebDriverWaits.ClickOn(tinymce);
         WebDriverWaits.SendKeysWithClear(tinymce, txt);
@@ -67,14 +70,14 @@ public class Invoice {
 
     }
 
-    public static void createNewInvoice(String invoiceName) {
+    public static void createNewInvoice(String invoiceName) throws InterruptedException {
         WebDriverWaits.ClickOn(createInvoiceBtn);
         WebDriverWaits.SendKeys(invoice_name, invoiceName);
         Invoice.selectInvoiceCheckBox("TRANSACTION-SUMMARY");
         Invoice.selectInvoiceCheckBox("TRANSACTION-SUMMARY-LIST");
         Invoice.selectInvoiceCheckBox("BILLPAY");
         Invoice.clickSave();
-        Invoice.selectCategory("TRANSACTION-SUMMARY-LIST");
+        Invoice.selectCategory("BILLPAY");
         Invoice.enterTemplateText("Personalised customer Sample  edited template text");
         Invoice.clickSaveTemplate();
     }

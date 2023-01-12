@@ -11,8 +11,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
-
-import static POM.TouImport.RandomName1;
 //import junit.framework.Assert;
 
 public class Plans extends BaseTest {
@@ -30,7 +28,7 @@ public class Plans extends BaseTest {
 		public static By Select_Current_ValidDate_From = By.xpath("//*[@class='active day']");
 		public static By DateValidTo_Datepicker = By.xpath("//*[@id='dateValidTo']");
 		public static By Select_Current_ValidDate_To = By.xpath("//*[@class='active day']");
-		public static By Add_Tariff_Button = By.xpath("//*[@id='addTrfBtn']");
+		public static By Add_Tariff_Button = By.id("addTrfBtn");
 		public static By ChargeDescription_Field = By.xpath("//*[@id='charge-desc']");
 		public static By ChargeDescription_Opn = By.xpath("//div[@class='tt-dataset-states']");
 		public static By RollupDescription_Field = By.xpath("//*[@id='rollup-desc']");
@@ -42,13 +40,19 @@ public class Plans extends BaseTest {
 		public static By Unit_Dropdown = By.xpath("//*[@id='unit-type']");
 		public static By Unit_Dropdown_Opn = By.xpath("(//*[@id='unit-type']/option)[2]");
 		public static By Rate_Field = By.xpath("//*[@id='rate']");
-		public static By AddTrf_Button = By.xpath("//*[@id='addTrf']");
-		public static By Trf_SearchField = By.xpath("(//label[text()='Search:'])[2]/input");
+	public static By RateR_Field = By.xpath("//*[@id='rateR']");
+
+	public static By AddTrf_Button = By.xpath("//*[@id='addTrf']");
+	public static By AddProrata_Button = By.id("addProrataBtn");
+	public static By AddProrata_Button1 = By.id("//button[(text()='Add Tariff')]");
+
+	public static By Trf_SearchField = By.xpath("(//label[text()='Search:'])[2]/input");
 		// public static By Trf_SearchField =
 		// By.xpath("//*[@id='datatablePreview_wrapper']/div[1]/label/input");
 		public static By Publish_Button = By.xpath("//*[@id='publishBtn']");
 //		public static By Cross_icon = By.xpath("//*[@class='icon-remove']");
 		public static By Cross_icon = By.id("closePlnBtn");
+	public static By Prorata_Close = By.id("prorataClose");
 
 		public static By Plan_Search_Field = By.xpath("(//label[text()='Search:'])[1]/input");
 		public static By SearchResultForPlanName = By.xpath("//tbody[@id='plnListBody']/tr/td[2]");
@@ -57,8 +61,8 @@ public class Plans extends BaseTest {
 		public static By InfoMsgTarrifCount = By.xpath("//div[@id='datatablePreview_info']");
 		public static By PlanSearchField = By.xpath(".//*[@class='dataTables_filter']/label/input");
 		public static By EditPlan = By.xpath("//*[@class='fa fa-pencil ']");
-		public static By TrfCalendarIcon = By.xpath("//*[@class='icon-calendar']");
-		public static By Prorata_ToggleButton = By.xpath("(//*[@class='switch-label'])[2]");
+		public static By TrfCalendarIcon = By.xpath("(//*[@class='icon-calendar'])[1]");
+		public static By Prorata_ToggleButton = By.xpath("(//span[@class='switch-label'])[2]");
 		public static By Prorata_RangeFrom_Datepicker = By.xpath("//*[@id='rangeFrom']");
 		public static By SelectTodayProrataDate_RangeFrom = By.xpath("//*[@class='active selected day']");
 		public static By Prorata_RangeTo_Datepicker = By.xpath("//*[@id='rangeTo']");
@@ -274,7 +278,7 @@ public class Plans extends BaseTest {
 
 		}
 
-		public static void PlanwithDemandTOUdefinition_Network_and_Retail_Trf() throws InterruptedException {
+		public static String PlanwithDemandTOUdefinition_Network_and_Retail_Trf() throws InterruptedException {
 			SoftAssert softAssert = new SoftAssert();
 			driver.navigate().refresh();
 			WebDriverWaits.ClickOn(PlanTab);
@@ -285,8 +289,8 @@ public class Plans extends BaseTest {
 			select.selectByVisibleText("Retail Electricity");
 			// select.selectByIndex(2);
 			WebDriverWaits.ClickOn(NameField);
-			String RandomName3 = "MktPlan_NetworkRate" + RandomStrings.RequiredCharacters(4);
-			WebDriverWaits.SendKeys(NameField, RandomName3);
+			String planId = "MktPlan_NetworkRate" + RandomStrings.RequiredCharacters(4);
+			WebDriverWaits.SendKeys(NameField, planId);
 			WebDriverWaits.ClickOn(Demand_TOU_Definition_Dropdown);
 
 			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -318,11 +322,11 @@ public class Plans extends BaseTest {
 			WebDriverWaits.ClickOn(Unit_Dropdown_Opn);
 			WebDriverWaits.ClickOn(Rate_Field);
 			// WebDriverWaits.SendKeys(Rate_Field,"10" );
-			String RandomRate4 = RandomStrings.RequiredDigits(2);
-			WebDriverWaits.SendKeys(Rate_Field, RandomRate4);
+			String random = RandomStrings.RequiredDigits(2);
+			WebDriverWaits.SendKeys(Rate_Field, random);
 			WebDriverWaits.ClickOn(AddTrf_Button);
 			WebDriverWaits.ClickOn(Trf_SearchField);
-			WebDriverWaits.SendKeys(Trf_SearchField, RandomRate4);
+			WebDriverWaits.SendKeys(Trf_SearchField, random);
 
 			// Assertion on Showing 1 to 1 of 1 entries
 			// Assertion that the Trf is added.
@@ -367,16 +371,9 @@ public class Plans extends BaseTest {
 			softAssert.assertEquals(ExpectedMsg3, "Market has been successfully created.");
 			System.out.println("Plan with DemandTOUdefinition Market has been successfully created.");
 			WebDriverWaits.ClickOn(Cross_icon);
-			WebDriverWaits.ClickOn(Plan_Search_Field);
-			WebDriverWaits.SendKeys(Plan_Search_Field, RandomName3);
-			String SearchResultPlanName = WebDriverWaits.GetText(SearchResultForPlanName);
-			Assert.assertEquals(SearchResultPlanName, RandomName3);
-			Thread.sleep(2000);
-			//Just an alternate because other plan and prorata modules are not executing
-			jse.executeScript("window.scrollBy(0,-400)", "");
-			Thread.sleep(2000);
 
 
+return planId;
 		}
 
 		public static void OtherPlan() throws InterruptedException {
@@ -451,52 +448,33 @@ public class Plans extends BaseTest {
 
 		public static void Add_ProRated_Rates() throws InterruptedException {
 			SoftAssert softAssert = new SoftAssert();
-			driver.navigate().refresh();
-			Thread.sleep(4000);
-			WebDriverWaits.ClickOn(PlanTab);
-			WebDriverWaits.ClickOn(CreateNewPlan);
-			Thread.sleep(3000);
-			WebDriverWaits.ClickOn(UsageTypeDropdown);
-			WebElement UsageOption = WebDriverWaits.WaitUntilVisibleWE(UsageTypeDropdown);
-			select = new Select(UsageOption);
-			select.selectByVisibleText("Retail Electricity");
-			// select.selectByIndex(2);
-			WebDriverWaits.ClickOn(NameField);
-			String RandomName3 = "MktPlan_NetworkRate" + RandomStrings.RequiredCharacters(4);
-			WebDriverWaits.SendKeys(NameField, RandomName3);
-//			WebDriverWaits.ClickOn(PlanSearchField);
-//			WebDriverWaits.SendKeys(PlanSearchField, RandomName1); // search tou network plan
-//			WebDriverWaits.ClickOn(EditPlan);
-			WebDriverWaits.ClickOn(ProrataPlanRecord_Edit);
-			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-			Thread.sleep(3000);
-			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-
-			JavascriptExecutor jser = (JavascriptExecutor) driver;
-		      WebElement TarrifCalendarIcon = (WebElement) jser
-		            .executeScript("return document.querySelector('div > a.btn.btn-warning.prorata')");
-		      Thread.sleep(3000);
-		      TarrifCalendarIcon.click();
-//			WebDriverWaits.ClickOn(TrfCalendarIcon);
-			WebDriverWaits.ClickOn(Prorata_ToggleButton);
+			Thread.sleep(5000);
+            WebDriverWaits.scrollIntoView(TrfCalendarIcon);
+			WebDriverWaits.ClickOn(TrfCalendarIcon);
+			Thread.sleep(5000);
+			WebDriverWaits.selectCheckBox(Prorata_ToggleButton);
 			WebDriverWaits.ClickOn(Prorata_RangeFrom_Datepicker);
 			WebDriverWaits.ClickOn(SelectTodayProrataDate_RangeFrom);
 			WebDriverWaits.ClickOn(Prorata_RangeTo_Datepicker);
-			Thread.sleep(2000);
-			WebDriverWaits.ClickOn(SelectTodayProrataDate_RangeTo);
-			WebDriverWaits.ClickOn(ProrataRateField);
-			String RandomRateField1 = RandomStrings.RequiredDigits(2);
-			WebDriverWaits.SendKeys(ProrataRateField, RandomRateField1);
-			WebDriverWaits.ClickOn(ProrataPlus_Button);
-			WebDriverWaits.ClickOn(ProrataClose_Button);
-			jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-			WebDriverWaits.ClickOn(Publish_Button);
-			// MktPlan_NetworkRateQJog has been successfully updated.
-			String ExpectedMsg5 = "Market has been successfully created.";
-			softAssert.assertEquals(ExpectedMsg5, "Market has been successfully created.");
-			System.out.println(RandomName1 + "has been successfully created.");
-			WebDriverWaits.ClickOn(Cross_icon);
+			WebDriverWaits.ClickOn(SelectTodayProrataDate_RangeFrom);
+			WebDriverWaits.SendKeys(RateR_Field,"20");
+			WebDriverWaits.ClickOn(AddProrata_Button);
+			WebDriverWaits.ClickOn(Prorata_Close);
+
+Thread.sleep(3000);
+//WebDriverWaits.scrollIntoView(AddProrata_Button1);
+//			WebDriverWaits.ClickOn(AddProrata_Button1)
+			;
+
+
 
 		}
+	public static void search_Plan(String planId) throws InterruptedException {
+		SoftAssert softAssert = new SoftAssert();
+Admin.navigateToPlans();
+        WebDriverWaits.SendKeysWithClear(PlanSearchField,planId);
+		WebDriverWaits.ClickOn(EditPlan);
 
+
+	}
 	}

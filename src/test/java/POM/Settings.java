@@ -17,8 +17,9 @@ public class Settings extends TestLogin {
     public static By alertSuccess = By.cssSelector(".alert.alert-success");
 
     // public static By save = By.className("btn btn-primary");
-    public static By saveSettings = By.xpath("//button[text()=' Save settings']");
+    public static By saveSettings = By.id("save");
     public  static  void selectPrimaryInvoiceTemplate(String invoiceName) {
+        WebDriverWaits.WaitUntilVisibleWE(primary_front_id);
         WebDriverWaits.scrollIntoView(primary_front_id);
         WebDriverWaits.selectByVisibleText(primary_front_id,invoiceName);
         WebDriverWaits.selectByVisibleText(primary_back_id,invoiceName);
@@ -36,6 +37,7 @@ public class Settings extends TestLogin {
         selectSecondaryInvoiceTemplate(invoiceName);
     }
     public static void clickSave() {
+        WebDriverWaits.scrollIntoView(saveSettings);
 WebDriverWaits.ClickOn(saveSettings);
     }
 }

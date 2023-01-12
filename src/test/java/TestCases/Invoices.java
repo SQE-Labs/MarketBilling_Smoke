@@ -5,20 +5,18 @@ import CommonMethods.RandomStrings;
 import POM.Admin;
 import POM.GroupEdit;
 import POM.Invoice;
-import POM.Login;
 import org.testng.annotations.Test;
 
 public class Invoices extends BaseTest {
     String invoiceName;
     @Test(priority = 1)
     public  void createInvoice_template() throws InterruptedException {
-        Login.ValidLogin();
         extentTest = extent.startTest("create Invoice Template ");
         extentTest.setDescription(" Verify that User is able to create Invoice Template. ");
         Admin.navigateToInvoiceSetup();
         Invoice.clickCreateNewInvoice();
-        Invoice.enterNewInvoice(invoiceName);
         invoiceName="Invoice"+ RandomStrings.RequiredDigits(3);
+        Invoice.enterNewInvoice(invoiceName);
         Invoice.selectInvoiceCheckBox("TRANSACTION-SUMMARY");
         Invoice.selectInvoiceCheckBox("TRANSACTION-SUMMARY-LIST");
         Invoice.clickSave();
@@ -32,7 +30,6 @@ public class Invoices extends BaseTest {
         extentTest = extent.startTest("edit Invoice Template ");
         extentTest.setDescription(" Verify that User is able to edit Invoice Template. ");
         Admin.navigateToInvoiceSetup();
-
         Invoice.searchInvoice(invoiceName);
         Invoice.editInvoice();
         Invoice.selectInvoiceCheckBox("TRANSACTION-SUMMARY");

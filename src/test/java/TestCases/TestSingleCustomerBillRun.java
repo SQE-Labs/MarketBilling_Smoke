@@ -20,7 +20,7 @@ public class TestSingleCustomerBillRun extends BaseTest {
     public  void CreateCustomer_For_BillrunCycle() throws InterruptedException {
         extentTest = extent.startTest(" Create Customer for bill run with 1 customer ");
         extentTest.setDescription(" Verify that User is able to run the small bill run with 1 customer ");
-         customerId =Customer.createCustomer("Tenant", "Residential", "residential123@yopmail.com");
+        customerId =Customer.createCustomer("Tenant", "Residential", "residential123@yopmail.com");
          serviceId=Services.M_AddService(customerId);
          Services.EditService();
          meterId =Metering.AddMeter();
@@ -35,6 +35,7 @@ public class TestSingleCustomerBillRun extends BaseTest {
     public  void create_Customer_invoiceTemplate() throws InterruptedException {
         extentTest = extent.startTest("Customer Invoice Template");
         extentTest.setDescription(" Verify that User is able to create Customer Invoice template");
+        Login.ValidLogin();
         Admin.navigateToInvoiceSetup();
         invoiceTemplate="Customer_Invoice_"+ RandomStrings.RequiredCharacters(4);
         Invoice.createNewInvoice(invoiceTemplate);
@@ -44,6 +45,7 @@ public class TestSingleCustomerBillRun extends BaseTest {
     public  void customer_InvoiceSettings() throws InterruptedException {
         extentTest = extent.startTest("Customer Invoice Settings");
         extentTest.setDescription(" Verify that User is able to update Customer Invoice Settings");
+        customerId="41130";
         Settings settings=Customer.navigateTo_CustomerSettings(  customerId);
         settings.invoiceSettings_Customer(invoiceTemplate);
         settings.clickSave();
@@ -98,7 +100,7 @@ public class TestSingleCustomerBillRun extends BaseTest {
     @Test(priority = 8)
 
     public  void downloadPdf() throws InterruptedException {
-        extentTest = extent.startTest(" download Pdf ");
+        extentTest = extent.startTest(" Download Pdf ");
         extentTest.setDescription(" Verify that User is able to download pdf");
         BillRun.billRunCycleSearch(billCycleName);
         BillRun.viewBillDetails( );

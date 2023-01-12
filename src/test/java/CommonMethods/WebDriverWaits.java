@@ -103,6 +103,16 @@ public class WebDriverWaits extends BrowsersInvoked {
 			checkBoxElement.click();
 		}
 	}
+	public static void toggleButton(By element,boolean value) {
+
+		WebElement checkBoxElement = driver.findElement(element);
+		String data = checkBoxElement.getAttribute("data-on");
+
+//performing click operation if element is not checked
+		if (data != "Yes") {
+			checkBoxElement.click();
+		}
+	}
 	public static void selectByValue(By element, String value) {
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 		WebElement ele = driver.findElement(element);
