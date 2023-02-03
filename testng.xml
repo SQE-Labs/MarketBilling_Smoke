@@ -4,13 +4,13 @@
 	<test thread-count="1" name="Test">
 		<classes>
 
-			<class name="TestCases.TestLogin">
+			<class name="TestClasses.TestLogin">
 				<methods>
 					<include name="ValidLogin" />
 				</methods>
 			</class>
 
-<!--							<class name="TestCases.TestAddPlan">-->
+<!--							<class name="TestClasses.TestAddPlan">-->
 <!--				<methods>-->
 <!--					<include name="TouImport" />-->
 <!--					<include name="AddPlanwithoutTOUDefinition" />-->
@@ -26,7 +26,7 @@
 
 
 
-<!--		<class name="TestCases.TestCustomers">-->
+<!--		<class name="TestClasses.TestCustomers">-->
 <!--				<methods>-->
 <!--					<include name="Customer" />-->
 <!--					<include name="SecondCustomer" />-->
@@ -35,7 +35,7 @@
 <!--			</class>-->
 
 
-<!--			<class name="TestCases.TestAddService">-->
+<!--			<class name="TestClasses.TestAddService">-->
 <!--				<methods>-->
 <!--					<include name="Service" />-->
 <!--					<include name="EditService" />-->
@@ -54,7 +54,7 @@
 <!--				</methods>-->
 <!--			</class>-->
 
-<!--			<class name="TestCases.TransactionsTest">-->
+<!--			<class name="TestClasses.TransactionsTest">-->
 <!--				<methods>-->
 <!--					<include name="cashPayment" />-->
 <!--					<include name="creditCardPayment"/>-->
@@ -62,46 +62,46 @@
 <!--			</class>-->
 
 
-<!--			<class name="TestCases.TestLargeBillRun">-->
+<!--			<class name="TestClasses.TestLargeBillRun">-->
 <!--				<methods>-->
 <!--					<include name="TestLargeBillRun" />-->
 <!--				</methods>-->
 <!--			</class>-->
-<!--			<class name="TestCases.TestTwoCustomerBillRun">-->
+<!--			<class name="TestClasses.TestTwoCustomerBillRun">-->
 <!--				<methods>-->
 <!--					<include name="Flow8_AllBillrunCycles" />-->
 <!--				</methods>-->
 <!--			</class>-->
 
 
-<!--			<class name="TestCases.TestBillRunWithUncommittedStatement">-->
+<!--			<class name="TestClasses.TestBillRunWithUncommittedStatement">-->
 <!--				<methods>-->
 <!--					<include name="BillRunWithUncommittedStatement" />-->
 <!--				</methods>-->
 <!--			</class>-->
 
-<!--			<class name="TestCases.BillRunTest">-->
+<!--			<class name="TestClasses.BillRunTest">-->
 <!--				<methods>-->
 <!--					<include name="BillRunWithNoCycle" />-->
 <!--					<include name="BillrunMethod_NoCycle" />-->
 <!--				</methods>-->
 <!--			</class>-->
 
-<!--		<class name="TestCases.Imports">-->
+<!--		<class name="TestClasses.Imports">-->
 <!--				<methods>-->
 <!--					<include name="CustomerPrerequiste" />-->
 <!--					<include name="MeterNumberImport"/>-->
 <!--				</methods>-->
 <!--			</class>-->
 
-<!--			<class name="TestCases.TestSingleCustomerBillRun">-->
+<!--			<class name="TestClasses.TestSingleCustomerBillRun">-->
 <!--				<methods>-->
 <!--					<include name="CreateCustomerFor_BillrunCycle" />-->
 <!--					<include name="SmallBillRunWithSingleCustomer" />-->
 <!--					<include name="Rollback_SmallBillRunWithSingleCustomer" />-->
 <!--				</methods>-->
 <!--			</class>-->
-			<class name="TestCases.TestAutoDueDate">
+			<class name="TestClasses.TestAutoDueDate">
 				<methods>
 					<include name="BillRun_after_EnableDueDate_CalendarDays" />
 					<include name="BillRun_after_EnableDueDate_BusinessDays" />
