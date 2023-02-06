@@ -1,7 +1,6 @@
 package org.automation.logger;
 
 
-
 public final class Log {
 
     private Log() {

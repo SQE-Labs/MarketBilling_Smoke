@@ -17,8 +17,8 @@ import java.util.function.Function;
  */
 public final class ExplicitWait extends BaseTest {
 
-    private long timeout, polling;
     private final Wait<WebDriver> wait;
+    private long timeout, polling;
 
     /**
      * Create wait object with default timeout and polling interval.

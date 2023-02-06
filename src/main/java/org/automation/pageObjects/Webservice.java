@@ -15,4 +15,9 @@ public class Webservice extends ActionEngine {
         return wsdlLinks;
 
     }
+
+    public boolean isXMLTextPresent(String text) {
+        return isElementPresent_custom(By.xpath("*[contains(text(),'" + text + "')]"), text);
+
+    }
 }

@@ -69,6 +69,7 @@ public class Element extends BaseTest {
         Log.info("Get text from [" + description + "] element");
         wait.until(visibilityOfElementLocated(locator)).clear();
     }
+
     public void click() {
         Log.info("Clicking [" + description + "] button");
         wait.until(elementToBeClickable(locator)).click();

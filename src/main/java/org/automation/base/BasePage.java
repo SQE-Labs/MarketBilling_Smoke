@@ -2,6 +2,7 @@ package org.automation.base;
 
 
 import org.automation.elements.Element;
+import org.automation.helpers.ExtentReportClass;
 import org.automation.logger.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,8 +12,7 @@ import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 
-public class BasePage extends  BaseTest
-{
+public class BasePage extends ExtentReportClass {
 
     private String parentWindow;
 
@@ -33,24 +33,26 @@ public class BasePage extends  BaseTest
      * @return page URL
      */
     public String getPageUrl() {
-        String currentUrl=getDriver().getCurrentUrl();
-        Log.info("Get the Current URL "+currentUrl);
+        String currentUrl = getDriver().getCurrentUrl();
+        Log.info("Get the Current URL " + currentUrl);
         return currentUrl;
     }
-   public boolean verifyConsoleLogs(){
-       LogEntries logs = getDriver().manage().logs().get(LogType.BROWSER);
-        boolean errors =false;
-       for (LogEntry entry : logs) {
-           if (entry.getLevel().equals("SEVERE")) {
-           System.out.println(entry.getMessage());
-           System.out.println(entry.getLevel());
 
-                  errors=true;
-             }
+    public boolean verifyConsoleLogs() {
+        LogEntries logs = getDriver().manage().logs().get(LogType.BROWSER);
+        boolean errors = false;
+        for (LogEntry entry : logs) {
+            if (entry.getLevel().equals("SEVERE")) {
+                System.out.println(entry.getMessage());
+                System.out.println(entry.getLevel());
 
-       }
-       return errors;
-   }
+                errors = true;
+            }
+
+        }
+        return errors;
+    }
+
     /**
      * Get the Title of the current page.
      *
@@ -68,10 +70,12 @@ public class BasePage extends  BaseTest
         Log.info("Refresh the browser");
         getDriver().navigate().refresh();
     }
+
     public void navigateBack() {
         Log.info("Navigate Back the browser");
         getDriver().navigate().back();
     }
+
     public void navigateForward() {
         Log.info("Navigate Forward the browser");
         getDriver().navigate().forward();

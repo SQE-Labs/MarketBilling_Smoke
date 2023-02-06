@@ -2,15 +2,15 @@
 <extentreports>
     <configuration>
 
-        <theme>light</theme>
+        <theme>dark</theme>
 
         <encoding>UTF-8</encoding>
 
         <protocol>https</protocol>
 
-        <documentTitle>MarketBilling</documentTitle>
+        <documentTitle>ComCate</documentTitle>
 
-        <reportName>ExtentReport</reportName>
+        <reportName>Comcate</reportName>
 
         <reportHeadline></reportHeadline>
 

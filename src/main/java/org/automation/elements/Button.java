@@ -1,7 +1,7 @@
 package org.automation.elements;
 
-import org.automation.logger.Log;
 import org.automation.base.BasePage;
+import org.automation.logger.Log;
 import org.openqa.selenium.By;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;

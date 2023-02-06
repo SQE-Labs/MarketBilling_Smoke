@@ -12,13 +12,7 @@ import java.util.Properties;
 
 import static java.nio.charset.Charset.defaultCharset;
 
-/**
- * To get the configuration details present in config.properties file.
- *
- * @author Sujay Sawant
- * @version 1.0.0
- * @since 08/31/2020
- */
+
 public final class Configuration {
 
     private static Properties properties;
