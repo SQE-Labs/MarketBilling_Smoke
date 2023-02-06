@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 
 public class FastNMI extends ActionEngine {
     public By nmi = By.id("thenmi");
-    public By goToSelectedNMI = By.className("btn btn-large btn-primary btn-round ");
+    public By goToSelectedNMI = By.xpath("//button[contains(text(),'Discovery')]");
 
     public By result = By.id("result");
 
@@ -18,7 +18,7 @@ public class FastNMI extends ActionEngine {
 
     }
     public void clickDiscoveryBtn() {
-        click_custom(goToSelectedNMI);
+        clickBtn_custom(goToSelectedNMI);
 
     }
 }

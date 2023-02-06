@@ -26,8 +26,8 @@ public class ExtentReportClass extends BaseTest {
 
     public static String getScreenshot(WebDriver driver, String screenshotName) {
         Long l = Calendar.getInstance().getTimeInMillis();
-        String screenshotId = screenshotName+ l.toString();
-        String Path = System.getProperty("user.dir") + "/ExtentReports/";
+        String screenshotId = screenshotName;
+        String Path = System.getProperty("user.dir") + "/test-report/";
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         String imgPath = Path + screenshotId + ".png";
         File dest = new File(imgPath);
@@ -37,20 +37,18 @@ public class ExtentReportClass extends BaseTest {
             e.printStackTrace();
         }
 
-        String ImagePath = "../ExtentReports/" + screenshotId + ".png";
-        return ImagePath;
+        return imgPath;
     }
 
     @BeforeSuite
     public void setExtent() throws InterruptedException, IOException {
-        extent = new ExtentReports(System.getProperty("user.dir") + "/testReport-output/ExtentReportResult.html", true);
+        extent = new ExtentReports(System.getProperty("user.dir") + "/test-report/ExtentReportResult.html", true);
         extent.addSystemInfo("Environment", "QA");
         extent.loadConfig(new File(System.getProperty("user.dir") + "/extent-config.xml"));
     }
 
     @AfterSuite
     public void endReport() {
-        extent.flush();
         extent.close();
     }
 
@@ -80,5 +78,6 @@ public class ExtentReportClass extends BaseTest {
             System.out.println("*** Executed " + result.getMethod().getMethodName() + " test successfully...");
         }
         extent.endTest(extentTest);
+        extent.flush();
     }
 }

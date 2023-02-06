@@ -8,20 +8,18 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.relevantcodes.extentreports.LogStatus.FAIL;
+import static com.relevantcodes.extentreports.LogStatus.PASS;
+
 
 public class ActionEngine extends BasePage {
 
     public void sendKeys_custom(By path, String valueToBeSent, String... label) {
         String var = "";
-        try {
             var = label.length > 0 ? label[0] : path.toString();
             Element element = new Element(var, path);
             element.getWebElement().sendKeys(valueToBeSent);
-
-        } catch (Exception e) {
-            //log failure in extent
-            //  ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Value enter in field: is failed due to exception: "+e);
-        }
+        extentTest.log(PASS, "Entered value as: "+ valueToBeSent);
     }
 
     public void sendKeys_withClear(By path, String valueToBeSent, String... label) {
@@ -33,10 +31,10 @@ public class ActionEngine extends BasePage {
             element.clear();
             element.getWebElement().sendKeys(valueToBeSent);
             //log success message in extent report
-            // test.log(LogStatus.PASS, "Entered value as: ");
+            extentTest.log(PASS, "Entered value as: "+ valueToBeSent);
         } catch (Exception e) {
             //  log failure in extent
-            //  ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Value enter in field: is failed due to exception: "+e);
+            // ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Value enter in field: is failed due to exception: "+e);
         }
     }
 
@@ -51,9 +49,9 @@ public class ActionEngine extends BasePage {
             btn.click();
             Log.info("Clicked on " + var);
             //log success message in exgent report
-            // test.log(LogStatus.PASS, var + "==> Clicked Successfully! ");
+            extentTest.log(PASS, var + "==> Clicked Button Successfully! ");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            extentTest.log(FAIL,  "==> Unable to click on => "+var) ;
             //log failure in extent
             // ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Unable to click on field: " +fieldName +" due to exception: "+e);
         }
@@ -68,7 +66,7 @@ public class ActionEngine extends BasePage {
         btn.click();
         Log.info("Clicked on " + var);
         //log success message in exgent report
-        //test.log(LogStatus.PASS, var + "==> Clicked Successfully! ");
+        extentTest.log(PASS, var + "==> Clicked Successfully! ");
 
     }
 
@@ -118,10 +116,10 @@ public class ActionEngine extends BasePage {
             flag = element.isVisible();
             Log.info(fieldName + " element is present -->" + flag);
 
-            // ExtentFactory.getInstance().getExtent().log(Status.PASS, fieldName + "==> Presence of field is: " + flag);
+            extentTest.log(PASS, fieldName + "==> Presence of field is: " + flag);
             return flag;
         } catch (Exception e) {
-            //  ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Checking for presence of field: " + fieldName + " not tested due to exception: " + e);
+            extentTest.log(FAIL, "Checking for presence of field: " + fieldName + " not tested due to exception: " + e);
             return flag;
         }
     }

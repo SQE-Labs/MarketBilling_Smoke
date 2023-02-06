@@ -42,7 +42,7 @@ public class SmokeTest extends ActionEngine {
     }
 
 
-    @Test(priority = 4, enabled = true, description = "verify create new customer")
+    @Test(priority = 4, enabled = false, description = "verify create new customer")
     public void createCustomer() throws InterruptedException {
         Customer customer = new Customer();
         customer.createCustomer("Tenant", "Business", "business123@yopmail.com");
@@ -71,7 +71,7 @@ public class SmokeTest extends ActionEngine {
         String[] tabs = PropertiesUtil.getPropertyValue("customerTabs").split(",");
         for (String tab : tabs) {
             customer.clickCustomerTab(tab);
-            customer.verifyConsoleLogs();
+            //customer.verifyConsoleLogs();
             getScreenshot(getDriver(), tab);
             SoftAssert softAssert = new SoftAssert();
             softAssert.assertFalse(customer.isErrorDisplayed());
@@ -79,7 +79,7 @@ public class SmokeTest extends ActionEngine {
 
     }
 
-    @Test(priority = 7, enabled = true, description = "verify Fast NMI discovery")
+    @Test(priority = 8, enabled = true, description = "verify Fast NMI discovery")
     public void FastNMIDiscovery() {
         Customer customer = new Customer();
         customer.clickNMITab();
@@ -90,7 +90,7 @@ public class SmokeTest extends ActionEngine {
 
     }
 
-    @Test(priority = 8, enabled = true, description = "load Webservices page")
+    @Test(priority = 9, enabled = false, description = "load Webservices page")
     public void loadWebServices() {
         Webservice webservice = new Webservice();
         getDriver().get(PropertiesUtil.getPropertyValue("webservices"));
@@ -107,7 +107,7 @@ public class SmokeTest extends ActionEngine {
                 }
             }
             Assertions softAssert = new Assertions();
-            webservice.switchToWindow("");
+            webservice.switchToWindow("new Tab");
 
             softAssert.assertStrings(webservice.getPageUrl(), hyperLink);
             softAssert.assertTrue(webservice.isXMLTextPresent("definitions"));

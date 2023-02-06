@@ -8,4 +8,5 @@ MarketBilling.iml
 .DS_Store
 node_modules
 ExtentReports
+test-report
 ~/.npm

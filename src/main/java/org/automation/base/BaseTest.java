@@ -6,11 +6,8 @@ import com.codoid.products.fillo.Connection;
 import com.codoid.products.fillo.Fillo;
 import com.codoid.products.fillo.Recordset;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.commons.io.FileUtils;
 import org.automation.logger.Log;
 import org.automation.utilities.PropertiesUtil;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -27,7 +24,6 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -48,22 +44,7 @@ public class BaseTest {
         return driver;
     }
 
-    public static String getScreenshot(WebDriver driver, String screenshotName) {
-        Long l = Calendar.getInstance().getTimeInMillis();
-        String screenshotId = l.toString();
-        String Path = System.getProperty("user.dir") + "/ExtentReports/";
-        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        String imgPath = Path + screenshotId + ".png";
-        File dest = new File(imgPath);
-        try {
-            FileUtils.copyFile(screenshot, dest);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        String ImagePath = "../ExtentReports/" + screenshotId + ".png";
-        return ImagePath;
-    }
 
     public static void closeDriver() {
         getDriver().close();
@@ -117,6 +98,7 @@ public class BaseTest {
 
     @AfterSuite
     public void toClose() {
+
         driver.quit();
     }
 
