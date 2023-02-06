@@ -51,7 +51,7 @@ public class Element extends BaseTest {
      * @return web element
      */
     public WebElement getWebElement() {
-        Log.info("Get the [" + description + "] web element");
+        Log.debug("Get the [" + description + "] web element");
         return wait.until(visibilityOfElementLocated(locator));
     }
 
@@ -61,17 +61,17 @@ public class Element extends BaseTest {
      * @return the text.
      */
     public String getText() {
-        Log.info("Get text from [" + description + "] element");
+        Log.debug("Get text from [" + description + "] element");
         return wait.until(visibilityOfElementLocated(locator)).getText();
     }
 
     public void clear() {
-        Log.info("Get text from [" + description + "] element");
+        Log.debug("Get text from [" + description + "] element");
         wait.until(visibilityOfElementLocated(locator)).clear();
     }
 
     public void click() {
-        Log.info("Clicking [" + description + "] button");
+        Log.debug("Clicking [" + description + "] button");
         wait.until(elementToBeClickable(locator)).click();
     }
 

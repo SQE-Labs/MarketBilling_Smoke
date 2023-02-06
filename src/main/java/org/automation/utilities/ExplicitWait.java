@@ -8,13 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.function.Function;
 
-/**
- * To handle conditions that require synchronization.
- *
- * @author Sujay Sawant
- * @version 1.0.0
- * @since 08/31/2020
- */
+
 public final class ExplicitWait extends BaseTest {
 
     private final Wait<WebDriver> wait;
@@ -24,8 +18,8 @@ public final class ExplicitWait extends BaseTest {
      * Create wait object with default timeout and polling interval.
      */
     public ExplicitWait() {
-        timeout = 20;
-        polling = 250;
+        timeout = 10;
+        polling = 200;
         wait = new WebDriverWait(getDriver(), timeout, polling);
     }
 

@@ -16,25 +16,14 @@ public class ActionEngine extends BasePage {
 
     public void sendKeys_custom(By path, String valueToBeSent, String... label) {
         String var = "";
-            var = label.length > 0 ? label[0] : path.toString();
-            Element element = new Element(var, path);
-            element.getWebElement().sendKeys(valueToBeSent);
-        extentTest.log(PASS, "Entered value as: "+ valueToBeSent);
-    }
-
-    public void sendKeys_withClear(By path, String valueToBeSent, String... label) {
-
-        String var = "";
         try {
             var = label.length > 0 ? label[0] : path.toString();
             Element element = new Element(var, path);
-            element.clear();
             element.getWebElement().sendKeys(valueToBeSent);
-            //log success message in extent report
-            extentTest.log(PASS, "Entered value as: "+ valueToBeSent);
+            extentTest.log(PASS, "Entered value as: " + valueToBeSent);
         } catch (Exception e) {
-            //  log failure in extent
-            // ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Value enter in field: is failed due to exception: "+e);
+            extentTest.log(FAIL, "==> Unable to enter data  for => " + var);
+
         }
     }
 
@@ -49,62 +38,37 @@ public class ActionEngine extends BasePage {
             btn.click();
             Log.info("Clicked on " + var);
             //log success message in exgent report
-            extentTest.log(PASS, var + "==> Clicked Button Successfully! ");
+            extentTest.log(PASS, "==> Clicked Button Successfully! " + var);
         } catch (Exception e) {
-            extentTest.log(FAIL,  "==> Unable to click on => "+var) ;
-            //log failure in extent
-            // ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Unable to click on field: " +fieldName +" due to exception: "+e);
+            extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
         }
     }
 
     public void click_custom(By path, String... label) {
         String var = "";
+        try {
 
-        var = label.length > 0 ? label[0] : path.toString();
+            var = label.length > 0 ? label[0] : path.toString();
 
-        Element btn = new Element(var, path);
-        btn.click();
-        Log.info("Clicked on " + var);
-        //log success message in exgent report
-        extentTest.log(PASS, var + "==> Clicked Successfully! ");
+            Element btn = new Element(var, path);
+            btn.click();
+            Log.info("Clicked on " + var);
+            //log success message in exgent report
+            extentTest.log(PASS, "==> Clicked element Successfully! " + var);
+        } catch (Exception e) {
+            extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
+
+        }
 
     }
 
     public void click_custom(WebElement element, String... label) {
         try {
-            element.click();            //log success message in exgent report
+            element.click();
+            extentTest.log(PASS, "==> Clicked element Successfully! " + label);
         } catch (Exception e) {
-            //log failure in extent
-            // ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Unable to click on field: " +fieldName +" due to exception: "+e);
+            extentTest.log(FAIL, "==> Unable to click  " + label+" due to exception "+e);
         }
-    }
-
-    //clear data from field
-    public void clear_custom(By element) {
-        try {
-
-            ((WebElement) element).clear();
-            Thread.sleep(250);
-            //   test.log(LogStatus.PASS, "==> Data Cleared Successfully! ");
-        } catch (Exception e) {
-            //   test.log(LogStatus.FAIL, "Unable to clear Data on field:  due to exception: " + e);
-
-        }
-    }
-
-    //custom mouseHover
-    public void moveToElement_custom(By element, String fieldName) {
-//            try{
-//                JavascriptExecutor executor = (JavascriptExecutor) DriverFactory.getInstance().getDriver();
-//                executor.executeScript("arguments[0].scrollIntoView(true);", element);
-//                Actions actions = new Actions(DriverFactory.getInstance().getDriver());
-//                actions.moveToElement(element).build().perform();
-//                ExtentFactory.getInstance().getExtent().log(Status.PASS, fieldName+"==> Mouse hovered Successfully! ");
-//                Thread.sleep(1000);
-//            }catch(Exception e){
-//                ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Unable to hover mouse on field: " +fieldName +" due to exception: "+e);
-//
-//            }
     }
 
 
@@ -114,12 +78,12 @@ public class ActionEngine extends BasePage {
         try {
             Element element = new Element(fieldName, path);
             flag = element.isVisible();
-            Log.info(fieldName + " element is present -->" + flag);
+            Log.debug(fieldName + " element is present -->" + flag);
 
-            extentTest.log(PASS, fieldName + "==> Presence of field is: " + flag);
+            extentTest.log(PASS, "==> Presence of element "+fieldName + " is: " + flag);
             return flag;
         } catch (Exception e) {
-            extentTest.log(FAIL, "Checking for presence of field: " + fieldName + " not tested due to exception: " + e);
+            extentTest.log(FAIL, "****Checking for presence of element : " + fieldName + " not tested due to exception: " + e);
             return flag;
         }
     }
@@ -173,10 +137,10 @@ public class ActionEngine extends BasePage {
             Element element = new Element("", path);
             text = element.getText();
             Log.info("Text for " + path + " is " + text);
-            //  ExtentFactory.getInstance().getExtent().log(Status.PASS, "==> Text retried is: "+ text);
+             extentTest.log(PASS, "==> Text retrieved is: "+ text);
             return text;
         } catch (Exception e) {
-            //   ExtentFactory.getInstance().getExtent().log(Status.FAIL, "==> Text not retried due to exception: "+ e);
+            extentTest.log(FAIL, "==> Text not retried due to exception: "+ e);
 
         }
         return text;
@@ -187,11 +151,11 @@ public class ActionEngine extends BasePage {
         try {
 
             text = element.getText();
-            Log.info("Text for " + element + " is " + text);
-            //  ExtentFactory.getInstance().getExtent().log(Status.PASS, "==> Text retried is: "+ text);
+            Log.debug("Text for " + element + " is " + text);
+            extentTest.log(PASS, "==> Text retrieved is: "+ text);
             return text;
         } catch (Exception e) {
-            //   ExtentFactory.getInstance().getExtent().log(Status.FAIL, "==> Text not retried due to exception: "+ e);
+            extentTest.log(FAIL, "==> Text not retried due to exception: "+ e);
 
         }
         return text;

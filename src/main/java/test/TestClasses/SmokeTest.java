@@ -16,45 +16,45 @@ public class SmokeTest extends ActionEngine {
     IndexPage indexPage;
     String customerId;
 
-    @Test(priority = 0, enabled = true, description = "verify version at  Login Page")
-    public void versionCheck_LoginPage() {
+    @Test(priority = 0, enabled = true, description = "verify build version at  Login Page")
+    public void version_Check_at_LoginPage() {
         Login login = new Login();
         Assert.assertEquals(login.getBuildVersionText(), PropertiesUtil.getPropertyValue("copyRightText"));
     }
 
-    @Test(priority = 1, enabled = true, description = "verify successful Login")
-    public void validLogin() {
+    @Test(priority = 1, enabled = true, description = "verify successful Login with valid username password")
+    public void valid_Login() {
         Login login = new Login();
         indexPage = login.validLogin();
         Assert.assertEquals(indexPage.getPageUrl(), PropertiesUtil.getPropertyValue("indexPage"));
     }
 
     @Test(priority = 2, enabled = true, description = "verify index page reload")
-    public void reloadIndexPage() {
+    public void reload_IndexPage() {
         indexPage.refreshPage();
         Assert.assertEquals(indexPage.getPageUrl(), PropertiesUtil.getPropertyValue("indexPage"));
     }
 
-    @Test(priority = 3, enabled = true, description = "verify build version")
-    public void versionCheck() {
+    @Test(priority = 3, enabled = true, description = "verify build version at index page")
+    public void version_Check_at_Indexpage() {
 
         Assert.assertEquals(indexPage.getTextVersion().trim(), PropertiesUtil.getPropertyValue("buildVersion"));
     }
 
 
-    @Test(priority = 4, enabled = false, description = "verify create new customer")
-    public void createCustomer() throws InterruptedException {
+    @Test(priority = 4, enabled = true, description = "verify create new customer")
+    public void create_new_Customer() throws InterruptedException {
         Customer customer = new Customer();
         customer.createCustomer("Tenant", "Business", "business123@yopmail.com");
     }
 
     @Test(priority = 5, enabled = true, description = "verify all customer Search box")
-    public void searchAllCustomers() {
+    public void search_All_Customers() {
         indexPage.searchAllCustomer();
     }
 
-    @Test(priority = 6, enabled = true, description = "verify Customer group Name")
-    public void searchRecentCustomers() {
+    @Test(priority = 6, enabled = true, description = "verify Customer group Name ")
+    public void search_Recent_Customers_groupName() {
         Customer customer = new Customer();
         SoftAssert softAssert = new SoftAssert();
         String customerIdRecent = customer.clickRecentCustomerId();
@@ -65,13 +65,12 @@ public class SmokeTest extends ActionEngine {
         softAssert.assertEquals(customer.getGroupName(), PropertiesUtil.getPropertyValue("groupName"));
     }
 
-    @Test(priority = 7, enabled = true, description = "verify Customer Tabs")
-    public void verifyCustomerTabs() {
+    @Test(priority = 7, enabled = true, description = "verify all Customer Tabs ")
+    public void verify_CustomerTabs() {
         Customer customer = new Customer();
         String[] tabs = PropertiesUtil.getPropertyValue("customerTabs").split(",");
         for (String tab : tabs) {
             customer.clickCustomerTab(tab);
-            //customer.verifyConsoleLogs();
             getScreenshot(getDriver(), tab);
             SoftAssert softAssert = new SoftAssert();
             softAssert.assertFalse(customer.isErrorDisplayed());
@@ -80,7 +79,7 @@ public class SmokeTest extends ActionEngine {
     }
 
     @Test(priority = 8, enabled = true, description = "verify Fast NMI discovery")
-    public void FastNMIDiscovery() {
+    public void Fast_NMIDiscovery() {
         Customer customer = new Customer();
         customer.clickNMITab();
         FastNMI nmipage = new FastNMI();
@@ -90,8 +89,8 @@ public class SmokeTest extends ActionEngine {
 
     }
 
-    @Test(priority = 9, enabled = false, description = "load Webservices page")
-    public void loadWebServices() {
+    @Test(priority = 9, enabled = true, description = "Load Webservices page and open each WSDL file link")
+    public void load_WebServices() {
         Webservice webservice = new Webservice();
         getDriver().get(PropertiesUtil.getPropertyValue("webservices"));
         List<WebElement> wsdlLinks = webservice.getWSDLLinks();

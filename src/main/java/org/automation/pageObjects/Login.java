@@ -25,12 +25,6 @@ public class Login extends ActionEngine {
         clickBtn_custom(login);
     }
 
-    public void login(String userName, String password) {
-        enterUsername(userName);
-        enterPassword(password);
-        clickLoginBtn();
-    }
-
     public IndexPage validLogin() {
         sendKeys_custom(UsernameField, PropertiesUtil.getPropertyValue("userName"));
         sendKeys_custom(PasswordField, PropertiesUtil.getPropertyValue("password"));
