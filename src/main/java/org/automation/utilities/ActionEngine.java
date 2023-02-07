@@ -178,7 +178,20 @@ public class ActionEngine extends BasePage {
         CheckBox checkBox = new CheckBox(var, path);
         return checkBox.isChecked();
     }
+    public boolean isElementInVisible(By path) {
+        boolean flag = false;
+        try {
+            Element element = new Element("fieldName", path);
+            flag = element.isInvisible();
+            Log.debug( " element is present -->" + flag);
 
+            extentTest.log(PASS, "==> Presence of element " + " is: " + flag);
+            return flag;
+        } catch (Exception e) {
+            extentTest.log(FAIL, "****Checking for presence of element : " + " not tested due to exception: " + e);
+            return flag;
+        }
+    }
     public List<WebElement> getWebElements(By path, String... label) {
         String var = "";
         try {
