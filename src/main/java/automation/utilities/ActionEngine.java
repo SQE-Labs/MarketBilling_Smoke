@@ -2,7 +2,6 @@ package automation.utilities;
 
 import automation.base.BasePage;
 import automation.elements.*;
-import org.automation.elements.*;
 import automation.logger.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
