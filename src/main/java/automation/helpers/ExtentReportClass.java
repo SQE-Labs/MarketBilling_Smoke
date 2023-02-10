@@ -76,6 +76,8 @@ public class ExtentReportClass extends BaseTest {
             extentTest.log(LogStatus.SKIP, "Test Case SKIPPED IS " + result.getName());
             System.out.println("*** Test " + result.getMethod().getMethodName() + " skipped...");
         } else if (result.getStatus() == ITestResult.SUCCESS) {
+            String screenshotPath = ExtentReportClass.getScreenshot(driver, result.getName());
+            extentTest.log(LogStatus.PASS, extentTest.addScreenCapture(screenshotPath));
             extentTest.log(LogStatus.PASS, "Test Case PASSED IS " + result.getName());
             System.out.println("*** Executed " + result.getMethod().getMethodName() + " test successfully...");
         }

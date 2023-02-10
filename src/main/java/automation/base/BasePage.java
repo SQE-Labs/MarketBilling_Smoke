@@ -35,6 +35,7 @@ public class BasePage extends ExtentReportClass {
     public String getPageUrl() {
         String currentUrl = BaseTest.getDriver().getCurrentUrl();
         Log.info("Get the Current URL " + currentUrl);
+
         return currentUrl;
     }
 

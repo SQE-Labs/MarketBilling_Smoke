@@ -22,7 +22,7 @@ public class ActionEngine extends BasePage {
             element.getWebElement().sendKeys(valueToBeSent);
             extentTest.log(PASS, "Entered value as: " + valueToBeSent);
         } catch (Exception e) {
-            extentTest.log(FAIL, "==> Unable to enter data  for => " + var);
+            extentTest.log(FAIL, "Unable to enter data  for => " + var);
 
         }
     }
@@ -38,7 +38,7 @@ public class ActionEngine extends BasePage {
             btn.click();
             Log.info("Clicked on " + var);
             //log success message in exgent report
-            extentTest.log(PASS, "==> Clicked Button Successfully! " + var);
+            extentTest.log(PASS, "Clicked Button Successfully! " + var);
         } catch (Exception e) {
             extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
         }
@@ -54,7 +54,7 @@ public class ActionEngine extends BasePage {
             btn.click();
             Log.info("Clicked on " + var);
             //log success message in exgent report
-            extentTest.log(PASS, "==> Clicked element Successfully! " + var);
+            extentTest.log(PASS, "Clicked element Successfully! " + var);
         } catch (Exception e) {
             extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
 
@@ -65,7 +65,7 @@ public class ActionEngine extends BasePage {
     public void click_custom(WebElement element, String... label) {
         try {
             element.click();
-            extentTest.log(PASS, "==> Clicked element Successfully! " + label);
+            extentTest.log(PASS, "Clicked element Successfully! " );
         } catch (Exception e) {
             extentTest.log(FAIL, "==> Unable to click  " + label+" due to exception "+e);
         }
@@ -80,7 +80,7 @@ public class ActionEngine extends BasePage {
             flag = element.isVisible();
             Log.debug(fieldName + " element is present -->" + flag);
 
-            extentTest.log(PASS, "==> Presence of element "+fieldName + " is: " + flag);
+            extentTest.log(PASS, "Presence of element "+fieldName + " is: " + flag);
             return flag;
         } catch (Exception e) {
             extentTest.log(FAIL, "****Checking for presence of element : " + fieldName + " not tested due to exception: " + e);
@@ -137,10 +137,10 @@ public class ActionEngine extends BasePage {
             Element element = new Element("", path);
             text = element.getText();
             Log.info("Text for " + path + " is " + text);
-             extentTest.log(PASS, "==> Text retrieved is: "+ text);
+             extentTest.log(PASS, "Text retrieved is: "+ text);
             return text;
         } catch (Exception e) {
-            extentTest.log(FAIL, "==> Text not retried due to exception: "+ e);
+            extentTest.log(FAIL, "Text not retrieved due to exception: "+ e);
 
         }
         return text;
