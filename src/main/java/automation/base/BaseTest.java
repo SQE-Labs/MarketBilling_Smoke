@@ -1,13 +1,13 @@
 package automation.base;
 
 
+import automation.logger.Log;
+import automation.utilities.PropertiesUtil;
 import com.codoid.products.exception.FilloException;
 import com.codoid.products.fillo.Connection;
 import com.codoid.products.fillo.Fillo;
 import com.codoid.products.fillo.Recordset;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import automation.logger.Log;
-import automation.utilities.PropertiesUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,8 +20,9 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
 import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 
 import java.io.IOException;
@@ -57,7 +58,7 @@ public class BaseTest {
         Reporter.log(message);
     }
 
-    @BeforeSuite
+    @BeforeClass
     public void SetProp() {
         switch (FinalBrowser) {
             case "CHROME": {
@@ -100,6 +101,11 @@ public class BaseTest {
     public void toClose() {
 
         driver.quit();
+    }
+    @AfterClass
+    public void afterClass() {
+
+        driver.close();
     }
 
 

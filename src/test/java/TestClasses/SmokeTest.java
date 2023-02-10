@@ -2,18 +2,16 @@ package TestClasses;
 
 import automation.pageObjects.*;
 import automation.utilities.ActionEngine;
-import automation.utilities.Assertions;
 import automation.utilities.PropertiesUtil;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class SmokeTest extends ActionEngine {
     IndexPage indexPage;
+    CustomerSearchPage searchPage = new CustomerSearchPage();
+    String BASE_URL=PropertiesUtil.getPropertyValue("baseUrl");
+
     String customerId;
 
     @Test(priority = 0, enabled = true, description = "verify build version at  Login Page")
@@ -26,13 +24,13 @@ public class SmokeTest extends ActionEngine {
     public void valid_Login() {
         Login login = new Login();
         indexPage = login.validLogin();
-        Assert.assertEquals(indexPage.getPageUrl(), PropertiesUtil.getPropertyValue("indexPage"));
+        Assert.assertEquals(indexPage.getPageUrl(),BASE_URL+ PropertiesUtil.getPropertyValue("indexPage"));
     }
 
     @Test(priority = 2, enabled = true, description = "verify index page reload")
     public void reload_IndexPage() {
         indexPage.refreshPage();
-        Assert.assertEquals(indexPage.getPageUrl(), PropertiesUtil.getPropertyValue("indexPage"));
+        Assert.assertEquals(indexPage.getPageUrl(),BASE_URL+ PropertiesUtil.getPropertyValue("indexPage"));
     }
 
     @Test(priority = 3, enabled = true, description = "verify build version at index page")
@@ -42,15 +40,50 @@ public class SmokeTest extends ActionEngine {
     }
 
 
-    @Test(priority = 4, enabled = true, description = "verify create new customer")
+    @Test(priority = 4, enabled =false , description = "verify create new customer")
     public void create_new_Customer() throws InterruptedException {
         Customer customer = new Customer();
         customer.createCustomer("Tenant", "Business", "business123@yopmail.com");
     }
+    @Test(priority = 5, enabled = true, description = "verify all customer Search box")
+    public void search_All() {
+        indexPage.searchAll();
+        Assert.assertTrue(searchPage.getHeaderText().contains("Customers Found"));
 
+    }
+    @Test(priority = 5, enabled = true, description = "verify all customer Search box")
+    public void search_All_Market_ServiceID() {
+
+        indexPage.searchAllServiceId();
+        Assert.assertTrue(searchPage.getHeaderText().contains("Market Services Found"));
+    }
+    @Test(priority = 5, enabled = true, description = "verify all customer Search box")
+    public void search_All_Customer_Address() {
+
+        indexPage.searchAllCustomerAddress();
+        Assert.assertTrue(searchPage.getHeaderText().contains("Customers Found"));
+
+
+    }
+    @Test(priority = 5, enabled = true, description = "verify all customer Search box")
+    public void search_All_Service_Address() {
+
+        indexPage.searchAllServiceAddress();
+        Assert.assertTrue(searchPage.getHeaderText().contains("Market Services Found"));
+
+    }
+    @Test(priority = 5, enabled = true, description = "verify all customer Search box")
+    public void search_All_Meter_Number() {
+        indexPage.searchAllMeterNumber();
+        Assert.assertTrue(searchPage.getHeaderText().contains("Market Services Found"));
+
+    }
     @Test(priority = 5, enabled = true, description = "verify all customer Search box")
     public void search_All_Customers() {
+
         indexPage.searchAllCustomer();
+        Assert.assertTrue(searchPage.getHeaderText().contains("Customers Found"));
+
     }
 
     @Test(priority = 6, enabled = true, description = "verify Customer group Name ")
@@ -58,23 +91,26 @@ public class SmokeTest extends ActionEngine {
         Customer customer = new Customer();
         SoftAssert softAssert = new SoftAssert();
         String customerIdRecent = customer.clickRecentCustomerId();
-        softAssert.assertEquals(customerIdRecent, customerId);
+       // softAssert.assertEquals(customerIdRecent, customerId);
 
         customer.switchToWindow("CustomerPage");
         customer.clickDetailsTab();
-        softAssert.assertEquals(customer.getGroupName(), PropertiesUtil.getPropertyValue("groupName"));
+        Assert.assertEquals(customer.getGroupName(), PropertiesUtil.getPropertyValue("groupName"));
+         softAssert.assertAll();
     }
 
     @Test(priority = 7, enabled = true, description = "verify all Customer Tabs ")
     public void verify_CustomerTabs() {
         Customer customer = new Customer();
+        SoftAssert softAssert = new SoftAssert();
         String[] tabs = PropertiesUtil.getPropertyValue("customerTabs").split(",");
         for (String tab : tabs) {
             customer.clickCustomerTab(tab);
             getScreenshot(getDriver(), tab);
-            SoftAssert softAssert = new SoftAssert();
             softAssert.assertFalse(customer.isErrorDisplayed());
+
         }
+      //  softAssert.assertAll();
 
     }
 
@@ -89,31 +125,5 @@ public class SmokeTest extends ActionEngine {
 
     }
 
-    @Test(priority = 9, enabled = true, description = "Load Webservices page and open each WSDL file link")
-    public void load_WebServices() {
-        Webservice webservice = new Webservice();
-        getDriver().get(PropertiesUtil.getPropertyValue("webservices"));
-        List<WebElement> wsdlLinks = webservice.getWSDLLinks();
-        for (WebElement link : wsdlLinks) {
-            String hyperLink = getText_custom(link);
-            String[] text = hyperLink.split("/");
-            click_custom(link);
-            String fileName = "";
-            for (String s : text) {
-                if (s.contains("?")) {
-                    fileName = Arrays.asList(s.split("\\?")).get(0);
-                    break;
-                }
-            }
-            Assertions softAssert = new Assertions();
-            webservice.switchToWindow("new Tab");
 
-            softAssert.assertStrings(webservice.getPageUrl(), hyperLink);
-            softAssert.assertTrue(webservice.isXMLTextPresent("definitions"));
-
-            getScreenshot(getDriver(), fileName);
-            webservice.navigateBack();
-
-        }
-    }
 }

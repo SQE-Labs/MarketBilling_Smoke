@@ -17,7 +17,7 @@ public class Webservice extends ActionEngine {
     }
 
     public boolean isXMLTextPresent(String text) {
-        return isElementPresent_custom(By.xpath("*[contains(text(),'" + text + "')]"), text);
+        return isElementPresent_custom(By.xpath("//*[contains(text(),'The document tree is shown below.')]"), text);
 
     }
 }

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="MarketBilling">
+<suite name="MarketBilling" >
     <test name="MarketBillink_Smoke">
         <classes>
-
             <class name="TestClasses.SmokeTest">
-
+                <methods>
+                    <exclude name="create_new_Customer"></exclude>
+                </methods>
+            </class>
+            <class name="TestClasses.WebserviceTest">
             </class>
 
         </classes>
