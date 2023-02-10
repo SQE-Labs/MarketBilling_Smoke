@@ -1,7 +1,7 @@
 # ACMS MarketBilling
 Framework created by **SQE LABS.**
 
-Pre-requisites : Maven,Jdk
+Pre-requisites : Maven,Jdk 11
 
   STEPS to run Test Suite
 1. Run below cmd in terminal/cmdline for downloading  using git 
