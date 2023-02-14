@@ -178,6 +178,20 @@ public class ActionEngine extends BasePage {
         CheckBox checkBox = new CheckBox(var, path);
         return checkBox.isChecked();
     }
+    public String getAttributevalue(By path ,String attribute) {
+        String value ;
+        try {
+            Element element = new Element("fieldName", path);
+            value = element.getAttributeValue(attribute);
+            Log.debug( " element attribute value  is present -->" + value);
+
+            extentTest.log(PASS, " Element attribute value is " + value);
+            return value;
+        } catch (Exception e) {
+            extentTest.log(FAIL, "****Checking for presence of element : " + " not tested due to exception: " + e);
+            return "";
+        }
+    }
     public boolean isElementInVisible(By path) {
         boolean flag = false;
         try {

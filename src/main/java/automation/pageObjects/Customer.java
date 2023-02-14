@@ -114,7 +114,7 @@ public class Customer extends ActionEngine {
     }
 
     public boolean isErrorDisplayed() {
-        return isElementInVisible(error);
+        return isElementPresent_custom(error,"error");
     }
 
     public void selectCategoryDropdownField(String categoryText) {
