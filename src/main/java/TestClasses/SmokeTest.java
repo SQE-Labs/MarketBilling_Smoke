@@ -49,6 +49,8 @@ public class SmokeTest extends ActionEngine {
     public void search_All() {
         indexPage.searchAll();
         Assert.assertTrue(searchPage.getHeaderText().contains("Customers Found"));
+        Assert.assertTrue(searchPage.getHeader2Text().contains("Market Services Found"));
+
 
     }
     @Test(priority = 5, enabled = true, description = "verify all customer Search box")
@@ -88,14 +90,19 @@ public class SmokeTest extends ActionEngine {
 
     @Test(priority = 6, enabled = true, description = "verify Customer group Name ")
     public void search_Recent_Customers_groupName() {
+        Admin admin = new Admin();
+        GroupEdit groupEdit= admin.navigateToGroupEdit();
+        String groupName =groupEdit.getGroupNameText();
+
         Customer customer = new Customer();
         SoftAssert softAssert = new SoftAssert();
+        indexPage.searchAllCustomer();
         String customerIdRecent = customer.clickRecentCustomerId();
        // softAssert.assertEquals(customerIdRecent, customerId);
-
         customer.switchToWindow("CustomerPage");
         customer.clickDetailsTab();
-        Assert.assertEquals(customer.getGroupName(), PropertiesUtil.getPropertyValue("groupName"));
+       String custGroupName= customer.getGroupName();
+        Assert.assertEquals(custGroupName, groupName);
          softAssert.assertAll();
     }
 
@@ -110,7 +117,7 @@ public class SmokeTest extends ActionEngine {
             softAssert.assertFalse(customer.isErrorDisplayed());
 
         }
-      //  softAssert.assertAll();
+        softAssert.assertAll();
 
     }
 
@@ -119,10 +126,19 @@ public class SmokeTest extends ActionEngine {
         Customer customer = new Customer();
         customer.clickNMITab();
         FastNMI nmipage = new FastNMI();
-        nmipage.enterNmi("EMB8573590");
+        nmipage.enterNmi(PropertiesUtil.getPropertyValue("nmi"));
         nmipage.clickDiscoveryBtn();
-        Assert.assertEquals(nmipage.getResultText(), "Error in Fast NMI Discovery Request - I/O Exception: java.net.ConnectException: Connection timed out: connect");
+        if (PropertiesUtil.getPropertyValue("env").equalsIgnoreCase("qa")) {
+            Assert.assertEquals(nmipage.getResultText(), "Error in Fast NMI Discovery Request - I/O Exception: java.net.ConnectException: Connection timed out: connect");
+            Assert.assertEquals(nmipage.getDlfValue(),"");
 
+        }
+        else{
+            Assert.assertTrue(nmipage.getResultText().contains("<Header>"));
+            Assert.assertNotEquals(nmipage.getDlfValue(),"");
+            Assert.assertNotEquals(nmipage.getTnivalue(),"");
+
+        }
     }
 
 
