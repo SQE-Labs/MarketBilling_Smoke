@@ -126,10 +126,19 @@ public class SmokeTest extends ActionEngine {
         Customer customer = new Customer();
         customer.clickNMITab();
         FastNMI nmipage = new FastNMI();
-        nmipage.enterNmi("EMB8573590");
+        nmipage.enterNmi(PropertiesUtil.getPropertyValue("nmi"));
         nmipage.clickDiscoveryBtn();
-        Assert.assertEquals(nmipage.getResultText(), "Error in Fast NMI Discovery Request - I/O Exception: java.net.ConnectException: Connection timed out: connect");
+        if (PropertiesUtil.getPropertyValue("env").equalsIgnoreCase("qa")) {
+            Assert.assertEquals(nmipage.getResultText(), "Error in Fast NMI Discovery Request - I/O Exception: java.net.ConnectException: Connection timed out: connect");
+            Assert.assertEquals(nmipage.getDlfValue(),"");
 
+        }
+        else{
+            Assert.assertTrue(nmipage.getResultText().contains("<Header>"));
+            Assert.assertNotEquals(nmipage.getDlfValue(),"");
+            Assert.assertNotEquals(nmipage.getTnivalue(),"");
+
+        }
     }
 
 

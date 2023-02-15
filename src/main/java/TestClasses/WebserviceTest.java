@@ -31,7 +31,7 @@ public class WebserviceTest extends ActionEngine {
                 }
             }
             webservice.switchToWindow("new Tab");
-            softAssert.assertEquals(webservice.getPageUrl(), BASE_URL+"/KL"+fileName+"?wsdl");
+            softAssert.assertEquals(webservice.getPageUrl(), BASE_URL+"/"+fileName+"?wsdl");
             softAssert.assertTrue(webservice.isXMLTextPresent("definitions"));
             getScreenshot(getDriver(), fileName);
             webservice.navigateBack();
