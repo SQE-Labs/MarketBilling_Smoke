@@ -7,11 +7,14 @@ import automation.utilities.WebDriverWaits;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.asserts.SoftAssert;
 
 public class Customer extends ActionEngine {
     public By customerTab = By.xpath("//a[@title='Customer']");
     public By detailsTab = By.xpath("//a[contains(text(),'Details')]");
     public By nmiTab = By.xpath("//a[contains(text(),'NMI')]");
+    public By market = By.xpath("(//a[contains(text(),' Market')])[1]");
+    public By service = By.xpath("//a[contains(text(),'Services')]");
 
     public By SearchField = By.xpath("//*[@id=\"search_input\"]");
     public By SearchIcon = By.xpath("//*[@class=\"glyphicon glyphicon-search\"]");
@@ -83,6 +86,43 @@ public class Customer extends ActionEngine {
     Assertions as;
     String SUCCESS_MESG = "Successfully saved customer.";
 
+
+    //Metering
+
+    public  By MeterReads_Tab = By.xpath("//*[@class='icon-bar-chart']");
+    public  By ServiceName_Dropdown = By.xpath("//*[@id='nmis']");
+    public  By ServiceName_DropdownOpn = By.xpath("//*[@id='nmis']/option[2]");
+    public  By MeterNumber_Dropdown = By.xpath("//*[@id='meterNo']");
+    public  By MeterNumber_DropdownOpn = By.xpath("//*[@id='meterNo']/option[2]");
+    public  By ViewMeterReads = By.xpath("//*[@id='viewMeterReads']");
+    public  By viewDemandReads = By.xpath("//*[@id='viewDemandReads']");
+   // public  By viewKvarhReads = By.xpath("//*[@id='viewKvarhReads']");
+    public  By viewTOUReads = By.xpath("//*[@id='viewTOUReads']");
+    public  By viewTOUDailyReads = By.xpath("//*[@id='viewTOUDailyReads']");
+    public  By viewNEM13Reads = By.xpath("//*[@id='viewNEM13Reads']");
+    public  By retrieveTOUDailyReads = By.id("viewNEM13Reads");
+    public  By retrieveTOUReads = By.id("retrieveTOUReads");
+    public  By exportNEM13Reads = By.id("exportNEM13Reads");
+    public  By retrieveNEM13Reads = By.id("retrieveNEM13Reads");
+
+
+    //Market Page
+    public  By b2bNotAndRequest = By.id("b2bNotAndRequest");
+    public  By SORD = By.id("SORD");
+    public  By CATS = By.id("CATS");
+    public  By NMID = By.id("NMID");
+    public  By newNMIDButton = By.id("newNMIDButton");
+    public  By CATSCategory = By.id("CATSCategory");
+    public  By newSOButton = By.id("newSOButton");
+    public  By B2BCategory = By.id("B2BCategory");
+
+//Services
+
+    public  By editService = By.xpath("//button[@title='View']");
+    public  By backToServices = By.xpath("//a[@value='Back']");
+
+
+
     public String getGroupName() {
         String groupName = getText_custom(groupTag);
         System.out.println("GroupName of customer is " + groupName);
@@ -108,7 +148,13 @@ public class Customer extends ActionEngine {
     public void clickNMITab() {
         clickBtn_custom(nmiTab, "NMI Tab");
     }
+    public void clickMarketTab() {
+        clickBtn_custom(market, "Market Tab");
+    }
 
+    public void clickServiceTab() {
+        clickBtn_custom(service, "Servcie Tab");
+    }
     public void clickCustomerTab(String tabName) {
         clickBtn_custom(By.xpath("//a[contains(text(),'" + tabName + "')]"), tabName);
     }
@@ -308,5 +354,59 @@ public class Customer extends ActionEngine {
         sendKeys_custom(ContractTerm_Field, "10");
     }
 
+    public void addMeterInformation(String serviceName , String meterNumber){
+        click_custom(ServiceName_Dropdown,"ServiceName");
+        click_custom(ServiceName_DropdownOpn);
+        click_custom(MeterNumber_Dropdown,"Meter Number");
+        click_custom(MeterNumber_DropdownOpn);
 
+    }
+    public void verifyMeterReadsTabs(){
+        click_custom(ViewMeterReads,"Meter Reads Tab");
+        click_custom(viewDemandReads," Demand Reads Tab");
+        //isElementPresent_custom();
+        SoftAssert softAssert = new SoftAssert();
+        click_custom(viewNEM13Reads,"NEM 13 Raw Reads Tab");
+        softAssert.assertTrue(isElementPresent_custom(retrieveNEM13Reads,"Retrieve Button"));
+        softAssert.assertFalse(isExceptionOrErrorPresent());
+        click_custom(viewTOUDailyReads,"Tou Aggregated Reads Tab");
+        softAssert.assertTrue(isElementPresent_custom(retrieveTOUDailyReads,"Retrieve Button"));
+        softAssert.assertFalse(isExceptionOrErrorPresent());
+
+        click_custom(viewTOUReads,"Tou Raw Reads Tab ");
+        softAssert.assertTrue(isElementPresent_custom(retrieveTOUReads, "Retrieve Button"));
+        softAssert.assertFalse(isExceptionOrErrorPresent());
+
+        softAssert.assertAll();
+
+    }
+    public void verifyMarketTabs(){
+       // click_custom(ViewMeterReads,"Meter Reads Tab");
+        //click_custom(viewDemandReads," Demand Reads Tab");
+        //isElementPresent_custom();
+        SoftAssert softAssert = new SoftAssert();
+        click_custom(NMID,"CATS NMI Discovery Tab");
+        softAssert.assertTrue(isElementPresent_custom(newNMIDButton,"Retrieve Button"));
+        softAssert.assertFalse(isExceptionOrErrorPresent());
+
+        click_custom(CATS,"Change request Tab");
+        softAssert.assertTrue(isElementPresent_custom(CATSCategory,"CATSCategory Box"));
+        softAssert.assertFalse(isExceptionOrErrorPresent());
+
+        click_custom(SORD,"Service Order Tab ");
+        softAssert.assertTrue(isElementPresent_custom(newSOButton, "newSOButton Button"));
+        click_custom(b2bNotAndRequest,"Notifications/request Tab");
+        softAssert.assertTrue(isElementPresent_custom(B2BCategory, "Category selection box "));
+        softAssert.assertFalse(isExceptionOrErrorPresent());
+
+        softAssert.assertAll();
+
+    }
+    public void verifyServiceEdit(){
+
+        click_custom(editService,"Edit Service Button");
+
+        scrollIntoView(backToServices);
+        click_custom(backToServices,"Back To Services Button");
+    }
 }
