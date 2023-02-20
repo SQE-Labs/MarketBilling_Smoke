@@ -14,6 +14,7 @@ public class IndexPage extends ActionEngine {
     public By serviceAddress = By.xpath("//a[text()='Service Address']");
     public By meterNumber = By.xpath("//a[text()='Market Service ID']");
     public By all = By.xpath("#");
+    public By searchInput=By.xpath("//div[@class='input-group search-panel-holder']//input[@id='search_input']");
 
     public String getTextVersion() {
         return getText_custom(footerVersion);
@@ -29,11 +30,16 @@ public class IndexPage extends ActionEngine {
     public void searchAll() {
         click_custom(searchIcon);
     }
+    public void searchAll(String searchText) {
+        sendKeys_custom(searchInput,searchText);
+        click_custom(searchIcon);
+    }
 
-    public void searchAllMeterNumber() {
+    public SrvCustSearchResults searchAllMeterNumber() {
         click_custom(dropDown);
         click_custom(meterNumber);
         click_custom(searchIcon);
+        return new  SrvCustSearchResults();
     }
     public void searchAllServiceAddress() {
         click_custom(dropDown);
