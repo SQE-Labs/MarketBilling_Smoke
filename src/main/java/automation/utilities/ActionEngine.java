@@ -2,6 +2,7 @@ package automation.utilities;
 
 import automation.base.BasePage;
 import automation.elements.*;
+import automation.helpers.ExtentReportClass;
 import automation.logger.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -34,7 +35,7 @@ public class ActionEngine extends BasePage {
         String var = "";
         try {
             var = label.length > 0 ? label[0] : path.toString();
-
+            WebDriverWaits.waitForElementDisabled(By.className("spinner"),6);
             Button btn = new Button(var, path);
             btn.click();
             Log.info("Clicked on " + var);
@@ -52,7 +53,7 @@ public class ActionEngine extends BasePage {
         try {
 
             var = label.length > 0 ? label[0] : path.toString();
-
+            WebDriverWaits.waitForElementDisabled(By.className("spinner"),6);
             Element btn = new Element(var, path);
             btn.click();
             Log.info("Clicked on " + var);
@@ -75,7 +76,23 @@ public class ActionEngine extends BasePage {
 
         }
     }
+    public boolean isDisabled(By  path,String... label) {
+        String var = "";
+        try {
 
+            var = label.length > 0 ? label[0] : path.toString();
+
+            Element ele = new Element(var, path);
+            Log.info("Clicked on " + var);
+            //log success message in exgent report
+            extentTest.log(PASS, "Clicked element Successfully! " + var);
+            return ele.isDisabled();
+
+        } catch (Exception e) {
+            extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
+            throw new RuntimeException(e);
+        }
+    }
 
     //check if element is Present
     public boolean isElementPresent_custom(By path, String fieldName) {
@@ -262,6 +279,16 @@ public class ActionEngine extends BasePage {
         } catch (Exception e) {
             extentTest.log(FAIL, "Error or Exception Presence" + " : " + flag);
             return flag;
+        }
+    }
+    public void attachScreenShot(String screenshotName) {
+
+        try {
+            String screenshotPath = ExtentReportClass.getScreenshot(driver, screenshotName);
+            extentTest.log(PASS, extentTest.addScreenCapture(screenshotPath));
+        } catch (Exception e) {
+            extentTest.log(FAIL, "Screenshot Failure "+e);
+
         }
     }
 

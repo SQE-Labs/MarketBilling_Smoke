@@ -112,7 +112,7 @@ public class SmokeTest extends ActionEngine {
         Admin admin = new Admin();
         GroupEdit groupEdit = admin.navigateToGroupEdit();
         String groupName = groupEdit.getGroupNameText();
-
+        attachScreenShot("groupNameAdmin");
         Customer customer = new Customer();
         SoftAssert softAssert = new SoftAssert();
         indexPage.searchAllCustomer();
@@ -121,6 +121,7 @@ public class SmokeTest extends ActionEngine {
         customer.switchToWindow("CustomerPage");
         customer.clickDetailsTab();
         String custGroupName = customer.getGroupName();
+        attachScreenShot("groupName");
         Assert.assertEquals(custGroupName, groupName);
         Assert.assertEquals(custGroupName, PropertiesUtil.getPropertyValue("groupName"));
         softAssert.assertAll();
@@ -135,7 +136,7 @@ public class SmokeTest extends ActionEngine {
         String[] tabs = PropertiesUtil.getPropertyValue("customerTabs").split(",");
         for (String tab : tabs) {
             customer.clickCustomerTab(tab);
-            getScreenshot(getDriver(), tab);
+            attachScreenShot(tab);
             if(!(tab.contains("Settings")))
             softAssert.assertFalse(customer.isExceptionOrErrorPresent());
 
