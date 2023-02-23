@@ -277,8 +277,8 @@ public class Customer extends ActionEngine {
 
     public void createCustomer(String type, String category, String email) throws InterruptedException {
         //Account Type
-        clickBtn_custom(CustomerIcontab);
-        clickBtn_custom(CustomerTypedropdown);
+        clickBtn_custom(CustomerIcontab,"CustomerIcontab");
+        clickBtn_custom(CustomerTypedropdown,"CustomerTypedropdown");
         Select select = new Select(getDriver().findElement(CustomerTypedropdown));
         select.selectByVisibleText(type);
         clickBtn_custom(Categorydropdown);
@@ -292,15 +292,15 @@ public class Customer extends ActionEngine {
         addContactDetails(email);
         addAccountManagement(category);
         scrollIntoView(SaveCustomerButton);
-        clickBtn_custom(SaveCustomerButton);
-        clickBtn_custom(SaveOnlyButton);
+        clickBtn_custom(SaveCustomerButton,"SaveCustomerButton");
+        clickBtn_custom(SaveOnlyButton,"SaveOnlyButton");
         Thread.sleep(2000);
     }
 
     public void addContactDetails(String email) throws InterruptedException {
-        clickBtn_custom(Address1field);
+        clickBtn_custom(Address1field,"Address1field");
         sendKeys_custom(Address1field, "Madirma R-Town");
-        clickBtn_custom(Cityfield);
+        clickBtn_custom(Cityfield,"Cityfield");
         sendKeys_custom(Cityfield, "Mills NY");
         clickBtn_custom(Statedropdown);
         select = new Select(getDriver().findElement(Statedropdown));
@@ -363,17 +363,26 @@ public class Customer extends ActionEngine {
     }
     public void verifyMeterReadsTabs(){
         click_custom(ViewMeterReads,"Meter Reads Tab");
+        attachScreenShot("Meter Reads Tab");
         click_custom(viewDemandReads," Demand Reads Tab");
+        attachScreenShot("Demand Reads Tab");
+
         //isElementPresent_custom();
         SoftAssert softAssert = new SoftAssert();
         click_custom(viewNEM13Reads,"NEM 13 Raw Reads Tab");
+        attachScreenShot("NEM 13 Raw Reads Tab");
+
         softAssert.assertTrue(isElementPresent_custom(retrieveNEM13Reads,"Retrieve Button"));
         softAssert.assertFalse(isExceptionOrErrorPresent());
         click_custom(viewTOUDailyReads,"Tou Aggregated Reads Tab");
+        attachScreenShot("Tou Aggregated  Reads Tab");
+
         softAssert.assertTrue(isElementPresent_custom(retrieveTOUDailyReads,"Retrieve Button"));
         softAssert.assertFalse(isExceptionOrErrorPresent());
 
         click_custom(viewTOUReads,"Tou Raw Reads Tab ");
+        attachScreenShot("Tou Raw Reads Tab");
+
         softAssert.assertTrue(isElementPresent_custom(retrieveTOUReads, "Retrieve Button"));
         softAssert.assertFalse(isExceptionOrErrorPresent());
 
@@ -386,16 +395,20 @@ public class Customer extends ActionEngine {
         //isElementPresent_custom();
         SoftAssert softAssert = new SoftAssert();
         click_custom(NMID,"CATS NMI Discovery Tab");
+        attachScreenShot("CATS NMI Discovery Tab");
         softAssert.assertTrue(isElementPresent_custom(newNMIDButton,"Retrieve Button"));
         softAssert.assertFalse(isExceptionOrErrorPresent());
 
         click_custom(CATS,"Change request Tab");
+        attachScreenShot("Change Request Tab");
         softAssert.assertTrue(isElementPresent_custom(CATSCategory,"CATSCategory Box"));
         softAssert.assertFalse(isExceptionOrErrorPresent());
 
         click_custom(SORD,"Service Order Tab ");
+        attachScreenShot("Service Order Tab");
         softAssert.assertTrue(isElementPresent_custom(newSOButton, "newSOButton Button"));
         click_custom(b2bNotAndRequest,"Notifications/request Tab");
+        attachScreenShot("Notifications/Request Tab");
         softAssert.assertTrue(isElementPresent_custom(B2BCategory, "Category selection box "));
         softAssert.assertFalse(isExceptionOrErrorPresent());
 
@@ -405,6 +418,7 @@ public class Customer extends ActionEngine {
     public void verifyServiceEdit(){
 
         click_custom(editService,"Edit Service Button");
+        attachScreenShot("Services Edit Page");
 
         scrollIntoView(backToServices);
         click_custom(backToServices,"Back To Services Button");

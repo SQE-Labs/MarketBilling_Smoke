@@ -2,6 +2,7 @@ package automation.utilities;
 
 import automation.base.BasePage;
 import automation.elements.*;
+import automation.helpers.ExtentReportClass;
 import automation.logger.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -34,7 +35,7 @@ public class ActionEngine extends BasePage {
         String var = "";
         try {
             var = label.length > 0 ? label[0] : path.toString();
-
+            WebDriverWaits.waitForElementDisabled(By.className("spinner"),6);
             Button btn = new Button(var, path);
             btn.click();
             Log.info("Clicked on " + var);
@@ -52,7 +53,7 @@ public class ActionEngine extends BasePage {
         try {
 
             var = label.length > 0 ? label[0] : path.toString();
-
+            WebDriverWaits.waitForElementDisabled(By.className("spinner"),6);
             Element btn = new Element(var, path);
             btn.click();
             Log.info("Clicked on " + var);
@@ -75,7 +76,23 @@ public class ActionEngine extends BasePage {
 
         }
     }
+    public boolean isDisabled(By  path,String... label) {
+        String var = "";
+        try {
 
+            var = label.length > 0 ? label[0] : path.toString();
+
+            Element ele = new Element(var, path);
+            Log.info("Clicked on " + var);
+            //log success message in exgent report
+            extentTest.log(PASS, "Clicked element Successfully! " + var);
+            return ele.isDisabled();
+
+        } catch (Exception e) {
+            extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
+            throw new RuntimeException(e);
+        }
+    }
 
     //check if element is Present
     public boolean isElementPresent_custom(By path, String fieldName) {
@@ -83,9 +100,9 @@ public class ActionEngine extends BasePage {
         try {
             Element element = new Element(fieldName, path);
             flag = element.isVisible();
-            Log.debug(fieldName + " element is present -->" + flag);
+            //Log.debug(fieldName + " element is present -->" + flag);
 
-            extentTest.log(PASS, "Presence of element "+fieldName + " is: " + flag);
+           // extentTest.log(PASS, "Presence of element "+fieldName + " is: " + flag);
             return flag;
         } catch (Exception e) {
             extentTest.log(FAIL, "****Checking for presence of element : " + fieldName + " not tested due to exception: " + e);
@@ -158,7 +175,7 @@ public class ActionEngine extends BasePage {
         try {
 
             text = element.getText();
-            Log.debug("Text for " + element + " is " + text);
+          //  Log.debug("Text for " + element + " is " + text);
             extentTest.log(PASS, "==> Text retrieved is: "+ text);
             return text;
         } catch (Exception e) {
@@ -190,7 +207,7 @@ public class ActionEngine extends BasePage {
         try {
             Element element = new Element("fieldName", path);
             value = element.getAttributeValue(attribute);
-            Log.debug( " element attribute value  is present -->" + value);
+        //    Log.debug( " element attribute value  is present -->" + value);
 
             extentTest.log(PASS, " Element attribute value is " + value);
             return value;
@@ -204,7 +221,7 @@ public class ActionEngine extends BasePage {
         try {
             Element element = new Element("fieldName", path);
             flag = element.isInvisible();
-            Log.debug( " element is present -->" + flag);
+         //   Log.debug( " element is present -->" + flag);
 
             extentTest.log(PASS, "==> Presence of element " + " is: " + flag);
             return flag;
@@ -256,12 +273,22 @@ public class ActionEngine extends BasePage {
             Element exceptionEle = new Element("fieldName", exception);
             Element errorEle = new Element("fieldName", error);
             flag= exceptionEle.isVisible() || errorEle.isVisible();
-            Log.debug( " Exception or Error  is present -->" + flag);
+           // Log.debug( " Exception or Error  is present -->" + flag);
 
             return flag;
         } catch (Exception e) {
             extentTest.log(FAIL, "Error or Exception Presence" + " : " + flag);
             return flag;
+        }
+    }
+    public void attachScreenShot(String screenshotName) {
+
+        try {
+            String screenshotPath = ExtentReportClass.getScreenshot(driver, screenshotName);
+            extentTest.log(PASS, extentTest.addScreenCapture(screenshotPath));
+        } catch (Exception e) {
+            extentTest.log(FAIL, "Screenshot Failure "+e);
+
         }
     }
 

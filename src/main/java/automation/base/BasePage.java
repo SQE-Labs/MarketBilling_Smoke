@@ -144,7 +144,7 @@ public class BasePage extends ExtentReportClass {
     /**
      * Switch to the frame containing the specified element.
      *
-     * @param description description of the frame
+     * @param //description description of the frame
      * @param element     element of the frame
      */
     public void switchToFrame(Element element) {
@@ -189,9 +189,9 @@ public class BasePage extends ExtentReportClass {
         js.executeScript("window.scrollBy(x, y)", "");
     }
 
-    public void ScrollDownThePageMax(int x, int y) {
+    public void ScrollDownThePageMax() {
         JavascriptExecutor js = (JavascriptExecutor) BaseTest.getDriver();
-        js.executeScript("window.scrollBy(x,y)", "");
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)", "");
     }
 
     public void ScrollUpThePage(int x, int y) {
