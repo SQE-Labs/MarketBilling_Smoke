@@ -24,7 +24,7 @@ public class ExtentReportClass extends BaseTest {
     public static String getScreenshot(WebDriver driver, String screenshotName) {
         Long l = Calendar.getInstance().getTimeInMillis();
         String screenshotId = screenshotName;
-        String Path = System.getProperty("user.dir") + "/test-report/";
+        String Path = System.getProperty("user.dir") + "/test-report/screenshots/";
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         String imgPath = Path + screenshotId + ".png";
         File dest = new File(imgPath);

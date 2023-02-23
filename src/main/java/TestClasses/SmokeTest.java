@@ -61,9 +61,9 @@ public class SmokeTest extends ActionEngine {
     public void search_All() {
         indexPage.searchAll();
         Assert.assertTrue(searchPage.getHeaderText().contains("Customers Found"));
+        attachScreenShot("SearchAllPage1");
+        indexPage.ScrollDownThePageMax();
         Assert.assertTrue(searchPage.getHeader2Text().contains("Market Services Found"));
-
-
     }
 
     @Test(priority = 5, enabled = true, description = "verify all customer Search box")

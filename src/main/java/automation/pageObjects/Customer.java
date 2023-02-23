@@ -277,8 +277,8 @@ public class Customer extends ActionEngine {
 
     public void createCustomer(String type, String category, String email) throws InterruptedException {
         //Account Type
-        clickBtn_custom(CustomerIcontab);
-        clickBtn_custom(CustomerTypedropdown);
+        clickBtn_custom(CustomerIcontab,"CustomerIcontab");
+        clickBtn_custom(CustomerTypedropdown,"CustomerTypedropdown");
         Select select = new Select(getDriver().findElement(CustomerTypedropdown));
         select.selectByVisibleText(type);
         clickBtn_custom(Categorydropdown);
@@ -292,15 +292,15 @@ public class Customer extends ActionEngine {
         addContactDetails(email);
         addAccountManagement(category);
         scrollIntoView(SaveCustomerButton);
-        clickBtn_custom(SaveCustomerButton);
-        clickBtn_custom(SaveOnlyButton);
+        clickBtn_custom(SaveCustomerButton,"SaveCustomerButton");
+        clickBtn_custom(SaveOnlyButton,"SaveOnlyButton");
         Thread.sleep(2000);
     }
 
     public void addContactDetails(String email) throws InterruptedException {
-        clickBtn_custom(Address1field);
+        clickBtn_custom(Address1field,"Address1field");
         sendKeys_custom(Address1field, "Madirma R-Town");
-        clickBtn_custom(Cityfield);
+        clickBtn_custom(Cityfield,"Cityfield");
         sendKeys_custom(Cityfield, "Mills NY");
         clickBtn_custom(Statedropdown);
         select = new Select(getDriver().findElement(Statedropdown));

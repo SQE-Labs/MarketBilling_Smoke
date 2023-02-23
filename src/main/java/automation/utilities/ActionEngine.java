@@ -100,9 +100,9 @@ public class ActionEngine extends BasePage {
         try {
             Element element = new Element(fieldName, path);
             flag = element.isVisible();
-            Log.debug(fieldName + " element is present -->" + flag);
+            //Log.debug(fieldName + " element is present -->" + flag);
 
-            extentTest.log(PASS, "Presence of element "+fieldName + " is: " + flag);
+           // extentTest.log(PASS, "Presence of element "+fieldName + " is: " + flag);
             return flag;
         } catch (Exception e) {
             extentTest.log(FAIL, "****Checking for presence of element : " + fieldName + " not tested due to exception: " + e);
@@ -175,7 +175,7 @@ public class ActionEngine extends BasePage {
         try {
 
             text = element.getText();
-            Log.debug("Text for " + element + " is " + text);
+          //  Log.debug("Text for " + element + " is " + text);
             extentTest.log(PASS, "==> Text retrieved is: "+ text);
             return text;
         } catch (Exception e) {
@@ -207,7 +207,7 @@ public class ActionEngine extends BasePage {
         try {
             Element element = new Element("fieldName", path);
             value = element.getAttributeValue(attribute);
-            Log.debug( " element attribute value  is present -->" + value);
+        //    Log.debug( " element attribute value  is present -->" + value);
 
             extentTest.log(PASS, " Element attribute value is " + value);
             return value;
@@ -221,7 +221,7 @@ public class ActionEngine extends BasePage {
         try {
             Element element = new Element("fieldName", path);
             flag = element.isInvisible();
-            Log.debug( " element is present -->" + flag);
+         //   Log.debug( " element is present -->" + flag);
 
             extentTest.log(PASS, "==> Presence of element " + " is: " + flag);
             return flag;
@@ -273,7 +273,7 @@ public class ActionEngine extends BasePage {
             Element exceptionEle = new Element("fieldName", exception);
             Element errorEle = new Element("fieldName", error);
             flag= exceptionEle.isVisible() || errorEle.isVisible();
-            Log.debug( " Exception or Error  is present -->" + flag);
+           // Log.debug( " Exception or Error  is present -->" + flag);
 
             return flag;
         } catch (Exception e) {
