@@ -18,7 +18,7 @@ public final class ExplicitWait extends BaseTest {
      * Create wait object with default timeout and polling interval.
      */
     public ExplicitWait() {
-        timeout = 10;
+        timeout = 6;
         polling = 200;
         wait = new WebDriverWait(getDriver(), timeout, polling);
     }

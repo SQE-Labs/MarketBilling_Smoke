@@ -51,7 +51,7 @@ public class Element extends BaseTest {
      * @return web element
      */
     public WebElement getWebElement() {
-        Log.debug("Get the [" + description + "] web element");
+      //  Log.debug("Get the [" + description + "] web element");
         return wait.until(visibilityOfElementLocated(locator));
     }
 
@@ -61,7 +61,7 @@ public class Element extends BaseTest {
      * @return the text.
      */
     public String getText() {
-        Log.debug("Get text from [" + description + "] element");
+      //  Log.debug("Get text from [" + description + "] element");
         return wait.until(visibilityOfElementLocated(locator)).getText();
     }
 
@@ -71,7 +71,7 @@ public class Element extends BaseTest {
     }
 
     public void click() {
-        Log.debug("Clicking [" + description + "] button");
+        //Log.debug("Clicking [" + description + "] button");
         wait.until(elementToBeClickable(locator)).click();
     }
 
@@ -103,7 +103,7 @@ public class Element extends BaseTest {
      * @return true if visible, false otherwise
      */
     public boolean isVisible() {
-        Log.info("Is [" + description + "] element visible");
+       // Log.info("Is [" + description + "] element visible");
         try {
             return wait.until(visibilityOfElementLocated(locator)).isDisplayed();
         } catch (TimeoutException e) {
@@ -117,7 +117,7 @@ public class Element extends BaseTest {
      * @return true if invisible, false otherwise
      */
     public boolean isInvisible() {
-        Log.info("Is [" + description + "] element invisible");
+      //  Log.info("Is [" + description + "] element invisible");
         try {
             return wait.until(invisibilityOfElementLocated(locator));
         } catch (TimeoutException e) {
@@ -131,7 +131,7 @@ public class Element extends BaseTest {
      * @return true if enabled, false otherwise
      */
     public boolean isEnabled() {
-        Log.info("Is [" + description + "] element enabled");
+       //// Log.info("Is [" + description + "] element enabled");
         try {
             return wait.until(driver -> driver.findElement(locator).isEnabled());
         } catch (TimeoutException e) {

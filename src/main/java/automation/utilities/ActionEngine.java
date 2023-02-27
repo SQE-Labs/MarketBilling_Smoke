@@ -2,6 +2,7 @@ package automation.utilities;
 
 import automation.base.BasePage;
 import automation.elements.*;
+import automation.helpers.ExtentReportClass;
 import automation.logger.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -23,6 +24,7 @@ public class ActionEngine extends BasePage {
             extentTest.log(PASS, "Entered value as: " + valueToBeSent);
         } catch (Exception e) {
             extentTest.log(FAIL, "Unable to enter data  for => " + var);
+            throw new RuntimeException(e);
 
         }
     }
@@ -33,7 +35,7 @@ public class ActionEngine extends BasePage {
         String var = "";
         try {
             var = label.length > 0 ? label[0] : path.toString();
-
+            WebDriverWaits.waitForElementDisabled(By.className("spinner"),6);
             Button btn = new Button(var, path);
             btn.click();
             Log.info("Clicked on " + var);
@@ -41,6 +43,8 @@ public class ActionEngine extends BasePage {
             extentTest.log(PASS, "Clicked Button Successfully! " + var);
         } catch (Exception e) {
             extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
+            throw new RuntimeException(e);
+
         }
     }
 
@@ -49,7 +53,7 @@ public class ActionEngine extends BasePage {
         try {
 
             var = label.length > 0 ? label[0] : path.toString();
-
+            WebDriverWaits.waitForElementDisabled(By.className("spinner"),6);
             Element btn = new Element(var, path);
             btn.click();
             Log.info("Clicked on " + var);
@@ -57,7 +61,7 @@ public class ActionEngine extends BasePage {
             extentTest.log(PASS, "Clicked element Successfully! " + var);
         } catch (Exception e) {
             extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
-
+            throw new RuntimeException(e);
         }
 
     }
@@ -68,9 +72,27 @@ public class ActionEngine extends BasePage {
             extentTest.log(PASS, "Clicked element Successfully! " );
         } catch (Exception e) {
             extentTest.log(FAIL, "==> Unable to click  " + label+" due to exception "+e);
+            throw new RuntimeException(e);
+
         }
     }
+    public boolean isDisabled(By  path,String... label) {
+        String var = "";
+        try {
 
+            var = label.length > 0 ? label[0] : path.toString();
+
+            Element ele = new Element(var, path);
+            Log.info("Clicked on " + var);
+            //log success message in exgent report
+            extentTest.log(PASS, "Clicked element Successfully! " + var);
+            return ele.isDisabled();
+
+        } catch (Exception e) {
+            extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
+            throw new RuntimeException(e);
+        }
+    }
 
     //check if element is Present
     public boolean isElementPresent_custom(By path, String fieldName) {
@@ -78,9 +100,9 @@ public class ActionEngine extends BasePage {
         try {
             Element element = new Element(fieldName, path);
             flag = element.isVisible();
-            Log.debug(fieldName + " element is present -->" + flag);
+            //Log.debug(fieldName + " element is present -->" + flag);
 
-            extentTest.log(PASS, "Presence of element "+fieldName + " is: " + flag);
+           // extentTest.log(PASS, "Presence of element "+fieldName + " is: " + flag);
             return flag;
         } catch (Exception e) {
             extentTest.log(FAIL, "****Checking for presence of element : " + fieldName + " not tested due to exception: " + e);
@@ -97,9 +119,11 @@ public class ActionEngine extends BasePage {
             var = fieldName.length > 0 ? fieldName[0] : path.toString();
             DropDown dd = new DropDown(var, path);
             dd.selectByVisibleText(ddVisibleText);
-            //   ExtentFactory.getInstance().getExtent().log(Status.PASS, var+"==> Dropdown Value Selected by visible text: "+ ddVisibleText);
+           extentTest.log(PASS, var+"==> Dropdown Value Selected by visible text: "+ ddVisibleText);
         } catch (Exception e) {
-            //    ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Dropdown value not selected for field: " +var +"  due to exception: "+e);
+          extentTest.log(FAIL, "Dropdown value not selected for field: " +var +"  due to exception: "+e);
+            throw new RuntimeException(e);
+
         }
     }
 
@@ -151,7 +175,7 @@ public class ActionEngine extends BasePage {
         try {
 
             text = element.getText();
-            Log.debug("Text for " + element + " is " + text);
+          //  Log.debug("Text for " + element + " is " + text);
             extentTest.log(PASS, "==> Text retrieved is: "+ text);
             return text;
         } catch (Exception e) {
@@ -183,7 +207,7 @@ public class ActionEngine extends BasePage {
         try {
             Element element = new Element("fieldName", path);
             value = element.getAttributeValue(attribute);
-            Log.debug( " element attribute value  is present -->" + value);
+        //    Log.debug( " element attribute value  is present -->" + value);
 
             extentTest.log(PASS, " Element attribute value is " + value);
             return value;
@@ -197,7 +221,7 @@ public class ActionEngine extends BasePage {
         try {
             Element element = new Element("fieldName", path);
             flag = element.isInvisible();
-            Log.debug( " element is present -->" + flag);
+         //   Log.debug( " element is present -->" + flag);
 
             extentTest.log(PASS, "==> Presence of element " + " is: " + flag);
             return flag;
@@ -207,20 +231,64 @@ public class ActionEngine extends BasePage {
         }
     }
     public List<WebElement> getWebElements(By path, String... label) {
-        String var = "";
+        String fieldName = "";
         try {
-            var = label.length > 0 ? label[0] : path.toString();
+            fieldName = label.length > 0 ? label[0] : path.toString();
 
-            Elements elem = new Elements(var, path);
-            Log.info("Clicked on " + var);
-            return elem.getWebElements();
+            Elements elem = new Elements(fieldName, path);
+            Log.info("Clicked on " + fieldName);
 
             //log success message in exgent report
-            // ExtentFactory.getInstance().getExtent().log(Status.PASS, var + "==> Clicked Successfully! ");
+          extentTest.log(PASS, fieldName + "==> Clicked Successfully! ");
+            return elem.getWebElements();
+
         } catch (Exception e) {
             //log failure in extent
-            // ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Unable to click on field: " +fieldName +" due to exception: "+e);
+            extentTest.log(FAIL, "Unable to click on field: " +fieldName +" due to exception: "+e);
             return null;
+        }
+    }
+    public WebElement getWebElement(By path, String... label) {
+        String fieldName = "";
+        try {
+            fieldName = label.length > 0 ? label[0] : path.toString();
+
+            Element elem = new Element(fieldName, path);
+            Log.info("Clicked on " + fieldName);
+            return elem.getWebElement();
+
+            //log success message in exgent report
+        } catch (Exception e) {
+            //log failure in extent
+            extentTest.log(FAIL, "Unable to find element : " +fieldName +" due to exception: "+e);
+            return null;
+        }
+    }
+    public boolean isExceptionOrErrorPresent() {
+        boolean flag = false;
+   By exception= By.xpath("(//*[contains( text(),'Exception')])[2]");
+        By error= By.xpath("//text()[contains(translate(., 'Error', 'error'), 'error')]");
+
+        try {
+            Element exceptionEle = new Element("fieldName", exception);
+            Element errorEle = new Element("fieldName", error);
+            flag= exceptionEle.isVisible() || errorEle.isVisible();
+           // Log.debug( " Exception or Error  is present -->" + flag);
+
+            return flag;
+        } catch (Exception e) {
+            extentTest.log(FAIL, "Error or Exception Presence" + " : " + flag);
+            return flag;
+        }
+    }
+    public void attachScreenShot(String screenshotName) {
+
+        try {
+            String screenshotPath = ExtentReportClass.getScreenshot(driver, screenshotName);
+            extentTest.log(PASS, extentTest.addScreenCapture(screenshotPath));
+        } catch (Exception e) {
+            extentTest.log(FAIL, "Screenshot Failure "+e);
+
         }
     }
 

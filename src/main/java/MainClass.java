@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MainClass {
 
-        public static void main(String[] args) {
+        public static void main (String[] args){
             TestNG testng = new TestNG();
             List<String> suites = Lists.newArrayList();
             suites.add(System.getProperty("user.dir")+"/testng.xml");//path to xml..

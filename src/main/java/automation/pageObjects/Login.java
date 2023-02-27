@@ -12,6 +12,8 @@ public class Login extends ActionEngine {
     public By copyright = By.className("copyright-text");
     By userNameField = By.xpath("//input[@name='j_username']");
     By login = By.xpath("//*[@name='submit']");
+    public  By groupLogiin = By.id("submitrequest");
+    public  By selectGroup = By.id("newGroup");
 
     public void enterUsername(String userNameText) {
         sendKeys_custom(userNameField, userNameText);
@@ -30,6 +32,13 @@ public class Login extends ActionEngine {
         sendKeys_custom(PasswordField, PropertiesUtil.getPropertyValue("password"));
         clickBtn_custom(LoginButton);
         return new IndexPage();
+    }
+    public  IndexPage loginWithGroupName(String groupName) {
+        validLogin();
+        selectDropDownByVisibleText_custom(selectGroup,groupName);
+         click_custom(groupLogiin);
+        return new IndexPage();
+
     }
 
     public String getBuildVersionText() {
