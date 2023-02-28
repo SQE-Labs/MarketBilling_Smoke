@@ -43,10 +43,10 @@ public class SmokeTest extends ActionEngine {
 
         Assert.assertEquals(indexPage.getTextVersion().trim(), PropertiesUtil.getPropertyValue("buildVersion"));
     }
-    @Test(priority = 3, enabled = true, description = "verify index page reload")
-    public void reload_IndexPage() {
+    @Test(priority = 3, enabled = true, description = "verify  page reload")
+    public void reload_Page() {
         indexPage.refreshPage();
-            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL + PropertiesUtil.getPropertyValue("indexPage"));
+            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL  +"/");
     }
 
     @Test(priority = 4, enabled = false, description = "verify create new customer")
