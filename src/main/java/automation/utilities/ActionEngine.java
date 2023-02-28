@@ -35,7 +35,7 @@ public class ActionEngine extends BasePage {
         String var = "";
         try {
             var = label.length > 0 ? label[0] : path.toString();
-            WebDriverWaits.waitForElementDisabled(By.className("spinner"),6);
+            WebDriverWaits.waitForElementDisabled(By.className("spinner"),8);
             Button btn = new Button(var, path);
             btn.click();
             Log.info("Clicked on " + var);
@@ -281,9 +281,27 @@ public class ActionEngine extends BasePage {
             return flag;
         }
     }
-    public void attachScreenShot(String screenshotName) {
+    public boolean isExceptionOrErrorPresent(int exceptionTextCount) {
+        boolean flag = false;
+        By exception= By.xpath("(//*[contains( text(),'Exception')])["+exceptionTextCount+"]");
+        By error= By.xpath("//text()[contains(translate(., 'Error', 'error'), 'error')]");
 
         try {
+            Element exceptionEle = new Element("fieldName", exception);
+            Element errorEle = new Element("fieldName", error);
+            flag= exceptionEle.isVisible() || errorEle.isVisible();
+            // Log.debug( " Exception or Error  is present -->" + flag);
+
+            return flag;
+        } catch (Exception e) {
+            extentTest.log(FAIL, "Error or Exception Presence" + " : " + flag);
+            return flag;
+        }
+    }
+    public void attachScreenShot(String screenshotName) {
+        WebDriverWaits.waitForElementDisabled(By.className("spinner"),8);
+        try {
+
             String screenshotPath = ExtentReportClass.getScreenshot(driver, screenshotName);
             extentTest.log(PASS, extentTest.addScreenCapture(screenshotPath));
         } catch (Exception e) {
