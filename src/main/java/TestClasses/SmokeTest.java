@@ -4,6 +4,7 @@ import automation.pageObjects.*;
 import automation.utilities.ActionEngine;
 import automation.utilities.PropertiesUtil;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -35,21 +36,18 @@ public class SmokeTest extends ActionEngine {
         }
     }
 
-    @Test(priority = 2, enabled = true, description = "verify index page reload")
-    public void reload_IndexPage() {
-        indexPage.refreshPage();
-        if (PropertiesUtil.getPropertyValue("group").contains("multi"))
-            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL+"/");
-        else
-            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL + PropertiesUtil.getPropertyValue("indexPage"));
-    }
 
-    @Test(priority = 3, enabled = true, description = "verify build version at index page")
+
+    @Test(priority = 2, enabled = true, description = "verify build version at index page")
     public void version_Check_at_Indexpage() {
 
         Assert.assertEquals(indexPage.getTextVersion().trim(), PropertiesUtil.getPropertyValue("buildVersion"));
     }
-
+    @Test(priority = 3, enabled = true, description = "verify index page reload")
+    public void reload_IndexPage() {
+        indexPage.refreshPage();
+            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL + PropertiesUtil.getPropertyValue("indexPage"));
+    }
 
     @Test(priority = 4, enabled = false, description = "verify create new customer")
     public void create_new_Customer() throws InterruptedException {
@@ -128,20 +126,37 @@ public class SmokeTest extends ActionEngine {
         Assert.assertFalse(isExceptionOrErrorPresent());
 
     }
+    @DataProvider(name = "getCustomerTabs")
+    public Object[] [] getCustomerTabs() {
+        String[] strList=PropertiesUtil.getPropertyValue("customerTabs").split(",");
+        String  data[] [] = new String[strList.length][1];
 
-    @Test(priority = 7, enabled = true, description = "verify all Customer Tabs ")
-    public void verify_CustomerTabs() {
-        Customer customer = new Customer();
-        SoftAssert softAssert = new SoftAssert();
-        String[] tabs = PropertiesUtil.getPropertyValue("customerTabs").split(",");
-        for (String tab : tabs) {
+        for ( int i = 0;i<strList.length;i++){
+          data[i][0]=strList[i];
+     }
+
+
+        return data;
+    }
+    @Test(priority = 7, enabled = true, description = "verify  Customer Tab")
+    public void Click_CustomerTabs() {
+        String tabs []=PropertiesUtil.getPropertyValue("customerTabs").split(",");
+        for(String tab :tabs) {
+            Customer customer = new Customer();
             customer.clickCustomerTab(tab);
             attachScreenShot(tab);
-            if(!(tab.contains("Settings")))
-            softAssert.assertFalse(customer.isExceptionOrErrorPresent());
+            if (!(tab.contains("Settings"))){
+                SoftAssert softAssert= new SoftAssert();
+                softAssert.assertFalse(customer.isExceptionOrErrorPresent(),"Exception in  "+tab+" Tab.\n");
+                softAssert.assertAll();
+            }
+            else{
+                SoftAssert softAssert= new SoftAssert();
+                softAssert.assertFalse(customer.isExceptionOrErrorPresent(3),"Exception in  "+tab+" Tab.\n");
+                softAssert.assertAll();
+            }
 
         }
-        softAssert.assertAll();
 
     }
 

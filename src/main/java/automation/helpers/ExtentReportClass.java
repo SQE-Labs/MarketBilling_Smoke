@@ -1,6 +1,7 @@
 package automation.helpers;
 
 import automation.base.BaseTest;
+import automation.logger.Log;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -55,30 +56,27 @@ public class ExtentReportClass extends BaseTest {
         Test test = method.getAnnotation(Test.class);
         extentTest = extent.startTest(method.getName());
         extentTest.setDescription(test.description());
-
-
-
-
+        Log.info("****** Execution started for "+method.getName());
     }
 
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
 
         if (result.getStatus() == ITestResult.FAILURE) {
-            extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS " + result.getName());
-            extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS " + result.getThrowable());
-            System.out.println("*** Test execution " + result.getMethod().getMethodName() + " failed...");
+           // extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS " + result.getName());
+            extentTest.log(LogStatus.FAIL, "TEST CASE FAILED : " + result.getThrowable());
+            Log.info("*** Test execution " + result.getMethod().getMethodName() + " failed...");
 
             String screenshotPath = ExtentReportClass.getScreenshot(driver, result.getName());
             extentTest.log(LogStatus.FAIL, extentTest.addScreenCapture(screenshotPath));
         } else if (result.getStatus() == ITestResult.SKIP) {
             extentTest.log(LogStatus.SKIP, "Test Case SKIPPED IS " + result.getName());
-            System.out.println("*** Test " + result.getMethod().getMethodName() + " skipped...");
+            Log.info("*** Test " + result.getMethod().getMethodName() + " skipped...");
         } else if (result.getStatus() == ITestResult.SUCCESS) {
             String screenshotPath = ExtentReportClass.getScreenshot(driver, result.getName());
             extentTest.log(LogStatus.PASS, extentTest.addScreenCapture(screenshotPath));
-            extentTest.log(LogStatus.PASS, "Test Case PASSED IS " + result.getName());
-            System.out.println("*** Executed " + result.getMethod().getMethodName() + " test successfully...");
+            extentTest.log(LogStatus.PASS, "*** Test Case PASSED ***" );
+            Log.info("*** Executed " + result.getMethod().getMethodName() + " test successfully...");
         }
         extent.endTest(extentTest);
         extent.flush();
