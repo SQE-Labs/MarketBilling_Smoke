@@ -299,7 +299,7 @@ public class ActionEngine extends BasePage {
         }
     }
     public void attachScreenShot(String screenshotName) {
-        WebDriverWaits.waitForElementDisabled(By.className("spinner"),8);
+        WebDriverWaits.waitForElementDisabled(By.className("spinner"),6);
         try {
 
             String screenshotPath = ExtentReportClass.getScreenshot(driver, screenshotName);

@@ -56,7 +56,7 @@ public class ExtentReportClass extends BaseTest {
         Test test = method.getAnnotation(Test.class);
         extentTest = extent.startTest(method.getName());
         extentTest.setDescription(test.description());
-        Log.info("****** Execution started for "+method.getName());
+        Log.info("******** Execution started for "+method.getName()+" ********");
     }
 
     @AfterMethod
@@ -65,18 +65,18 @@ public class ExtentReportClass extends BaseTest {
         if (result.getStatus() == ITestResult.FAILURE) {
            // extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS " + result.getName());
             extentTest.log(LogStatus.FAIL, "TEST CASE FAILED : " + result.getThrowable());
-            Log.info("*** Test execution " + result.getMethod().getMethodName() + " failed...");
+            Log.info("Test execution " + result.getMethod().getMethodName() + " failed...");
 
             String screenshotPath = ExtentReportClass.getScreenshot(driver, result.getName());
             extentTest.log(LogStatus.FAIL, extentTest.addScreenCapture(screenshotPath));
         } else if (result.getStatus() == ITestResult.SKIP) {
             extentTest.log(LogStatus.SKIP, "Test Case SKIPPED IS " + result.getName());
-            Log.info("*** Test " + result.getMethod().getMethodName() + " skipped...");
+            Log.info("Test " + result.getMethod().getMethodName() + " skipped...");
         } else if (result.getStatus() == ITestResult.SUCCESS) {
             String screenshotPath = ExtentReportClass.getScreenshot(driver, result.getName());
             extentTest.log(LogStatus.PASS, extentTest.addScreenCapture(screenshotPath));
             extentTest.log(LogStatus.PASS, "*** Test Case PASSED ***" );
-            Log.info("*** Executed " + result.getMethod().getMethodName() + " test successfully...");
+            Log.info("Executed " + result.getMethod().getMethodName() + " test successfully...");
         }
         extent.endTest(extentTest);
         extent.flush();

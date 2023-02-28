@@ -109,7 +109,7 @@ public class Customer extends ActionEngine {
     //Market Page
     public  By b2bNotAndRequest = By.id("b2bNotAndRequest");
     public  By SORD = By.id("SORD");
-    public  By CATS = By.id("CATS");
+    public  By CATS = By.xpath("//a[@id='CATS']");
     public  By NMID = By.id("NMID");
     public  By newNMIDButton = By.id("newNMIDButton");
     public  By CATSCategory = By.id("CATSCategory");
@@ -390,9 +390,6 @@ public class Customer extends ActionEngine {
 
     }
     public void verifyMarketTabs(){
-       // click_custom(ViewMeterReads,"Meter Reads Tab");
-        //click_custom(viewDemandReads," Demand Reads Tab");
-        //isElementPresent_custom();
         SoftAssert softAssert = new SoftAssert();
         click_custom(NMID,"CATS NMI Discovery Tab");
         attachScreenShot("CATS NMI Discovery Tab");
@@ -407,6 +404,7 @@ public class Customer extends ActionEngine {
         click_custom(SORD,"Service Order Tab ");
         attachScreenShot("Service Order Tab");
         softAssert.assertTrue(isElementPresent_custom(newSOButton, "newSOButton Button"));
+
         click_custom(b2bNotAndRequest,"Notifications/request Tab");
         attachScreenShot("Notifications/Request Tab");
         softAssert.assertTrue(isElementPresent_custom(B2BCategory, "Category selection box "));
