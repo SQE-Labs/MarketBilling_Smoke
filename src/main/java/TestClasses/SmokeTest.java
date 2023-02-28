@@ -204,7 +204,6 @@ public class SmokeTest extends ActionEngine {
 
     @Test(priority = 10, enabled = true, description = "verify meter reads  Sub Tabs")
     public void verify_MeterReads_Sub_Tabs() {
-        //indexPage.searchAll(serviceID);
         Customer customer = new Customer();
         customer.clickCustomerTab("Meter Reads");
         customer.addMeterInformation(serviceID, "");
