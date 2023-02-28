@@ -120,10 +120,10 @@ public class SmokeTest extends ActionEngine {
         customer.clickDetailsTab();
         String custGroupName = customer.getGroupName();
         attachScreenShot("groupName");
-        Assert.assertEquals(custGroupName, groupName);
-        Assert.assertEquals(custGroupName, PropertiesUtil.getPropertyValue("groupName"));
+        softAssert.assertEquals(custGroupName, groupName);
+        softAssert.assertEquals(custGroupName, PropertiesUtil.getPropertyValue("groupName"));
+        softAssert.assertFalse(isExceptionOrErrorPresent());
         softAssert.assertAll();
-        Assert.assertFalse(isExceptionOrErrorPresent());
 
     }
     @DataProvider(name = "getCustomerTabs")
@@ -141,22 +141,21 @@ public class SmokeTest extends ActionEngine {
     @Test(priority = 7, enabled = true, description = "verify  Customer Tab")
     public void Click_CustomerTabs() {
         String tabs []=PropertiesUtil.getPropertyValue("customerTabs").split(",");
+        SoftAssert softAssert= new SoftAssert();
+
         for(String tab :tabs) {
             Customer customer = new Customer();
             customer.clickCustomerTab(tab);
             attachScreenShot(tab);
             if (!(tab.contains("Settings"))){
-                SoftAssert softAssert= new SoftAssert();
                 softAssert.assertFalse(customer.isExceptionOrErrorPresent(),"Exception in  "+tab+" Tab.\n");
-                softAssert.assertAll();
             }
             else{
-                SoftAssert softAssert= new SoftAssert();
                 softAssert.assertFalse(customer.isExceptionOrErrorPresent(3),"Exception in  "+tab+" Tab.\n");
-                softAssert.assertAll();
             }
 
         }
+        softAssert.assertAll();
 
     }
 
@@ -172,16 +171,18 @@ public class SmokeTest extends ActionEngine {
         FastNMI nmipage = new FastNMI();
         nmipage.enterNmi(serviceID);
         nmipage.clickDiscoveryBtn();
+        SoftAssert softAssert = new SoftAssert();
         if (PropertiesUtil.getPropertyValue("env").equalsIgnoreCase("qa")) {
-            Assert.assertEquals(nmipage.getResultText(), "Error in Fast NMI Discovery Request - I/O Exception: java.net.ConnectException: Connection timed out: connect");
-            Assert.assertEquals(nmipage.getDlfValue(), "");
+            softAssert.assertEquals(nmipage.getResultText(), "Error in Fast NMI Discovery Request - I/O Exception: java.net.ConnectException: Connection timed out: connect");
+            softAssert.assertEquals(nmipage.getDlfValue(), "");
 
         } else {
-            Assert.assertTrue(nmipage.getResultText().contains("<Header>"));
-            Assert.assertNotEquals(nmipage.getDlfValue(), "");
-            Assert.assertNotEquals(nmipage.getTnivalue(), "");
+            softAssert.assertTrue(nmipage.getResultText().contains("<Header>"));
+            softAssert.assertNotEquals(nmipage.getDlfValue(), "");
+            softAssert.assertNotEquals(nmipage.getTnivalue(), "");
 
         }
+        softAssert.assertAll();
 
     }
 
