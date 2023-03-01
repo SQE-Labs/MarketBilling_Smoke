@@ -144,7 +144,7 @@ public class SmokeTest extends ActionEngine {
         return data;
     }
     @Test(priority = 7, enabled = true, description = "verify  Customer Tab")
-    public void Click_CustomerTabs() {
+    public void Click_CustomerTabs() throws InterruptedException {
         String tabs []=PropertiesUtil.getPropertyValue("customerTabs").split(",");
         SoftAssert softAssert= new SoftAssert();
 
@@ -152,6 +152,7 @@ public class SmokeTest extends ActionEngine {
 
                 Customer customer = new Customer();
                 customer.clickCustomerTab(tab);
+                Thread.sleep (4000);
                 attachScreenShot(tab);
                 if (!(tab.contains("Settings"))) {
                     softAssert.assertFalse(customer.isExceptionOrErrorPresent(), "Exception in  " + tab + " Tab.\n");
