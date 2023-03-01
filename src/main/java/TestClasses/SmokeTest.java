@@ -149,20 +149,23 @@ public class SmokeTest extends ActionEngine {
         SoftAssert softAssert= new SoftAssert();
 
         for(String tab :tabs) {
-            Customer customer = new Customer();
-            customer.clickCustomerTab(tab);
-            attachScreenShot(tab);
-            if (!(tab.contains("Settings"))){
-                softAssert.assertFalse(customer.isExceptionOrErrorPresent(),"Exception in  "+tab+" Tab.\n");
-            }
-            else{
-                softAssert.assertFalse(customer.isExceptionOrErrorPresent(3),"Exception in  "+tab+" Tab.\n");
-            }
 
-        }
+                Customer customer = new Customer();
+                customer.clickCustomerTab(tab);
+                attachScreenShot(tab);
+                if (!(tab.contains("Settings"))) {
+                    softAssert.assertFalse(customer.isExceptionOrErrorPresent(), "Exception in  " + tab + " Tab.\n");
+                } else {
+                    softAssert.assertFalse(customer.isExceptionOrErrorPresent(3), "Exception in  " + tab + " Tab.\n");
+                }
+
+
+            }
         softAssert.assertAll();
 
     }
+
+
 
     @Test(priority = 8, enabled = true, description = "verify Fast NMI discovery tab")
     public void verify_Fast_NMIDiscovery() {
