@@ -18,7 +18,9 @@ public class SmokeTest extends ActionEngine {
     @Test(priority = 0, enabled = true, description = "verify build version at  Login Page")
     public void version_Check_at_LoginPage() {
         Login login = new Login();
-        Assert.assertEquals(login.getBuildVersionText(), PropertiesUtil.getPropertyValue("copyRightText"));
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(login.getBuildVersionText(), PropertiesUtil.getPropertyValue("copyRightText"));
+        softAssert.assertAll();
 
     }
 
@@ -57,11 +59,14 @@ public class SmokeTest extends ActionEngine {
 
     @Test(priority = 5, enabled = true, description = "verify all customer Search box")
     public void search_All() {
+        SoftAssert softAssert = new SoftAssert();
+
         indexPage.searchAll();
-        Assert.assertTrue(searchPage.getHeaderText().contains("Customers Found"));
+        softAssert.assertTrue(searchPage.getHeaderText().contains("Customers Found"));
         attachScreenShot("SearchAllPage1");
         indexPage.ScrollDownThePageMax();
-        Assert.assertTrue(searchPage.getHeader2Text().contains("Market Services Found"));
+        softAssert.assertTrue(searchPage.getHeader2Text().contains("Market Services Found"));
+        softAssert.assertAll();
     }
 
     @Test(priority = 5, enabled = true, description = "verify all customer Search box")
