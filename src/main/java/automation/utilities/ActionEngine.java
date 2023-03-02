@@ -266,13 +266,13 @@ public class ActionEngine extends BasePage {
     }
     public boolean isExceptionOrErrorPresent() {
         boolean flag = false;
-   By exception= By.xpath("(//*[contains( text(),'Exception')])[2]");
-        By error= By.xpath("//text()[contains(translate(., 'Error', 'error'), 'error')]");
+       By exception= By.xpath("(//*[contains( text(),'Exception')])[2]");
+     //   By error= By.xpath("//text()[contains(translate(., 'Error', 'error'), 'error')]");
 
         try {
             Element exceptionEle = new Element("fieldName", exception);
-            Element errorEle = new Element("fieldName", error);
-            flag= exceptionEle.isVisible() || errorEle.isVisible();
+          //  Element errorEle = new Element("fieldName", error);
+            flag= exceptionEle.isVisible() ;
            // Log.debug( " Exception or Error  is present -->" + flag);
 
             return flag;
