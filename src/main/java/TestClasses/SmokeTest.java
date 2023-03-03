@@ -12,6 +12,8 @@ public class SmokeTest extends ActionEngine {
     IndexPage indexPage;
     CustomerSearchPage searchPage = new CustomerSearchPage();
     String BASE_URL = PropertiesUtil.getPropertyValue("baseUrl");
+    String INDEX = PropertiesUtil.getPropertyValue("indexPage");
+
     String serviceID;
     String customerId;
 
@@ -48,7 +50,13 @@ public class SmokeTest extends ActionEngine {
     @Test(priority = 3, enabled = true, description = "verify  page reload")
     public void reload_Page() {
         indexPage.refreshPage();
-            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL  +"/");
+        if (PropertiesUtil.getPropertyValue("group").contains("single")) {
+            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL  +INDEX);}
+        else {
+            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL  +"/");}
+
+
+
     }
 
     @Test(priority = 4, enabled = false, description = "verify create new customer")
@@ -154,10 +162,10 @@ public class SmokeTest extends ActionEngine {
                 customer.clickCustomerTab(tab);
                 Thread.sleep (4000);
                 attachScreenShot(tab);
-                if (!(tab.contains("Settings"))) {
+                if (!(tab.contains("Settings")||tab.contains("Contact"))) {
                     softAssert.assertFalse(customer.isExceptionOrErrorPresent(), "Exception in  " + tab + " Tab.\n");
                 } else {
-                    softAssert.assertFalse(customer.isExceptionOrErrorPresent(3), "Exception in  " + tab + " Tab.\n");
+                    softAssert.assertFalse(customer.isExceptionOrErrorPresent(3), "Exception found in  " + tab + " Tab.\n");
                 }
 
 
