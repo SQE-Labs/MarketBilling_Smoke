@@ -178,12 +178,16 @@ public class SmokeTest extends ActionEngine {
 
     @Test(priority = 8, enabled = true, description = "verify Fast NMI discovery tab")
     public void verify_Fast_NMIDiscovery() {
-        SrvCustSearchResults srvCustSearchResults = indexPage.searchAllMeterNumber();
-        Assert.assertTrue(searchPage.getHeaderText().contains("Market Services Found"));
-        serviceID = srvCustSearchResults.getFirstServiceId();
-        indexPage.searchAll(serviceID);
-
         Customer customer = new Customer();
+
+        SrvCustSearchResults srvCustSearchResults = indexPage.searchAllMeterNumber();
+        serviceID = srvCustSearchResults.getFirstServiceId();
+
+        if (srvCustSearchResults.getHeaderCount()>1 ){
+            customer.clickRecentCustomerId();
+            customer.switchToWindow("customer");
+        }
+
         customer.clickNMITab();
         FastNMI nmipage = new FastNMI();
         nmipage.enterNmi(serviceID);
@@ -206,6 +210,13 @@ public class SmokeTest extends ActionEngine {
     @Test(priority = 9, enabled = true, description = "verify market Tab sub Tabs")
     public void verify_marketTab_subTabs() {
         Customer customer = new Customer();
+        SrvCustSearchResults srvCustSearchResults = indexPage.searchAllMeterNumber();
+       // serviceID = srvCustSearchResults.getFirstServiceId();
+        if (srvCustSearchResults.getHeaderCount()>1 ){
+            customer.clickRecentCustomerId();
+            customer.switchToWindow("customer");
+        }
+
         customer.clickMarketTab();
         customer.verifyMarketTabs();
 
@@ -215,6 +226,14 @@ public class SmokeTest extends ActionEngine {
     public void verify_serviceTab_SubTabs() {
        // indexPage.searchAll(serviceID);
         Customer customer = new Customer();
+        SrvCustSearchResults srvCustSearchResults = indexPage.searchAllMeterNumber();
+        if (srvCustSearchResults.getHeaderCount()>1 ){
+            customer.clickRecentCustomerId();
+            customer.switchToWindow("customer");
+
+        }
+        //serviceID = srvCustSearchResults.getFirstServiceId();
+
         customer.clickServiceTab();
         customer.verifyServiceEdit();
 
@@ -223,6 +242,13 @@ public class SmokeTest extends ActionEngine {
     @Test(priority = 10, enabled = true, description = "verify meter reads  Sub Tabs")
     public void verify_MeterReads_Sub_Tabs() {
         Customer customer = new Customer();
+        SrvCustSearchResults srvCustSearchResults = indexPage.searchAllMeterNumber();
+      //  serviceID = srvCustSearchResults.getFirstServiceId();
+        if (srvCustSearchResults.getHeaderCount()>1 ){
+            customer.clickRecentCustomerId();
+            customer.switchToWindow("customer");
+
+        }
         customer.clickCustomerTab("Meter Reads");
         customer.addMeterInformation(serviceID, "");
         customer.verifyMeterReadsTabs();
