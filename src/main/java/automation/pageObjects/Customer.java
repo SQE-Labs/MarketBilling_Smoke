@@ -359,7 +359,12 @@ public class Customer extends ActionEngine {
         click_custom(ServiceName_DropdownOpn);
         click_custom(MeterNumber_Dropdown,"Meter Number");
         click_custom(MeterNumber_DropdownOpn);
-
+    }
+    public void addMeterInformation(){
+        click_custom(ServiceName_Dropdown,"ServiceName");
+        click_custom(ServiceName_DropdownOpn);
+        click_custom(MeterNumber_Dropdown,"Meter Number");
+      //  click_custom(MeterNumber_DropdownOpn);
     }
     public void verifyMeterReadsTabs(){
         click_custom(ViewMeterReads,"Meter Reads Tab");

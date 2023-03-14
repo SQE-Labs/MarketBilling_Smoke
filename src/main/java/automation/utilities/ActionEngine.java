@@ -264,9 +264,9 @@ public class ActionEngine extends BasePage {
             return null;
         }
     }
-    public boolean isExceptionOrErrorPresent() {
+    public boolean  isExceptionOrErrorPresent() {
         boolean flag = false;
-       By exception= By.xpath("(//*[contains( text(),'Exception')])[2]");
+       By exception= By.xpath("//*[contains( text(),'exception')]");
      //   By error= By.xpath("//text()[contains(translate(., 'Error', 'error'), 'error')]");
 
         try {
@@ -277,7 +277,7 @@ public class ActionEngine extends BasePage {
 
             return flag;
         } catch (Exception e) {
-            extentTest.log(FAIL, "Error or Exception Presence" + " : " + flag);
+            extentTest.log(FAIL, " Exception text Presence" + " : " + flag);
             return flag;
         }
     }

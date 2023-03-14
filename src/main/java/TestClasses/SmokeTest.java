@@ -162,11 +162,12 @@ public class SmokeTest extends ActionEngine {
                 customer.clickCustomerTab(tab);
                 Thread.sleep (4000);
                 attachScreenShot(tab);
-                if (!(tab.contains("Settings")||tab.contains("Contact"))) {
-                    softAssert.assertFalse(customer.isExceptionOrErrorPresent(), "Exception in  " + tab + " Tab.\n");
-                } else {
-                    softAssert.assertFalse(customer.isExceptionOrErrorPresent(3), "Exception found in  " + tab + " Tab.\n");
-                }
+//                if (!(tab.contains("Settings")||tab.contains("Contact"))) {
+//                    softAssert.assertFalse(customer.isExceptionOrErrorPresent(), "Exception in  " + tab + " Tab.\n");
+//                } else {
+//                    softAssert.assertFalse(customer.isExceptionOrErrorPresent(3), "Exception found in  " + tab + " Tab.\n");
+//                }
+            softAssert.assertFalse(customer.isExceptionOrErrorPresent(), "Exception in  " + tab + " Tab.\n");
 
 
             }
@@ -250,7 +251,7 @@ public class SmokeTest extends ActionEngine {
 
         }
         customer.clickCustomerTab("Meter Reads");
-        customer.addMeterInformation(serviceID, "");
+        customer.addMeterInformation();
         customer.verifyMeterReadsTabs();
         Assert.assertFalse(isExceptionOrErrorPresent());
 
