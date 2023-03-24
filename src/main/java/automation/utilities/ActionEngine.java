@@ -266,7 +266,7 @@ public class ActionEngine extends BasePage {
     }
     public boolean  isExceptionOrErrorPresent() {
         boolean flag = false;
-       By exception= By.xpath("//*[contains( text(),'exception')]");
+       By exception= By.xpath("//*[contains( text(),'exception ')]");
      //   By error= By.xpath("//text()[contains(translate(., 'Error', 'error'), 'error')]");
 
         try {
