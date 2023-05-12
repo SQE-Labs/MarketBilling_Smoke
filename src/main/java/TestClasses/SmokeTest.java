@@ -260,6 +260,7 @@ public class SmokeTest extends ActionEngine {
             customer.switchToWindow("customer");
 
         }
+
         customer.clickCustomerTab("Meter Reads");
         customer.addMeterInformation();
         customer.verifyMeterReadsTabs();
