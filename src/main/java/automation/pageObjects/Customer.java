@@ -127,8 +127,6 @@ public class Customer extends ActionEngine {
         String groupName = getText_custom(groupTag);
         System.out.println("GroupName of customer is " + groupName);
         return groupName;
-
-
     }
 
     public String clickRecentCustomerId() {

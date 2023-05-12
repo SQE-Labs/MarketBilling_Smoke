@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extentreports>
+
     <configuration>
 
         <theme>dark</theme>
@@ -8,11 +9,11 @@
 
         <protocol>https</protocol>
 
-        <documentTitle>ComCate</documentTitle>
+        <documentTitle>AMCS Utilities</documentTitle>
 
-        <reportName>AMCS</reportName>
+        <reportName>Smoke Suite</reportName>
 
-        <reportHeadline></reportHeadline>
+        <reportHeadline>https://markettest.utilibill.com.au/marketbilling</reportHeadline>
 
         <dateFormat>yyyy-MM-dd</dateFormat>
 

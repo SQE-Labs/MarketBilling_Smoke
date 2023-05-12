@@ -2,15 +2,24 @@ package TestClasses;
 
 import automation.pageObjects.*;
 import automation.utilities.ActionEngine;
+import automation.utilities.DateTime;
 import automation.utilities.PropertiesUtil;
+import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
+import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
 import org.testng.asserts.SoftAssert;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class SmokeTest extends ActionEngine {
     IndexPage indexPage;
     CustomerSearchPage searchPage = new CustomerSearchPage();
+    Admin admin = new Admin();
     String BASE_URL = PropertiesUtil.getPropertyValue("baseUrl");
     String INDEX = PropertiesUtil.getPropertyValue("indexPage");
 
@@ -31,7 +40,7 @@ public class SmokeTest extends ActionEngine {
         Login login = new Login();
         if (PropertiesUtil.getPropertyValue("group").contains("multi")) {
             indexPage = login.loginWithGroupName(PropertiesUtil.getPropertyValue("groupName"));
-            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL+"/");
+            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL + "/");
 
         } else {
             indexPage = login.validLogin();
@@ -41,20 +50,20 @@ public class SmokeTest extends ActionEngine {
     }
 
 
-
     @Test(priority = 2, enabled = true, description = "verify build version at index page")
     public void version_Check_at_Indexpage() {
 
         Assert.assertEquals(indexPage.getTextVersion().trim(), PropertiesUtil.getPropertyValue("buildVersion"));
     }
+
     @Test(priority = 3, enabled = true, description = "verify  page reload")
     public void reload_Page() {
         indexPage.refreshPage();
         if (PropertiesUtil.getPropertyValue("group").contains("single")) {
-            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL  +INDEX);}
-        else {
-            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL  +"/");}
-
+            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL + INDEX);
+        } else {
+            Assert.assertEquals(indexPage.getPageUrl(), BASE_URL + "/");
+        }
 
 
     }
@@ -139,29 +148,31 @@ public class SmokeTest extends ActionEngine {
         softAssert.assertAll();
 
     }
-    @DataProvider(name = "getCustomerTabs")
-    public Object[] [] getCustomerTabs() {
-        String[] strList=PropertiesUtil.getPropertyValue("customerTabs").split(",");
-        String  data[] [] = new String[strList.length][1];
 
-        for ( int i = 0;i<strList.length;i++){
-          data[i][0]=strList[i];
-     }
+    @DataProvider(name = "getCustomerTabs")
+    public Object[][] getCustomerTabs() {
+        String[] strList = PropertiesUtil.getPropertyValue("customerTabs").split(",");
+        String data[][] = new String[strList.length][1];
+
+        for (int i = 0; i < strList.length; i++) {
+            data[i][0] = strList[i];
+        }
 
 
         return data;
     }
+
     @Test(priority = 7, enabled = true, description = "verify  Customer Tab")
     public void Click_CustomerTabs() throws InterruptedException {
-        String tabs []=PropertiesUtil.getPropertyValue("customerTabs").split(",");
-        SoftAssert softAssert= new SoftAssert();
+        String tabs[] = PropertiesUtil.getPropertyValue("customerTabs").split(",");
+        SoftAssert softAssert = new SoftAssert();
 
-        for(String tab :tabs) {
+        for (String tab : tabs) {
 
-                Customer customer = new Customer();
-                customer.clickCustomerTab(tab);
-                Thread.sleep (4000);
-                attachScreenShot(tab);
+            Customer customer = new Customer();
+            customer.clickCustomerTab(tab);
+            Thread.sleep(4000);
+            attachScreenShot(tab);
 //                if (!(tab.contains("Settings")||tab.contains("Contact"))) {
 //                    softAssert.assertFalse(customer.isExceptionOrErrorPresent(), "Exception in  " + tab + " Tab.\n");
 //                } else {
@@ -170,11 +181,10 @@ public class SmokeTest extends ActionEngine {
             softAssert.assertFalse(customer.isExceptionOrErrorPresent(), "Exception in  " + tab + " Tab.\n");
 
 
-            }
+        }
         softAssert.assertAll();
 
     }
-
 
 
     @Test(priority = 8, enabled = true, description = "verify Fast NMI discovery tab")
@@ -184,7 +194,7 @@ public class SmokeTest extends ActionEngine {
         SrvCustSearchResults srvCustSearchResults = indexPage.searchAllMeterNumber();
         serviceID = srvCustSearchResults.getFirstServiceId();
 
-        if (srvCustSearchResults.getHeaderCount()>1 ){
+        if (srvCustSearchResults.getHeaderCount() > 1) {
             customer.clickRecentCustomerId();
             customer.switchToWindow("customer");
         }
@@ -212,8 +222,8 @@ public class SmokeTest extends ActionEngine {
     public void verify_marketTab_subTabs() {
         Customer customer = new Customer();
         SrvCustSearchResults srvCustSearchResults = indexPage.searchAllMeterNumber();
-       // serviceID = srvCustSearchResults.getFirstServiceId();
-        if (srvCustSearchResults.getHeaderCount()>1 ){
+        // serviceID = srvCustSearchResults.getFirstServiceId();
+        if (srvCustSearchResults.getHeaderCount() > 1) {
             customer.clickRecentCustomerId();
             customer.switchToWindow("customer");
         }
@@ -225,10 +235,10 @@ public class SmokeTest extends ActionEngine {
 
     @Test(priority = 10, enabled = true, description = "verify  Servic sub Tabs")
     public void verify_serviceTab_SubTabs() {
-       // indexPage.searchAll(serviceID);
+        // indexPage.searchAll(serviceID);
         Customer customer = new Customer();
         SrvCustSearchResults srvCustSearchResults = indexPage.searchAllMeterNumber();
-        if (srvCustSearchResults.getHeaderCount()>1 ){
+        if (srvCustSearchResults.getHeaderCount() > 1) {
             customer.clickRecentCustomerId();
             customer.switchToWindow("customer");
 
@@ -244,8 +254,8 @@ public class SmokeTest extends ActionEngine {
     public void verify_MeterReads_Sub_Tabs() {
         Customer customer = new Customer();
         SrvCustSearchResults srvCustSearchResults = indexPage.searchAllMeterNumber();
-      //  serviceID = srvCustSearchResults.getFirstServiceId();
-        if (srvCustSearchResults.getHeaderCount()>1 ){
+        //  serviceID = srvCustSearchResults.getFirstServiceId();
+        if (srvCustSearchResults.getHeaderCount() > 1) {
             customer.clickRecentCustomerId();
             customer.switchToWindow("customer");
 
@@ -265,4 +275,65 @@ public class SmokeTest extends ActionEngine {
 
     }
 
+    @Test(priority = 12, enabled = true, description = "Download Zip file from Statement Summary")
+    public void statementSummary_downloadZip() throws InterruptedException, IOException {
+//        Admin admin = new Admin();
+//        Login login = new Login();
+        BillRun billRun = new BillRun();
+//        login.validLogin();
+//        admin.navigateToBillRun();
+//        billRun.downloadZip();
+        Thread.sleep(10000);
+        billRun.unSevenZipFile();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //SevenZFile sevenZFile = new SevenZFile(new File("C:\\Users\\Itsqe\\Downloads\\Statement_8597_1683870737153.7z"));
+//        SevenZArchiveEntry entry = sevenZFile.getNextEntry();
+//        while(entry!=null){
+//            System.out.println(entry.getName());
+//            FileOutputStream out = new FileOutputStream(entry.getName());
+//            byte[] content = new byte[(int) entry.getSize()];
+//            sevenZFile.read(content, 0, content.length);
+//            out.write(content);
+//            out.close();
+//            entry = sevenZFile.getNextEntry();
+//        }
+//        sevenZFile.close();
+    }
+
+    @Test(priority = 13, enabled = true, description = "Download Pdf file from Statement Summary")
+    public void statementSummary_downloadPdf() throws InterruptedException {
+        Admin admin = new Admin();
+        Login login = new Login();
+        BillRun billRun = new BillRun();
+        login.validLogin();
+        admin.navigateToBillRun();
+        billRun.downloadPdf();
+        Thread.sleep(1000);
+        String fileName = billRun.getcustomerNumber() + billRun.getStatementNumber() + DateTime.getCurrentDateTime("YYYYMMddhhmmss") + "_0.pdf";
+        //    String fileName ="41532_8597_"+ DateTime.getCurrentDateTime("yyyyMMddHHmmss")+"_0.pdf";
+        Thread.sleep(12000);
+        Assert.assertTrue(billRun.isFileDownloaded(fileName));
+    }
 }

@@ -2,6 +2,7 @@ package automation.helpers;
 
 import automation.base.BaseTest;
 import automation.logger.Log;
+import automation.utilities.PropertiesUtil;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -12,9 +13,9 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ExtentReportClass extends BaseTest {
@@ -40,14 +41,47 @@ public class ExtentReportClass extends BaseTest {
 
     @BeforeSuite
     public void setExtent() throws InterruptedException, IOException {
-        extent = new ExtentReports(System.getProperty("user.dir") + "/test-report/ExtentReportResult.html", true);
+        String filePath=System.getProperty("user.dir") + "/test-report/ExtentReportResult.html";
+        extent = new ExtentReports(filePath, true);
+        extent.addSystemInfo("URL: ",PropertiesUtil.getPropertyValue("baseUrl"));
         extent.addSystemInfo("Environment", "QA");
+        extent.assignProject(PropertiesUtil.getPropertyValue("baseUrl"));
         extent.loadConfig(new File(System.getProperty("user.dir") + "/extent-config.xml"));
+
+     //   ExtentSparkReporter sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/test-report/ExtentReportResult.html");
+        //sparkReporter.config().setDocumentTitle(PropertiesUtil.getPropertyValue("baseUrl"));
+
+
+
     }
 
+
+
     @AfterSuite
-    public void endReport() {
+    public void endReport() throws IOException {
         extent.close();
+        String filePath=System.getProperty("user.dir") + "/test-report/ExtentReportResult.html";
+        ArrayList<String> lines = new ArrayList<String>();
+        String line = null;
+        try
+        {
+            File f1 = new File(filePath);
+            FileReader fr = new FileReader(f1);
+            BufferedReader br = new BufferedReader(fr);
+            while ( br.readLine() != null)
+            { line=br.readLine();
+                if (line.contains("<h5>Tests</h5>"))
+                    line = line.replace("<h5>Tests</h5>", "<h5>Tests12344</h5> ");
+                lines.add(line);
+            }
+            FileWriter fw = new FileWriter(f1);
+            BufferedWriter out = new BufferedWriter(fw);
+            out.write(lines.toString());
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
 
@@ -55,7 +89,9 @@ public class ExtentReportClass extends BaseTest {
     public void beforeMethod(Method method){
         Test test = method.getAnnotation(Test.class);
         extentTest = extent.startTest(method.getName());
-        extentTest.setDescription(test.description());
+
+        extentTest.setDescription(test.description()+"<b> <i> <u><br />"+"URL : "+getDriver().getCurrentUrl()+"</u></i></b>");
+
         Log.info("******** Execution started for "+method.getName()+" ********");
     }
 
