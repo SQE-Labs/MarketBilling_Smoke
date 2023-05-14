@@ -159,7 +159,7 @@ public class BillRun extends ActionEngine {
         try (SevenZFile sevenZFile = new SevenZFile(new File("C:/Users/Itsqe/Documents/Statement_8597_1683880948900.7z"))) {
 
             Iterable<SevenZArchiveEntry> iterable = sevenZFile.getEntries();
-          for(SevenZArchiveEntry entry  :iterable){
+            for (SevenZArchiveEntry entry : iterable) {
 
                 File file = new File("C:/Users/Itsqe/Documents/" + entry.getName());
                 System.out.println("Un seven zipping - " + file);
@@ -168,8 +168,8 @@ public class BillRun extends ActionEngine {
                 Files.createDirectories(new File(dir).toPath());
                 // Stream file content
                 byte[] content = new byte[(int) entry.getSize()];
-               // sevenZFile.read(content);
-             //   Files.write(file.toPath(), content);
+                // sevenZFile.read(content);
+                //   Files.write(file.toPath(), content);
 
             }
         } catch (IOException e) {
@@ -181,19 +181,17 @@ public class BillRun extends ActionEngine {
         SevenZFile sevenZFile = new SevenZFile(new File(in));
 
 
-
-
-            File curfile = new File(destination, "");
-            File parent = curfile.getParentFile();
-            if (!parent.exists()) {
-                parent.mkdirs();
-            }
-            FileOutputStream out = new FileOutputStream(curfile);
+        File curfile = new File(destination, "");
+        File parent = curfile.getParentFile();
+        if (!parent.exists()) {
+            parent.mkdirs();
+        }
+        FileOutputStream out = new FileOutputStream(curfile);
 //         //   byte[] content = new byte[(int) sevenZFile.getSize()];
 //            sevenZFile.read(content, 0, content.length);
 //            out.write(content);
 //            out.close();
-        }
+    }
 
     public static String getContent(final String directory, final String fileName, final String subFileName) throws IOException {
         String out = null;

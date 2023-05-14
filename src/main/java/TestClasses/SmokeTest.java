@@ -278,49 +278,15 @@ public class SmokeTest extends ActionEngine {
 
     @Test(priority = 12, enabled = true, description = "Download Zip file from Statement Summary")
     public void statementSummary_downloadZip() throws InterruptedException, IOException {
-//        Admin admin = new Admin();
-//        Login login = new Login();
+        Admin admin = new Admin();
+        Login login = new Login();
         BillRun billRun = new BillRun();
-//        login.validLogin();
-//        admin.navigateToBillRun();
-//        billRun.downloadZip();
+        login.validLogin();
+        admin.navigateToBillRun();
+        billRun.downloadZip();
         Thread.sleep(10000);
         billRun.unSevenZipFile();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //SevenZFile sevenZFile = new SevenZFile(new File("C:\\Users\\Itsqe\\Downloads\\Statement_8597_1683870737153.7z"));
-//        SevenZArchiveEntry entry = sevenZFile.getNextEntry();
-//        while(entry!=null){
-//            System.out.println(entry.getName());
-//            FileOutputStream out = new FileOutputStream(entry.getName());
-//            byte[] content = new byte[(int) entry.getSize()];
-//            sevenZFile.read(content, 0, content.length);
-//            out.write(content);
-//            out.close();
-//            entry = sevenZFile.getNextEntry();
-//        }
-//        sevenZFile.close();
     }
 
     @Test(priority = 13, enabled = true, description = "Download Pdf file from Statement Summary")
