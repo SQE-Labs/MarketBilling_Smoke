@@ -6,7 +6,6 @@
             <class name="TestClasses.SmokeTest"> </class>
             <class name="TestClasses.WebserviceTest">
             </class>
-
         </classes>
     </test>
 </suite>
