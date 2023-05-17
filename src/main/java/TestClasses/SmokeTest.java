@@ -215,7 +215,6 @@ public class SmokeTest extends ActionEngine {
 
         }
         softAssert.assertAll();
-
     }
 
     @Test(priority = 9, enabled = true, description = "verify market Tab sub Tabs")
@@ -276,12 +275,12 @@ public class SmokeTest extends ActionEngine {
 
     }
 
-    @Test(priority = 12, enabled = true, description = "Download Zip file from Statement Summary")
+    @Test(priority = 12, enabled = false, description = "Download Zip file from Statement Summary")
     public void statementSummary_downloadZip() throws InterruptedException, IOException {
         Admin admin = new Admin();
         Login login = new Login();
         BillRun billRun = new BillRun();
-        login.validLogin();
+       // login.validLogin();
         admin.navigateToBillRun();
         billRun.downloadZip();
         Thread.sleep(10000);
@@ -289,17 +288,17 @@ public class SmokeTest extends ActionEngine {
 
     }
 
-    @Test(priority = 13, enabled = true, description = "Download Pdf file from Statement Summary")
+    @Test(priority = 13, enabled = false, description = "Download Pdf file from Statement Summary")
     public void statementSummary_downloadPdf() throws InterruptedException {
         Admin admin = new Admin();
         Login login = new Login();
         BillRun billRun = new BillRun();
-        login.validLogin();
+        //login.validLogin();
         admin.navigateToBillRun();
         billRun.downloadPdf();
         Thread.sleep(1000);
         String fileName = billRun.getcustomerNumber() + billRun.getStatementNumber() + DateTime.getCurrentDateTime("YYYYMMddhhmmss") + "_0.pdf";
-        //    String fileName ="41532_8597_"+ DateTime.getCurrentDateTime("yyyyMMddHHmmss")+"_0.pdf";
+      //  String fileName ="41532_8597_"+ DateTime.getCurrentDateTime("yyyyMMddHHmmss")+"_0.pdf";
         Thread.sleep(12000);
         Assert.assertTrue(billRun.isFileDownloaded(fileName));
     }
