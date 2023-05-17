@@ -2,6 +2,7 @@ package automation.helpers;
 
 import automation.base.BaseTest;
 import automation.logger.Log;
+import automation.utilities.PropertiesUtil;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -12,8 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Method;
 import java.util.Calendar;
 
@@ -40,30 +40,37 @@ public class ExtentReportClass extends BaseTest {
 
     @BeforeSuite
     public void setExtent() throws InterruptedException, IOException {
-        extent = new ExtentReports(System.getProperty("user.dir") + "/test-report/ExtentReportResult.html", true);
+        String filePath = System.getProperty("user.dir") + "/test-report/ExtentReportResult.html";
+        extent = new ExtentReports(filePath, true);
+        extent.addSystemInfo("URL: ", PropertiesUtil.getPropertyValue("baseUrl"));
         extent.addSystemInfo("Environment", "QA");
+        extent.assignProject(PropertiesUtil.getPropertyValue("baseUrl"));
         extent.loadConfig(new File(System.getProperty("user.dir") + "/extent-config.xml"));
-    }
+           }
+
 
     @AfterSuite
-    public void endReport() {
+    public void endReport() throws IOException {
         extent.close();
+
     }
 
 
     @BeforeMethod
-    public void beforeMethod(Method method){
+    public void beforeMethod(Method method) {
         Test test = method.getAnnotation(Test.class);
         extentTest = extent.startTest(method.getName());
-        extentTest.setDescription(test.description());
-        Log.info("******** Execution started for "+method.getName()+" ********");
+
+        extentTest.setDescription(test.description() + "<b> <i> <u><br />" + "URL : " + getDriver().getCurrentUrl() + "</u></i></b>");
+
+        Log.info("******** Execution started for " + method.getName() + " ********");
     }
 
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
 
         if (result.getStatus() == ITestResult.FAILURE) {
-           // extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS " + result.getName());
+            // extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS " + result.getName());
             extentTest.log(LogStatus.FAIL, "TEST CASE FAILED : " + result.getThrowable());
             Log.info("Test execution " + result.getMethod().getMethodName() + " failed...");
 
@@ -75,7 +82,7 @@ public class ExtentReportClass extends BaseTest {
         } else if (result.getStatus() == ITestResult.SUCCESS) {
             String screenshotPath = ExtentReportClass.getScreenshot(driver, result.getName());
             extentTest.log(LogStatus.PASS, extentTest.addScreenCapture(screenshotPath));
-            extentTest.log(LogStatus.PASS, "*** Test Case PASSED ***" );
+            extentTest.log(LogStatus.PASS, "*** Test Case PASSED ***");
             Log.info("Executed " + result.getMethod().getMethodName() + " test successfully...");
         }
         extent.endTest(extentTest);
