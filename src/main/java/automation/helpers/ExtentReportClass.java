@@ -15,7 +15,6 @@ import org.testng.annotations.*;
 
 import java.io.*;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ExtentReportClass extends BaseTest {
@@ -41,65 +40,37 @@ public class ExtentReportClass extends BaseTest {
 
     @BeforeSuite
     public void setExtent() throws InterruptedException, IOException {
-        String filePath=System.getProperty("user.dir") + "/test-report/ExtentReportResult.html";
+        String filePath = System.getProperty("user.dir") + "/test-report/ExtentReportResult.html";
         extent = new ExtentReports(filePath, true);
-        extent.addSystemInfo("URL: ",PropertiesUtil.getPropertyValue("baseUrl"));
+        extent.addSystemInfo("URL: ", PropertiesUtil.getPropertyValue("baseUrl"));
         extent.addSystemInfo("Environment", "QA");
         extent.assignProject(PropertiesUtil.getPropertyValue("baseUrl"));
         extent.loadConfig(new File(System.getProperty("user.dir") + "/extent-config.xml"));
-
-     //   ExtentSparkReporter sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/test-report/ExtentReportResult.html");
-        //sparkReporter.config().setDocumentTitle(PropertiesUtil.getPropertyValue("baseUrl"));
-
-
-
-    }
-
+           }
 
 
     @AfterSuite
     public void endReport() throws IOException {
         extent.close();
-        String filePath=System.getProperty("user.dir") + "/test-report/ExtentReportResult.html";
-        ArrayList<String> lines = new ArrayList<String>();
-        String line = null;
-        try
-        {
-            File f1 = new File(filePath);
-            FileReader fr = new FileReader(f1);
-            BufferedReader br = new BufferedReader(fr);
-            while ( br.readLine() != null)
-            { line=br.readLine();
-                if (line.contains("<h5>Tests</h5>"))
-                    line = line.replace("<h5>Tests</h5>", "<h5>Tests12344</h5> ");
-                lines.add(line);
-            }
-            FileWriter fw = new FileWriter(f1);
-            BufferedWriter out = new BufferedWriter(fw);
-            out.write(lines.toString());
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
+
     }
 
 
     @BeforeMethod
-    public void beforeMethod(Method method){
+    public void beforeMethod(Method method) {
         Test test = method.getAnnotation(Test.class);
         extentTest = extent.startTest(method.getName());
 
-        extentTest.setDescription(test.description()+"<b> <i> <u><br />"+"URL : "+getDriver().getCurrentUrl()+"</u></i></b>");
+        extentTest.setDescription(test.description() + "<b> <i> <u><br />" + "URL : " + getDriver().getCurrentUrl() + "</u></i></b>");
 
-        Log.info("******** Execution started for "+method.getName()+" ********");
+        Log.info("******** Execution started for " + method.getName() + " ********");
     }
 
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
 
         if (result.getStatus() == ITestResult.FAILURE) {
-           // extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS " + result.getName());
+            // extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS " + result.getName());
             extentTest.log(LogStatus.FAIL, "TEST CASE FAILED : " + result.getThrowable());
             Log.info("Test execution " + result.getMethod().getMethodName() + " failed...");
 
@@ -111,7 +82,7 @@ public class ExtentReportClass extends BaseTest {
         } else if (result.getStatus() == ITestResult.SUCCESS) {
             String screenshotPath = ExtentReportClass.getScreenshot(driver, result.getName());
             extentTest.log(LogStatus.PASS, extentTest.addScreenCapture(screenshotPath));
-            extentTest.log(LogStatus.PASS, "*** Test Case PASSED ***" );
+            extentTest.log(LogStatus.PASS, "*** Test Case PASSED ***");
             Log.info("Executed " + result.getMethod().getMethodName() + " test successfully...");
         }
         extent.endTest(extentTest);

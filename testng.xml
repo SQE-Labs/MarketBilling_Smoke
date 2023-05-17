@@ -4,11 +4,11 @@
     <test name="MarketBillink_Smoke">
         <classes>
             <class name="TestClasses.SmokeTest">
-                <methods>
-                    <exclude name="create_new_Customer"></exclude>
-                </methods>
-            </class>
-            <class name="TestClasses.WebserviceTest">
+<!--                <methods>-->
+<!--                    <exclude name="create_new_Customer"></exclude>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="TestClasses.WebserviceTest">-->
             </class>
 
         </classes>
