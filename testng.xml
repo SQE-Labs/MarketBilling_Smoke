@@ -4,8 +4,7 @@
     <test name="MarketBillink_Smoke">
         <classes>
             <class name="TestClasses.SmokeTest"> </class>
-            <class name="TestClasses.WebserviceTest">
-            </class>
+            <class name="TestClasses.WebserviceTest"> </class>
         </classes>
     </test>
 </suite>
