@@ -153,7 +153,6 @@ public class SmokeTest extends ActionEngine {
             data[i][0] = strList[i];
         }
 
-
         return data;
     }
 
@@ -174,8 +173,6 @@ public class SmokeTest extends ActionEngine {
 //                    softAssert.assertFalse(customer.isExceptionOrErrorPresent(3), "Exception found in  " + tab + " Tab.\n");
 //                }
             softAssert.assertFalse(customer.isExceptionOrErrorPresent(), "Exception in  " + tab + " Tab.\n");
-
-
         }
         softAssert.assertAll();
 
@@ -236,7 +233,6 @@ public class SmokeTest extends ActionEngine {
         if (srvCustSearchResults.getHeaderCount() > 1) {
             customer.clickRecentCustomerId();
             customer.switchToWindow("customer");
-
         }
         //serviceID = srvCustSearchResults.getFirstServiceId();
 
@@ -253,7 +249,6 @@ public class SmokeTest extends ActionEngine {
         if (srvCustSearchResults.getHeaderCount() > 1) {
             customer.clickRecentCustomerId();
             customer.switchToWindow("customer");
-
         }
 
         customer.clickCustomerTab("Meter Reads");
@@ -273,7 +268,6 @@ public class SmokeTest extends ActionEngine {
         //login.validLogin();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
-
         String statement=billRun.downloadZip();
         String fileName = billRun.getcustomerNumber() + "_"+statement+"_" + DateTime.getEpocTime() + ".7z";
         String home = System.getProperty("user.home");
