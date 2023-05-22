@@ -51,6 +51,7 @@ public class ExtentReportClass extends BaseTest {
 
     @AfterSuite
     public void endReport() throws IOException {
+        extent.flush();
         extent.close();
 
     }
