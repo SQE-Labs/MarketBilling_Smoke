@@ -4,16 +4,11 @@ import automation.pageObjects.*;
 import automation.utilities.ActionEngine;
 import automation.utilities.DateTime;
 import automation.utilities.PropertiesUtil;
-import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
-import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.Assertion;
 import org.testng.asserts.SoftAssert;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class SmokeTest extends ActionEngine {
@@ -283,9 +278,14 @@ public class SmokeTest extends ActionEngine {
         BillRun billRun = new BillRun();
         login.validLogin();
         admin.navigateToBillRun();
-        billRun.downloadZip();
-        Thread.sleep(10000);
-        billRun.unSevenZipFile();
+
+        String statement=billRun.downloadZip();
+        String fileName = billRun.getcustomerNumber() + "_"+statement+"_" + DateTime.getEpocTime() + ".7z";
+        String home = System.getProperty("user.home");
+        billRun.unzip( home + "/Downloads/" ,fileName );
+        String downloadedFile= billRun.validateDownloadedFile();
+        Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
+
 
     }
 
@@ -296,11 +296,11 @@ public class SmokeTest extends ActionEngine {
         BillRun billRun = new BillRun();
         login.validLogin();
         admin.navigateToBillRun();
-        billRun.downloadPdf();
-        Thread.sleep(1000);
-        String fileName = billRun.getcustomerNumber() + billRun.getStatementNumber() + DateTime.getCurrentDateTime("YYYYMMddhhmmss") + "_0.pdf";
-        //    String fileName ="41532_8597_"+ DateTime.getCurrentDateTime("yyyyMMddHHmmss")+"_0.pdf";
-        Thread.sleep(12000);
-        Assert.assertTrue(billRun.isFileDownloaded(fileName));
+        String statement= billRun.downloadPdf();
+       // String fileName = billRun.getcustomerNumber() +"_"+ statement+"_" + DateTime.getCurrentDateTime("YYYYMMddhhmmss") + "_0.pdf";
+        //System.out.println("gener");
+        String downloadedFile= billRun.validateDownloadedFile();
+        Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
+
     }
 }

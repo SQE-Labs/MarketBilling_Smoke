@@ -8,8 +8,9 @@ import org.openqa.selenium.By;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
+
+import static com.relevantcodes.extentreports.LogStatus.FAIL;
+import static com.relevantcodes.extentreports.LogStatus.PASS;
 
 public class BillRun extends ActionEngine {
 
@@ -83,9 +84,9 @@ public class BillRun extends ActionEngine {
     }
 
 
-    public void downloadPdf() throws InterruptedException {
+    public String downloadPdf() throws InterruptedException {
         clickBillRunSearch();
-        getStatementNumber();
+      String statement=  getStatementNumber();
         clickStatementDetails();
         getcustomerNumber();
         select_StatementCheckbox();
@@ -96,11 +97,14 @@ public class BillRun extends ActionEngine {
         invoiceGroupTemplateSelection();
         invoiceGroupTemplateSelectionDD();
         clickDownload();
+        Thread.sleep(6000);
+
+        return statement;
     }
 
-    public void downloadZip() throws InterruptedException {
+    public String downloadZip() throws InterruptedException {
         clickBillRunSearch();
-        getStatementNumber();
+       String statement= getStatementNumber();
         clickStatementDetails();
         getcustomerNumber();
         select_StatementCheckbox();
@@ -111,89 +115,63 @@ public class BillRun extends ActionEngine {
         invoiceGroupTemplateSelection();
         invoiceGroupTemplateSelectionDD();
         clickDownload();
-
+return statement;
 
     }
 
-    public static boolean isFileDownloaded(String fileName) {
+    public  boolean isFileDownloaded(String fileName) throws InterruptedException {
+        Thread.sleep(10000);
         String home = System.getProperty("user.home");
-        String file_name = fileName;
-        String file_with_location = home + "\\Downloads\\" + file_name;
+        String file_with_location = home + "/Downloads/" + fileName;
         File file = new File(file_with_location.trim());
-
-//        (File tempFile : downloadPath.listFiles()) {
-//            if (tempFile.getName().contains(fileName)) {
-//                String tempEx = FilenameUtils.getExtension(tempFile.getName());
-//                // crdownload - For Chrome, part - For Firefox
-//                if (tempEx.equalsIgnoreCase("crdownload") || tempEx.equalsIgnoreCase("part")) {
-//                    Thread.sleep(1000);
-//                } else {
-//                    isFileFound = true;
-//                    logger.info("Download To Completed....");
-//                    return tempFile;
-//                }
-//            }
-//        }
-//            if (file.exists()) {
-//                System.out.println(file_with_location + " is present");
-//
-//                return true;
-//            } else {
-//                System.out.println(file_with_location + " is not present");
-//
-//                return false;
-//            }
-        if (file.exists()) {
-            System.out.println(file_with_location + " is present");
-
+       String fileTest=file.getName();
+        if (file.exists() && file.length()!=0) {
+            System.out.println(file_with_location + " is present with size greater than 0 ");
+            extentTest.log(PASS, file_with_location+" is present  with size greater than 0");
             return true;
-        } else {
+        }
+        else {
             System.out.println(file_with_location + " is not present");
+            extentTest.log(FAIL, file_with_location+" is not  present ");
 
             return false;
         }
     }
 
-    public static void unSevenZipFile() {
-        // Get 7zip file.
-        try (SevenZFile sevenZFile = new SevenZFile(new File("C:/Users/Itsqe/Documents/Statement_8597_1683880948900.7z"))) {
-
-            Iterable<SevenZArchiveEntry> iterable = sevenZFile.getEntries();
-            for (SevenZArchiveEntry entry : iterable) {
-
-                File file = new File("C:/Users/Itsqe/Documents/" + entry.getName());
-                System.out.println("Un seven zipping - " + file);
-                // Create directory before streaming files.
-                String dir = file.toPath().toString().substring(0, file.toPath().toString().lastIndexOf("\\"));
-                Files.createDirectories(new File(dir).toPath());
-                // Stream file content
-                byte[] content = new byte[(int) entry.getSize()];
-                // sevenZFile.read(content);
-                //   Files.write(file.toPath(), content);
-
+    public  String unzip( String directory,  String fileName) {
+        final StringBuilder sb = new StringBuilder();
+        final File fDirectory = new File(directory);
+        final File input7z = new File(fDirectory, fileName);
+        try (final SevenZFile sevenZFile = new SevenZFile(input7z)) {
+            SevenZArchiveEntry entry = sevenZFile.getNextEntry();
+            while (entry != null) {
+                try (final FileOutputStream out = new FileOutputStream(new File(fDirectory, entry.getName()))) {
+                    byte[] content = new byte[(int) entry.getSize()];
+                    sevenZFile.read(content, 0, content.length);
+                    out.write(content);
+                } catch (final IOException ioe) {
+                    final String error = "Error when writing entry " + entry.getName();
+                    sb.append(error).append("\n");
+                }
+                entry = sevenZFile.getNextEntry();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (final IOException ioe) {
+            final String error = "Error when reading entry " + fileName;
+            sb.append(error).append("\n");
         }
+        return sb.length() == 0 ? null : sb.toString();
     }
 
-    public static void decompress(String in, File destination) throws IOException {
-        SevenZFile sevenZFile = new SevenZFile(new File(in));
+    public  String validateDownloadedFile(){
+        driver.navigate().to("chrome://downloads/");
+        ChromeDownloads download = new ChromeDownloads();
+        //Thread.sleep(6000);
+        String downloadedFile=download.getFileName();
+        System.out.println(downloadedFile);
+        return downloadedFile;
 
-
-        File curfile = new File(destination, "");
-        File parent = curfile.getParentFile();
-        if (!parent.exists()) {
-            parent.mkdirs();
-        }
-        FileOutputStream out = new FileOutputStream(curfile);
-//         //   byte[] content = new byte[(int) sevenZFile.getSize()];
-//            sevenZFile.read(content, 0, content.length);
-//            out.write(content);
-//            out.close();
     }
-
-    public static String getContent(final String directory, final String fileName, final String subFileName) throws IOException {
+    public  String getContent(final String directory, final String fileName, final String subFileName) throws IOException {
         String out = null;
         final File fDirectory = new File(directory);
         final File input7z = new File(fDirectory, fileName);
@@ -214,5 +192,3 @@ public class BillRun extends ActionEngine {
         return out;
     }
 }
-
-

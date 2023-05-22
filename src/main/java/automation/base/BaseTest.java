@@ -60,6 +60,8 @@ public class BaseTest {
             case "CHROME": {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 WebDriverManager.chromedriver().setup();
+                chromeOptions.addArguments("--remote-allow-origins=*");
+
                 driver = new ChromeDriver(chromeOptions);
                 break;
             }
