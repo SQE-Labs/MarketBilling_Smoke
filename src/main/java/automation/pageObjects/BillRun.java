@@ -115,6 +115,7 @@ public class BillRun extends ActionEngine {
         invoiceGroupTemplateSelection();
         invoiceGroupTemplateSelectionDD();
         clickDownload();
+        Thread.sleep(10000);
 return statement;
 
     }

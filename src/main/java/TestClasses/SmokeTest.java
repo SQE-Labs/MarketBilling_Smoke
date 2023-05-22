@@ -62,7 +62,7 @@ public class SmokeTest extends ActionEngine {
 
 
     }
-
+//  Not requires for Production //
     @Test(priority = 4, enabled = false, description = "verify create new customer")
     public void create_new_Customer() throws InterruptedException {
         Customer customer = new Customer();
@@ -263,20 +263,15 @@ public class SmokeTest extends ActionEngine {
 
     }
 
-    @Test(priority = 11, enabled = true, description = "verify build version at index page")
-    public void version_Check_Jsp() {
-        Version version = new Version();
-        getDriver().get(PropertiesUtil.getPropertyValue("baseUrl") + PropertiesUtil.getPropertyValue("versionJsp"));
-        Assert.assertEquals(version.getHeaderText().trim(), PropertiesUtil.getPropertyValue("jspVersion"));
 
-    }
 
     @Test(priority = 12, enabled = true, description = "Download Zip file from Statement Summary")
     public void statementSummary_downloadZip() throws InterruptedException, IOException {
         Admin admin = new Admin();
         Login login = new Login();
         BillRun billRun = new BillRun();
-        login.validLogin();
+        //login.validLogin();
+        admin.navigateToBasePage();
         admin.navigateToBillRun();
 
         String statement=billRun.downloadZip();
@@ -294,13 +289,18 @@ public class SmokeTest extends ActionEngine {
         Admin admin = new Admin();
         Login login = new Login();
         BillRun billRun = new BillRun();
-        login.validLogin();
+        admin.navigateToBasePage();
         admin.navigateToBillRun();
         String statement= billRun.downloadPdf();
-       // String fileName = billRun.getcustomerNumber() +"_"+ statement+"_" + DateTime.getCurrentDateTime("YYYYMMddhhmmss") + "_0.pdf";
-        //System.out.println("gener");
         String downloadedFile= billRun.validateDownloadedFile();
         Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
+
+    }
+    @Test(priority = 14, enabled = true, description = "verify build version at index page")
+    public void version_Check_Jsp() {
+        Version version = new Version();
+        getDriver().get(PropertiesUtil.getPropertyValue("baseUrl") + PropertiesUtil.getPropertyValue("versionJsp"));
+        Assert.assertEquals(version.getHeaderText().trim(), PropertiesUtil.getPropertyValue("jspVersion"));
 
     }
 }

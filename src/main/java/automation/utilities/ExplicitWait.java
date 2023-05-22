@@ -21,7 +21,7 @@ public final class ExplicitWait extends BaseTest {
      */
     public ExplicitWait() {
         timeout = Duration.ofSeconds(10);
-        polling = Duration.ofSeconds(200);
+        polling = Duration.ofMillis(200);
         wait = new WebDriverWait(getDriver(), timeout, polling);
     }
 
