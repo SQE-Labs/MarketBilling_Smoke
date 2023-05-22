@@ -4,16 +4,11 @@ import automation.pageObjects.*;
 import automation.utilities.ActionEngine;
 import automation.utilities.DateTime;
 import automation.utilities.PropertiesUtil;
-import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
-import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.Assertion;
 import org.testng.asserts.SoftAssert;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class SmokeTest extends ActionEngine {
@@ -67,7 +62,7 @@ public class SmokeTest extends ActionEngine {
 
 
     }
-
+//  Not requires for Production //
     @Test(priority = 4, enabled = false, description = "verify create new customer")
     public void create_new_Customer() throws InterruptedException {
         Customer customer = new Customer();
@@ -215,6 +210,7 @@ public class SmokeTest extends ActionEngine {
 
         }
         softAssert.assertAll();
+
     }
 
     @Test(priority = 9, enabled = true, description = "verify market Tab sub Tabs")
@@ -267,39 +263,44 @@ public class SmokeTest extends ActionEngine {
 
     }
 
-    @Test(priority = 11, enabled = true, description = "verify build version at index page")
+
+
+    @Test(priority = 12, enabled = true, description = "Download Zip file from Statement Summary")
+    public void statementSummary_downloadZip() throws InterruptedException, IOException {
+        Admin admin = new Admin();
+        Login login = new Login();
+        BillRun billRun = new BillRun();
+        //login.validLogin();
+        admin.navigateToBasePage();
+        admin.navigateToBillRun();
+
+        String statement=billRun.downloadZip();
+        String fileName = billRun.getcustomerNumber() + "_"+statement+"_" + DateTime.getEpocTime() + ".7z";
+        String home = System.getProperty("user.home");
+        billRun.unzip( home + "/Downloads/" ,fileName );
+        String downloadedFile= billRun.validateDownloadedFile();
+        Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
+
+
+    }
+
+    @Test(priority = 13, enabled = true, description = "Download Pdf file from Statement Summary")
+    public void statementSummary_downloadPdf() throws InterruptedException {
+        Admin admin = new Admin();
+        Login login = new Login();
+        BillRun billRun = new BillRun();
+        admin.navigateToBasePage();
+        admin.navigateToBillRun();
+        String statement= billRun.downloadPdf();
+        String downloadedFile= billRun.validateDownloadedFile();
+        Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
+
+    }
+    @Test(priority = 14, enabled = true, description = "verify build version at index page")
     public void version_Check_Jsp() {
         Version version = new Version();
         getDriver().get(PropertiesUtil.getPropertyValue("baseUrl") + PropertiesUtil.getPropertyValue("versionJsp"));
         Assert.assertEquals(version.getHeaderText().trim(), PropertiesUtil.getPropertyValue("jspVersion"));
 
-    }
-
-    @Test(priority = 12, enabled = false, description = "Download Zip file from Statement Summary")
-    public void statementSummary_downloadZip() throws InterruptedException, IOException {
-        Admin admin = new Admin();
-        Login login = new Login();
-        BillRun billRun = new BillRun();
-       // login.validLogin();
-        admin.navigateToBillRun();
-        billRun.downloadZip();
-        Thread.sleep(10000);
-        billRun.unSevenZipFile();
-
-    }
-
-    @Test(priority = 13, enabled = false, description = "Download Pdf file from Statement Summary")
-    public void statementSummary_downloadPdf() throws InterruptedException {
-        Admin admin = new Admin();
-        Login login = new Login();
-        BillRun billRun = new BillRun();
-        //login.validLogin();
-        admin.navigateToBillRun();
-        billRun.downloadPdf();
-        Thread.sleep(1000);
-        String fileName = billRun.getcustomerNumber() + billRun.getStatementNumber() + DateTime.getCurrentDateTime("YYYYMMddhhmmss") + "_0.pdf";
-      //  String fileName ="41532_8597_"+ DateTime.getCurrentDateTime("yyyyMMddHHmmss")+"_0.pdf";
-        Thread.sleep(12000);
-        Assert.assertTrue(billRun.isFileDownloaded(fileName));
     }
 }

@@ -6,20 +6,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.function.Function;
 
 
 public final class ExplicitWait extends BaseTest {
 
     private final Wait<WebDriver> wait;
-    private long timeout, polling;
+    private Duration timeout;
+    private Duration polling;
 
     /**
      * Create wait object with default timeout and polling interval.
      */
     public ExplicitWait() {
-        timeout = 6;
-        polling = 200;
+        timeout = Duration.ofSeconds(10);
+        polling = Duration.ofMillis(200);
         wait = new WebDriverWait(getDriver(), timeout, polling);
     }
 
@@ -29,7 +31,7 @@ public final class ExplicitWait extends BaseTest {
      * @param timeout time to wait
      * @param polling poll interval
      */
-    public ExplicitWait(long timeout, long polling) {
+    public ExplicitWait(Duration timeout, Duration polling) {
         wait = new WebDriverWait(getDriver(), timeout, polling);
     }
 

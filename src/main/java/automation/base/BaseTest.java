@@ -42,24 +42,14 @@ public class BaseTest {
     }
 
 
-
-    public static void closeDriver() {
-        getDriver().close();
-        //driver.remove();
-    }
-
-    public static void reportLog(String message) {
-        // message = BREAK_LINE + message;
-        Log.info("Message: " + message);
-        Reporter.log(message);
-    }
-
     @BeforeClass
     public void SetProp() {
         switch (FinalBrowser) {
             case "CHROME": {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 WebDriverManager.chromedriver().setup();
+                chromeOptions.addArguments("--remote-allow-origins=*");
+
                 driver = new ChromeDriver(chromeOptions);
                 break;
             }

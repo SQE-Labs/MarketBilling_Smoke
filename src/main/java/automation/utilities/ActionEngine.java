@@ -7,6 +7,7 @@ import automation.logger.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.time.Duration;
 import java.util.List;
 
 import static com.relevantcodes.extentreports.LogStatus.FAIL;
@@ -35,7 +36,7 @@ public class ActionEngine extends BasePage {
         String var = "";
         try {
             var = label.length > 0 ? label[0] : path.toString();
-            WebDriverWaits.waitForElementDisabled(By.className("spinner"),8);
+            WebDriverWaits.waitForElementDisabled(By.className("spinner"), Duration.ofSeconds(8));
             Button btn = new Button(var, path);
             btn.click();
             Log.info("Clicked on " + var);
@@ -53,7 +54,7 @@ public class ActionEngine extends BasePage {
         try {
 
             var = label.length > 0 ? label[0] : path.toString();
-            WebDriverWaits.waitForElementDisabled(By.className("spinner"),6);
+            WebDriverWaits.waitForElementDisabled(By.className("spinner"),Duration.ofSeconds(6));
             Element btn = new Element(var, path);
             btn.click();
             Log.info("Clicked on " + var);
@@ -299,7 +300,7 @@ public class ActionEngine extends BasePage {
         }
     }
     public void attachScreenShot(String screenshotName) {
-        WebDriverWaits.waitForElementDisabled(By.className("spinner"),6);
+        WebDriverWaits.waitForElementDisabled(By.className("spinner"),Duration.ofSeconds(6));
         try {
 
             String screenshotPath = ExtentReportClass.getScreenshot(driver, screenshotName);

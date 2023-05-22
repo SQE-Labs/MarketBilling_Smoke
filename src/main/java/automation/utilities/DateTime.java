@@ -19,4 +19,13 @@ public class DateTime {
 
 
     }
+    public static long getEpocTime() {
+
+
+        long currentTimestamp = System.currentTimeMillis();
+        System.out.println("Current epoch timestamp in millis: " + currentTimestamp);
+        return currentTimestamp;
+
+
+    }
 }

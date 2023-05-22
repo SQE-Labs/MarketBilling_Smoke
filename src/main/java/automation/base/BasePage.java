@@ -205,4 +205,9 @@ public class BasePage extends ExtentReportClass {
         jse.executeScript("arguments[0].scrollIntoView(true);", ele);
 
     }
+    public void jsExecutor(String jsCode) {
+        JavascriptExecutor jse = (JavascriptExecutor) BaseTest.getDriver();
+        jse.executeScript(jsCode);
+
+    }
 }

@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
 
+import java.time.Duration;
+
 public class Customer extends ActionEngine {
     public By customerTab = By.xpath("//a[@title='Customer']");
     public By detailsTab = By.xpath("//a[contains(text(),'Details')]");
@@ -240,7 +242,7 @@ public class Customer extends ActionEngine {
     }
 
     public String getSuccessMsgText() {
-        WebDriverWaits.waitForElementVisible(successMessageForCustomerCreation, 5);
+        WebDriverWaits.waitForElementVisible(successMessageForCustomerCreation, Duration.ofSeconds(5));
         return getText_custom(successMessageForCustomerCreation);
     }
 

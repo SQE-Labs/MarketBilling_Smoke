@@ -2,6 +2,7 @@ package automation.pageObjects;
 
 
 import automation.utilities.ActionEngine;
+import automation.utilities.PropertiesUtil;
 import org.openqa.selenium.By;
 
 import java.io.File;
@@ -33,6 +34,10 @@ public class Admin  extends ActionEngine {
     public  void navigateToBillRun(){
         click_custom(AdminIcon);
         click_custom(billRun);
+
+    }
+    public  void navigateToBasePage(){
+        getDriver().get(PropertiesUtil.getPropertyValue("baseUrl"));
 
     }
     public  void navigateToPlans(){
