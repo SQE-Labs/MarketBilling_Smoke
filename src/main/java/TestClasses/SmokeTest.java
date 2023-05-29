@@ -62,7 +62,8 @@ public class SmokeTest extends ActionEngine {
 
 
     }
-//  Not requires for Production //
+
+    //  Not requires for Production //
     @Test(priority = 4, enabled = false, description = "verify create new customer")
     public void create_new_Customer() throws InterruptedException {
         Customer customer = new Customer();
@@ -259,7 +260,6 @@ public class SmokeTest extends ActionEngine {
     }
 
 
-
     @Test(priority = 12, enabled = true, description = "Download Zip file from Statement Summary")
     public void statementSummary_downloadZip() throws InterruptedException, IOException {
         Admin admin = new Admin();
@@ -268,11 +268,11 @@ public class SmokeTest extends ActionEngine {
         //login.validLogin();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
-        String statement=billRun.downloadZip();
-        String fileName = billRun.getcustomerNumber() + "_"+statement+"_" + DateTime.getEpocTime() + ".7z";
+        String statement = billRun.downloadZip();
+        String fileName = billRun.getcustomerNumber() + "_" + statement + "_" + DateTime.getEpocTime() + ".7z";
         String home = System.getProperty("user.home");
-        billRun.unzip( home + "/Downloads/" ,fileName );
-        String downloadedFile= billRun.validateDownloadedFile();
+        billRun.unzip(home + "/Downloads/", fileName);
+        String downloadedFile = billRun.validateDownloadedFile();
         Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
 
 
@@ -285,11 +285,12 @@ public class SmokeTest extends ActionEngine {
         BillRun billRun = new BillRun();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
-        String statement= billRun.downloadPdf();
-        String downloadedFile= billRun.validateDownloadedFile();
+        String statement = billRun.downloadPdf();
+        String downloadedFile = billRun.validateDownloadedFile();
         Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
 
     }
+
     @Test(priority = 14, enabled = true, description = "verify build version at index page")
     public void version_Check_Jsp() {
         Version version = new Version();
