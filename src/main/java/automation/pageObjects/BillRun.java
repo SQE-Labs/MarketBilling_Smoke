@@ -26,9 +26,14 @@ public class BillRun extends ActionEngine {
     public By statementNumber = By.xpath("(//tbody/tr[1]//td[1])[1]");
     public By customerNumber = By.xpath("//tbody/tr[1]//td[2]");
     public By SelectCustomerZip = By.xpath("//*[@id='downloadIndividual']");
+    public By invoiceTemplateCustomer = By.id("forCustomerSettings");
 
     public void clickDownloadPDF() {
         click_custom(downloadPDF);
+    }
+
+    public void clickInvoiceTemplate() {
+        click_custom(invoiceTemplateCustomer);
     }
 
 
@@ -86,16 +91,18 @@ public class BillRun extends ActionEngine {
 
     public String downloadPdf() throws InterruptedException {
         clickBillRunSearch();
-      String statement=  getStatementNumber();
+        String statement = getStatementNumber();
         clickStatementDetails();
         getcustomerNumber();
         select_StatementCheckbox();
         clickDownloadPDF();
         click_SelectCustomer();
         Thread.sleep(2000);
-        selectInvoiceTemplate();
-        invoiceGroupTemplateSelection();
-        invoiceGroupTemplateSelectionDD();
+        // //By default Selecting invoice templete for customer settings.
+        //  selectInvoiceTemplate();
+        //  clickInvoiceTemplate();
+        // invoiceGroupTemplateSelection();
+        //  invoiceGroupTemplateSelectionDD();
         clickDownload();
         Thread.sleep(6000);
 
@@ -104,42 +111,41 @@ public class BillRun extends ActionEngine {
 
     public String downloadZip() throws InterruptedException {
         clickBillRunSearch();
-       String statement= getStatementNumber();
+        String statement = getStatementNumber();
         clickStatementDetails();
         getcustomerNumber();
         select_StatementCheckbox();
         clickDownloadPDF();
         selectCustomerZip();
         Thread.sleep(2000);
-        selectInvoiceTemplate();
-        invoiceGroupTemplateSelection();
-        invoiceGroupTemplateSelectionDD();
+        //By default Selecting invoice templete for customer settings.
+        //  invoiceGroupTemplateSelection();
+        //  invoiceGroupTemplateSelectionDD();
         clickDownload();
         Thread.sleep(10000);
-return statement;
+        return statement;
 
     }
 
-    public  boolean isFileDownloaded(String fileName) throws InterruptedException {
+    public boolean isFileDownloaded(String fileName) throws InterruptedException {
         Thread.sleep(10000);
         String home = System.getProperty("user.home");
         String file_with_location = home + "/Downloads/" + fileName;
         File file = new File(file_with_location.trim());
-       String fileTest=file.getName();
-        if (file.exists() && file.length()!=0) {
+        String fileTest = file.getName();
+        if (file.exists() && file.length() != 0) {
             System.out.println(file_with_location + " is present with size greater than 0 ");
-            extentTest.log(PASS, file_with_location+" is present  with size greater than 0");
+            extentTest.log(PASS, file_with_location + " is present  with size greater than 0");
             return true;
-        }
-        else {
+        } else {
             System.out.println(file_with_location + " is not present");
-            extentTest.log(FAIL, file_with_location+" is not  present ");
+            extentTest.log(FAIL, file_with_location + " is not  present ");
 
             return false;
         }
     }
 
-    public  String unzip( String directory,  String fileName) {
+    public String unzip(String directory, String fileName) {
         final StringBuilder sb = new StringBuilder();
         final File fDirectory = new File(directory);
         final File input7z = new File(fDirectory, fileName);
@@ -163,16 +169,17 @@ return statement;
         return sb.length() == 0 ? null : sb.toString();
     }
 
-    public  String validateDownloadedFile(){
+    public String validateDownloadedFile() {
         driver.navigate().to("chrome://downloads/");
         ChromeDownloads download = new ChromeDownloads();
         //Thread.sleep(6000);
-        String downloadedFile=download.getFileName();
+        String downloadedFile = download.getFileName();
         System.out.println(downloadedFile);
         return downloadedFile;
 
     }
-    public  String getContent(final String directory, final String fileName, final String subFileName) throws IOException {
+
+    public String getContent(final String directory, final String fileName, final String subFileName) throws IOException {
         String out = null;
         final File fDirectory = new File(directory);
         final File input7z = new File(fDirectory, fileName);
