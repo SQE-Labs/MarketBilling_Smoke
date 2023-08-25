@@ -161,7 +161,7 @@ public class SmokeTest extends ActionEngine {
     public void Click_CustomerTabs() throws InterruptedException {
         String tabs[] = PropertiesUtil.getPropertyValue("customerTabs").split(",");
         SoftAssert softAssert = new SoftAssert();
-
+        Login login = new Login();
         for (String tab : tabs) {
 
             Customer customer = new Customer();
@@ -181,7 +181,7 @@ public class SmokeTest extends ActionEngine {
 
 
     @Test(priority = 8, enabled = true, description = "verify Fast NMI discovery tab")
-    public void verify_Fast_NMIDiscovery() {
+    public void verify_Fast_NMIDiscovery() throws InterruptedException {
         Customer customer = new Customer();
 
         SrvCustSearchResults srvCustSearchResults = indexPage.searchAllMeterNumber();
@@ -192,7 +192,7 @@ public class SmokeTest extends ActionEngine {
             customer.switchToWindow("customer");
         }
 
-        customer.clickNMITab();
+        //customer.clickNMITab();
         FastNMI nmipage = new FastNMI();
         nmipage.enterNmi(serviceID);
         nmipage.clickDiscoveryBtn();
@@ -243,7 +243,7 @@ public class SmokeTest extends ActionEngine {
     }
 
     @Test(priority = 10, enabled = true, description = "verify meter reads  Sub Tabs")
-    public void verify_MeterReads_Sub_Tabs() {
+    public void verify_MeterReads_Sub_Tabs() throws InterruptedException {
         Customer customer = new Customer();
         SrvCustSearchResults srvCustSearchResults = indexPage.searchAllMeterNumber();
         //  serviceID = srvCustSearchResults.getFirstServiceId();

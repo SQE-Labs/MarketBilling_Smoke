@@ -145,9 +145,9 @@ public class Customer extends ActionEngine {
     public void clickDetailsTab() {
         clickBtn_custom(detailsTab, "Details Tab");
     }
-    public void clickNMITab() {
-        clickBtn_custom(nmiTab, "NMI Tab");
-    }
+//    public void clickNMITab() throws InterruptedException {
+//        clickBtn_custom(nmiTab, "NMI Tab");
+//    }
     public void clickMarketTab() {
         clickBtn_custom(market, "Market Tab");
     }
@@ -155,7 +155,7 @@ public class Customer extends ActionEngine {
     public void clickServiceTab() {
         clickBtn_custom(service, "Servcie Tab");
     }
-    public void clickCustomerTab(String tabName) {
+    public void clickCustomerTab(String tabName) throws InterruptedException {
         clickBtn_custom(By.xpath("//a[contains(text(),'" + tabName + "')]"), tabName);
     }
 
