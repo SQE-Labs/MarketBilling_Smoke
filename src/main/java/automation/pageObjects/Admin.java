@@ -17,6 +17,11 @@ public class Admin  extends ActionEngine {
     public  By groupEditBtn = By.xpath("//p[text()='Edit Group']");
     public  By billRun = By.xpath("//span[text()='Bill Run']");
     public  By plans = By.xpath("//span[text()='Plans']");
+    public  By processDataFrom = By.id("dateFrom");
+    public  By billRunStatus = By.id("billrunStatus");
+    public  By commit = By.xpath("//option[text()='Committed']");
+    public  By reload = By.xpath("//a[@class='btn btn-primary reloadButton']");
+
 
 
 
@@ -29,11 +34,20 @@ public class Admin  extends ActionEngine {
     public  GroupEdit navigateToGroupEdit(){
         click_custom(AdminIcon);
         click_custom(groupEditBtn);
- return  new GroupEdit();
+        return  new GroupEdit();
     }
-    public  void navigateToBillRun(){
+    public  void navigateToBillRun() throws InterruptedException {
         click_custom(AdminIcon);
         click_custom(billRun);
+        click_custom(billRunStatus);
+        selectDropDownByVisibleText_custom(billRunStatus,"Committed");
+        clear_custum(processDataFrom);
+        click_custom(reload);
+
+
+
+
+
 
     }
     public  void navigateToBasePage(){

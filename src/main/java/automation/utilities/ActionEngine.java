@@ -77,6 +77,17 @@ public class ActionEngine extends BasePage {
 
         }
     }
+
+    public void clear_custum(By path, String... label) {
+        String var = "";
+        try {
+            var = label.length > 0 ? label[0] : path.toString();
+            Element element1 = new Element(var, path);
+            element1.clear();
+        } catch (Exception e1) {
+            extentTest.log(FAIL, "Unable to enter data  for => " + var);
+            throw new RuntimeException(e1);            }            }
+
     public boolean isDisabled(By  path,String... label) {
         String var = "";
         try {
@@ -123,7 +134,7 @@ public class ActionEngine extends BasePage {
            extentTest.log(PASS, var+"==> Dropdown Value Selected by visible text: "+ ddVisibleText);
         } catch (Exception e) {
           extentTest.log(FAIL, "Dropdown value not selected for field: " +var +"  due to exception: "+e);
-            throw new RuntimeException(e);
+
 
         }
     }

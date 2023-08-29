@@ -27,9 +27,15 @@ public class BillRun extends ActionEngine {
     public By customerNumber = By.xpath("//tbody/tr[1]//td[2]");
     public By SelectCustomerZip = By.xpath("//*[@id='downloadIndividual']");
     public By invoiceTemplateCustomer = By.id("forCustomerSettings");
+    public By CustomerCheckbox = By.xpath("//input[@id='chkDelete_0']");
 
     public void clickDownloadPDF() {
         click_custom(downloadPDF);
+    }
+
+    public void CustomerCheckbox() throws InterruptedException {
+        switchToWindow(browser);
+        selectCheckBox(CustomerCheckbox);
     }
 
     public void clickInvoiceTemplate() {
@@ -47,6 +53,7 @@ public class BillRun extends ActionEngine {
 
     public void select_StatementCheckbox() {
         click_custom(statementCheckbox);
+
     }
 
     public void click_SelectCustomer() throws InterruptedException {
@@ -90,11 +97,12 @@ public class BillRun extends ActionEngine {
 
 
     public String downloadPdf() throws InterruptedException {
-        clickBillRunSearch();
+        //clickBillRunSearch();
         String statement = getStatementNumber();
         clickStatementDetails();
         getcustomerNumber();
-        select_StatementCheckbox();
+        CustomerCheckbox();
+        //select_StatementCheckbox();
         clickDownloadPDF();
         click_SelectCustomer();
         Thread.sleep(2000);
@@ -110,11 +118,12 @@ public class BillRun extends ActionEngine {
     }
 
     public String downloadZip() throws InterruptedException {
-        clickBillRunSearch();
+        //clickBillRunSearch();
         String statement = getStatementNumber();
         clickStatementDetails();
         getcustomerNumber();
-        select_StatementCheckbox();
+        //select_StatementCheckbox();
+        CustomerCheckbox();
         clickDownloadPDF();
         selectCustomerZip();
         Thread.sleep(2000);
@@ -124,7 +133,6 @@ public class BillRun extends ActionEngine {
         clickDownload();
         Thread.sleep(10000);
         return statement;
-
     }
 
     public boolean isFileDownloaded(String fileName) throws InterruptedException {
