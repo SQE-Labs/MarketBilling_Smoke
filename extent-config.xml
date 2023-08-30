@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extentreports>
+
+    <configuration>
+
+        <theme>dark</theme>
+
+        <encoding>UTF-8</encoding>
+
+        <protocol>https</protocol>
+
+        <documentTitle>AMCS Utilities</documentTitle>
+
+        <reportName>Smoke Suite </reportName>
+
+        <reportHeadline>https://markettest.utilibill.com.au/marketbilling</reportHeadline>
+
+        <dateFormat>yyyy-MM-dd</dateFormat>
+
+        <timeFormat>HH:mm:ss</timeFormat>
+
+        <scripts>
+            <![CDATA[
+        $(document).ready(function() {
+
+        });
+      ]]>
+        </scripts>
+
+        <styles>
+            <![CDATA[
+
+      ]]>
+        </styles>
+    </configuration>
+</extentreports>
