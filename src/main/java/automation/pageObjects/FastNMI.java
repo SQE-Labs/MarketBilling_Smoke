@@ -1,9 +1,11 @@
 package automation.pageObjects;
 
 import automation.utilities.ActionEngine;
+
 import automation.utilities.WebDriverWaits;
 
 import java.time.Duration;
+
 
 import org.openqa.selenium.By;
 
@@ -25,11 +27,16 @@ public class FastNMI extends ActionEngine {
     public String getTnivalue() {
         return getAttributevalue(tni,"value");
     }
+ 
     
-    public void enterNmi(String text) throws InterruptedException { 
+   
+    
+ 
+    public void enterNmi(String text) {
         sendKeys_custom(nmi,text);
+
     }
-    
+ 
     public void clickDiscoveryBtn() {
         clickBtn_custom(goToSelectedNMI);
 

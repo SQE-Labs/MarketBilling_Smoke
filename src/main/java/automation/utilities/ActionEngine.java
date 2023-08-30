@@ -25,7 +25,9 @@ public class ActionEngine extends BasePage {
             extentTest.log(PASS, "Entered value as: " + valueToBeSent);
         } catch (Exception e) {
             extentTest.log(FAIL, "Unable to enter data  for => " + var);
-  
+            throw new RuntimeException(e);
+
+ 
         }
     }
 
@@ -41,9 +43,9 @@ public class ActionEngine extends BasePage {
             Log.info("Clicked on " + var);
             //log success message in exgent report
             extentTest.log(PASS, "Clicked Button Successfully! " + var);
-        } catch (Exception e) {
-            extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
-            throw new RuntimeException(e);
+        } catch (Exception e1) {
+            extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e1);
+            throw new RuntimeException(e1);
 
         }
     }

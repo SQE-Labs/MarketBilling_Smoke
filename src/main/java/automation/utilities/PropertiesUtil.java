@@ -25,7 +25,6 @@ public class PropertiesUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         //2. read data
         String value = prop.get(key).toString();
 
@@ -35,6 +34,7 @@ public class PropertiesUtil {
             } catch (Exception e) {
             }
         }
+ 
         return value;
     }
 }
