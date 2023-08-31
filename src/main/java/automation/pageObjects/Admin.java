@@ -1,11 +1,9 @@
 package automation.pageObjects;
 
-
 import automation.utilities.ActionEngine;
 import automation.utilities.PropertiesUtil;
 import automation.utilities.WebDriverWaits;
 import org.openqa.selenium.By;
-
 import java.io.File;
 
 public class Admin  extends ActionEngine {

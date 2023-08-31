@@ -198,8 +198,6 @@ public class SmokeTest extends ActionEngine {
         SoftAssert softAssert = new SoftAssert();
         if (PropertiesUtil.getPropertyValue("env").equalsIgnoreCase("qa")) {
             softAssert.assertEquals(nmipage.getResultText(), "Error in Fast NMI Discovery Request - I/O Exception: 403 - Bad User Credentials (NB: check that the MSATS password hasn't expired -- AEMO enforces password rotation)");
-            //"Error in Fast NMI Discovery Request - I/O Exception: java.net.ConnectException: Connection timed out: connect"
-            //softAssert.assertEquals(nmipage.getResultText(), "Error in Fast NMI Discovery Request - I/O Exception: java.net.ConnectException: Connection timed out: connect");
             softAssert.assertEquals(nmipage.getDlfValue(), "");
 
         } else {

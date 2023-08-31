@@ -28,10 +28,7 @@ public class FastNMI extends ActionEngine {
     public String getTnivalue() {
         return getAttributevalue(tni,"value");
     }
- 
-    
-   
-    
+
  
     public void enterNmi(String serviceID) {
         click_custom(fastNMiBtn,"FastNMiBtn");
