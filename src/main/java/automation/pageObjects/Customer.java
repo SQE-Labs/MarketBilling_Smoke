@@ -156,6 +156,10 @@ public class Customer extends ActionEngine {
         clickBtn_custom(service, "Servcie Tab");
     }
     public void clickCustomerTab(String tabName) throws InterruptedException {
+        Thread.sleep(2000);
+ 
+    	WebDriverWaits.waitForElementUntilVisible((By.xpath("//a[contains(text(),'" + tabName + "')]")), Duration.ofSeconds(10));
+
         clickBtn_custom(By.xpath("//a[contains(text(),'" + tabName + "')]"), tabName);
     }
 

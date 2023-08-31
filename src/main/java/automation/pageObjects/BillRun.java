@@ -1,6 +1,8 @@
 package automation.pageObjects;
 
 import automation.utilities.ActionEngine;
+import automation.utilities.PropertiesUtil;
+import automation.utilities.WebDriverWaits;
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
 import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.openqa.selenium.By;
@@ -27,9 +29,17 @@ public class BillRun extends ActionEngine {
     public By customerNumber = By.xpath("//tbody/tr[1]//td[2]");
     public By SelectCustomerZip = By.xpath("//*[@id='downloadIndividual']");
     public By invoiceTemplateCustomer = By.id("forCustomerSettings");
+    public By CustomerCheckbox = By.xpath("//input[@id='chkDelete_0']");
 
     public void clickDownloadPDF() {
         click_custom(downloadPDF);
+    }
+
+    public void CustomerCheckbox() throws InterruptedException {
+        switchToWindow(browser);
+        selectCheckBox(CustomerCheckbox);
+        Thread.sleep(2000);
+
     }
 
     public void clickInvoiceTemplate() {
@@ -47,6 +57,7 @@ public class BillRun extends ActionEngine {
 
     public void select_StatementCheckbox() {
         click_custom(statementCheckbox);
+
     }
 
     public void click_SelectCustomer() throws InterruptedException {
@@ -90,11 +101,16 @@ public class BillRun extends ActionEngine {
 
 
     public String downloadPdf() throws InterruptedException {
-        clickBillRunSearch();
+        //clickBillRunSearch();
         String statement = getStatementNumber();
         clickStatementDetails();
-        getcustomerNumber();
-        select_StatementCheckbox();
+        String customerNumber = getcustomerNumber();
+        if (PropertiesUtil.getPropertyValue("billRun").contains("old")){
+            select_StatementCheckbox();
+        }
+        else {
+            CustomerCheckbox();
+        }
         clickDownloadPDF();
         click_SelectCustomer();
         Thread.sleep(2000);
@@ -110,21 +126,27 @@ public class BillRun extends ActionEngine {
     }
 
     public String downloadZip() throws InterruptedException {
-        clickBillRunSearch();
+        //clickBillRunSearch();
         String statement = getStatementNumber();
         clickStatementDetails();
-        getcustomerNumber();
-        select_StatementCheckbox();
-        clickDownloadPDF();
-        selectCustomerZip();
-        Thread.sleep(2000);
+        String customerNumber = getcustomerNumber();
+        if (PropertiesUtil.getPropertyValue("billRun").contains("old")){
+            select_StatementCheckbox();
+        }
+
+        else{
+            switchToWindow(browser);
+            select_StatementCheckbox();
+        }
         //By default Selecting invoice templete for customer settings.
         //  invoiceGroupTemplateSelection();
         //  invoiceGroupTemplateSelectionDD();
+        clickDownloadPDF();
+        selectCustomerZip();
+        Thread.sleep(2000);
         clickDownload();
         Thread.sleep(10000);
         return statement;
-
     }
 
     public boolean isFileDownloaded(String fileName) throws InterruptedException {

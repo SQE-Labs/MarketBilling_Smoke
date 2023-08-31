@@ -70,6 +70,7 @@ public class BaseTest {
 
         driver.manage().window().maximize();
         driver.get(PropertiesUtil.getPropertyValue("baseUrl"));
+
     }
 
     @AfterSuite
