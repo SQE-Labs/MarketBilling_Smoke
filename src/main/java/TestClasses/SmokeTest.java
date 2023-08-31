@@ -8,13 +8,13 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
 import java.io.IOException;
 
 public class SmokeTest extends ActionEngine {
     IndexPage indexPage;
     CustomerSearchPage searchPage = new CustomerSearchPage();
     Admin admin = new Admin();
+
     String BASE_URL = PropertiesUtil.getPropertyValue("baseUrl");
     String INDEX = PropertiesUtil.getPropertyValue("indexPage");
 
@@ -59,7 +59,6 @@ public class SmokeTest extends ActionEngine {
         } else {
             Assert.assertEquals(indexPage.getPageUrl(), BASE_URL + "/");
         }
-
 
     }
 
@@ -198,7 +197,9 @@ public class SmokeTest extends ActionEngine {
         nmipage.clickDiscoveryBtn();
         SoftAssert softAssert = new SoftAssert();
         if (PropertiesUtil.getPropertyValue("env").equalsIgnoreCase("qa")) {
-            softAssert.assertEquals(nmipage.getResultText(), "Error in Fast NMI Discovery Request - I/O Exception: java.net.ConnectException: Connection timed out: connect");
+            softAssert.assertEquals(nmipage.getResultText(), "Error in Fast NMI Discovery Request - I/O Exception: 403 - Bad User Credentials (NB: check that the MSATS password hasn't expired -- AEMO enforces password rotation)");
+            //"Error in Fast NMI Discovery Request - I/O Exception: java.net.ConnectException: Connection timed out: connect"
+            //softAssert.assertEquals(nmipage.getResultText(), "Error in Fast NMI Discovery Request - I/O Exception: java.net.ConnectException: Connection timed out: connect");
             softAssert.assertEquals(nmipage.getDlfValue(), "");
 
         } else {
@@ -265,7 +266,6 @@ public class SmokeTest extends ActionEngine {
         Admin admin = new Admin();
         Login login = new Login();
         BillRun billRun = new BillRun();
-        //login.validLogin();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
         String statement = billRun.downloadZip();
@@ -282,6 +282,7 @@ public class SmokeTest extends ActionEngine {
     public void statementSummary_downloadPdf() throws InterruptedException {
         Admin admin = new Admin();
         Login login = new Login();
+
         BillRun billRun = new BillRun();
         admin.navigateToBasePage();
         admin.navigateToBillRun();

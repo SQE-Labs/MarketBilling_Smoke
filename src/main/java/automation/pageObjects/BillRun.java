@@ -1,6 +1,8 @@
 package automation.pageObjects;
 
 import automation.utilities.ActionEngine;
+import automation.utilities.PropertiesUtil;
+import automation.utilities.WebDriverWaits;
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
 import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.openqa.selenium.By;
@@ -36,6 +38,8 @@ public class BillRun extends ActionEngine {
     public void CustomerCheckbox() throws InterruptedException {
         switchToWindow(browser);
         selectCheckBox(CustomerCheckbox);
+        Thread.sleep(2000);
+
     }
 
     public void clickInvoiceTemplate() {
@@ -100,9 +104,13 @@ public class BillRun extends ActionEngine {
         //clickBillRunSearch();
         String statement = getStatementNumber();
         clickStatementDetails();
-        getcustomerNumber();
-        CustomerCheckbox();
-        //select_StatementCheckbox();
+        String customerNumber = getcustomerNumber();
+        if (PropertiesUtil.getPropertyValue("billRun").contains("old")){
+            select_StatementCheckbox();
+        }
+        else {
+            CustomerCheckbox();
+        }
         clickDownloadPDF();
         click_SelectCustomer();
         Thread.sleep(2000);
@@ -121,15 +129,21 @@ public class BillRun extends ActionEngine {
         //clickBillRunSearch();
         String statement = getStatementNumber();
         clickStatementDetails();
-        getcustomerNumber();
-        //select_StatementCheckbox();
-        CustomerCheckbox();
-        clickDownloadPDF();
-        selectCustomerZip();
-        Thread.sleep(2000);
+        String customerNumber = getcustomerNumber();
+        if (PropertiesUtil.getPropertyValue("billRun").contains("old")){
+            select_StatementCheckbox();
+        }
+
+        else{
+            switchToWindow(browser);
+            select_StatementCheckbox();
+        }
         //By default Selecting invoice templete for customer settings.
         //  invoiceGroupTemplateSelection();
         //  invoiceGroupTemplateSelectionDD();
+        clickDownloadPDF();
+        selectCustomerZip();
+        Thread.sleep(2000);
         clickDownload();
         Thread.sleep(10000);
         return statement;

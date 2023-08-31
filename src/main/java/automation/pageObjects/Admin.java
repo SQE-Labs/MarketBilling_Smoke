@@ -3,6 +3,7 @@ package automation.pageObjects;
 
 import automation.utilities.ActionEngine;
 import automation.utilities.PropertiesUtil;
+import automation.utilities.WebDriverWaits;
 import org.openqa.selenium.By;
 
 import java.io.File;
@@ -21,10 +22,7 @@ public class Admin  extends ActionEngine {
     public  By billRunStatus = By.id("billrunStatus");
     public  By commit = By.xpath("//option[text()='Committed']");
     public  By reload = By.xpath("//a[@class='btn btn-primary reloadButton']");
-
-
-
-
+    public  By billRunSearchBtn = By.xpath("//i[@class='icon-search']");
 
     public  void navigateToInvoiceSetup(){
         click_custom(AdminIcon);
@@ -39,15 +37,17 @@ public class Admin  extends ActionEngine {
     public  void navigateToBillRun() throws InterruptedException {
         click_custom(AdminIcon);
         click_custom(billRun);
-        click_custom(billRunStatus);
-        selectDropDownByVisibleText_custom(billRunStatus,"Committed");
-        clear_custum(processDataFrom);
-        click_custom(reload);
-
-
-
-
-
+        if(PropertiesUtil.getPropertyValue("billRun").contains("old")){
+            //isElementPresent_custom(billRunSearchBtn,"BillRunSearch") &&
+            click_custom(billRunSearchBtn);
+        }
+        else
+        {
+            click_custom(billRunStatus);
+            selectDropDownByVisibleText_custom(billRunStatus,"Committed");
+            clear_custum(processDataFrom);
+            click_custom(reload);
+        }
 
     }
     public  void navigateToBasePage(){
@@ -60,7 +60,5 @@ public class Admin  extends ActionEngine {
         click_custom(plans);
 
     }
-
-
 
 }
