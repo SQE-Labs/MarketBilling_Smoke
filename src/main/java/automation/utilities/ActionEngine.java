@@ -37,7 +37,7 @@ public class ActionEngine extends BasePage {
         String var = "";
         try {
             var = label.length > 0 ? label[0] : path.toString();
-            WebDriverWaits.waitForElementDisabled(By.className("spinner"), Duration.ofSeconds(8));
+            WebDriverWaits.waitForElementDisabled(By.className("spinner"), Duration.ofSeconds(15));
             Button btn = new Button(var, path);
             btn.click();
             Log.info("Clicked on " + var);
@@ -55,7 +55,7 @@ public class ActionEngine extends BasePage {
         try {
 
             var = label.length > 0 ? label[0] : path.toString();
-            WebDriverWaits.waitForElementDisabled(By.className("spinner"),Duration.ofSeconds(6));
+            WebDriverWaits.waitForElementDisabled(By.className("spinner"), Duration.ofSeconds(15));
             Element btn = new Element(var, path);
             btn.click();
             Log.info("Clicked on " + var);
@@ -63,7 +63,7 @@ public class ActionEngine extends BasePage {
             extentTest.log(PASS, "Clicked element Successfully! " + var);
         } catch (Exception e) {
             extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
-           //throw new RuntimeException(e);
+           throw new RuntimeException(e);
         }
 
     }
@@ -135,6 +135,7 @@ public class ActionEngine extends BasePage {
            extentTest.log(PASS, var+"==> Dropdown Value Selected by visible text: "+ ddVisibleText);
         } catch (Exception e) {
           extentTest.log(FAIL, "Dropdown value not selected for field: " +var +"  due to exception: "+e);
+            throw  new RuntimeException(e);
 
 
         }
@@ -149,6 +150,8 @@ public class ActionEngine extends BasePage {
             dd.selectByValue(ddValue);
             //   ExtentFactory.getInstance().getExtent().log(Status.PASS, var+"==> Dropdown Value Selected by visible text: "+ ddValue);
         } catch (Exception e) {
+            throw  new RuntimeException(e);
+
             //   ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Dropdown value not selected for field: " +var +"  due to exception: "+e);
         }
     }
@@ -162,6 +165,8 @@ public class ActionEngine extends BasePage {
             dd.selectByIndex(ddValue);
             //   ExtentFactory.getInstance().getExtent().log(Status.PASS, var+"==> Dropdown Value Selected by visible text: "+ ddValue);
         } catch (Exception e) {
+            throw  new RuntimeException(e);
+
             //  ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Dropdown value not selected for field: " +var +"  due to exception: "+e);
         }
     }
@@ -170,7 +175,7 @@ public class ActionEngine extends BasePage {
     public String getText_custom(By path) {
         String text = "";
         try {
-
+            WebDriverWaits.waitForElementDisabled(By.cssSelector("div#searchResult_processing .spinner"), Duration.ofSeconds(15));
             Element element = new Element("", path);
             text = element.getText();
             Log.info("Text for " + path + " is " + text);
@@ -178,9 +183,9 @@ public class ActionEngine extends BasePage {
             return text;
         } catch (Exception e) {
             extentTest.log(FAIL, "Text not retrieved due to exception: "+ e);
+            throw  new RuntimeException(e);
 
         }
-        return text;
     }
 
     public String getText_custom(WebElement element) {
@@ -193,9 +198,9 @@ public class ActionEngine extends BasePage {
             return text;
         } catch (Exception e) {
             extentTest.log(FAIL, "==> Text not retried due to exception: "+ e);
+            throw  new RuntimeException(e);
 
         }
-        return text;
     }
 
     public void selectCheckBox(By path, String... fieldName) {
@@ -308,6 +313,7 @@ public class ActionEngine extends BasePage {
             return flag;
         } catch (Exception e) {
             extentTest.log(FAIL, "Error or Exception Presence" + " : " + flag);
+
             return flag;
         }
     }
@@ -319,6 +325,7 @@ public class ActionEngine extends BasePage {
             extentTest.log(PASS, extentTest.addScreenCapture(screenshotPath));
         } catch (Exception e) {
             extentTest.log(FAIL, "Screenshot Failure "+e);
+            throw  new RuntimeException(e);
 
         }
     }

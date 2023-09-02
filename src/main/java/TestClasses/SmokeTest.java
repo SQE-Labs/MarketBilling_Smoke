@@ -123,7 +123,7 @@ public class SmokeTest extends ActionEngine {
     }
 
     @Test(priority = 6, enabled = true, description = "verify Customer group Name ")
-    public void search_Recent_Customers_groupName() {
+    public void search_Recent_Customers_groupName() throws InterruptedException {
         Admin admin = new Admin();
         GroupEdit groupEdit = admin.navigateToGroupEdit();
         String groupName = groupEdit.getGroupNameText();
@@ -139,6 +139,7 @@ public class SmokeTest extends ActionEngine {
         attachScreenShot("groupName");
         softAssert.assertEquals(custGroupName, groupName);
         softAssert.assertEquals(custGroupName, PropertiesUtil.getPropertyValue("groupName"));
+        Thread.sleep(5000);
         softAssert.assertFalse(isExceptionOrErrorPresent());
         softAssert.assertAll();
 
@@ -280,7 +281,7 @@ public class SmokeTest extends ActionEngine {
     public void statementSummary_downloadPdf() throws InterruptedException {
         Admin admin = new Admin();
         Login login = new Login();
-
+        //login.validLogin();
         BillRun billRun = new BillRun();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
