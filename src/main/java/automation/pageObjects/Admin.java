@@ -36,15 +36,17 @@ public class Admin  extends ActionEngine {
         click_custom(AdminIcon);
         click_custom(billRun);
         if(PropertiesUtil.getPropertyValue("billRun").contains("old")){
-            //isElementPresent_custom(billRunSearchBtn,"BillRunSearch") &&
+          //  if(isElementPresent_custom(billRunSearchBtn,"BillRunSearch")){ //&&
             click_custom(billRunSearchBtn);
         }
         else
         {
+            Thread.sleep(4000);
             click_custom(billRunStatus);
             selectDropDownByVisibleText_custom(billRunStatus,"Committed");
             clear_custum(processDataFrom);
             click_custom(reload);
+            Thread.sleep(2000);
         }
 
     }

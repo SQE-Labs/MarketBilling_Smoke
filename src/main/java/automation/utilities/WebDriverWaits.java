@@ -51,7 +51,9 @@ public class WebDriverWaits extends BaseTest {
 
     public static void waitForElementDisabled(By locator, Duration waitTime) {
         WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-        Boolean bool = wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator))
+        ;
+
     }
     /**
      * Waits for a given element to be clickable

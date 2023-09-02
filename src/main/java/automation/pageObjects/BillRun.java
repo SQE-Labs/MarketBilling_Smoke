@@ -90,6 +90,7 @@ public class BillRun extends ActionEngine {
     }
 
     public String getStatementNumber() {
+
         String stateNumber = getText_custom(statementNumber);
         System.out.println(stateNumber);
         return stateNumber;
@@ -102,7 +103,8 @@ public class BillRun extends ActionEngine {
 
     public String downloadPdf() throws InterruptedException {
         //clickBillRunSearch();
-        String statement = getStatementNumber();
+       // Thread.sleep(5000);
+          String statement = getStatementNumber();
         clickStatementDetails();
         String customerNumber = getcustomerNumber();
         if (PropertiesUtil.getPropertyValue("billRun").contains("old")){
@@ -127,6 +129,7 @@ public class BillRun extends ActionEngine {
 
     public String downloadZip() throws InterruptedException {
         //clickBillRunSearch();
+
         String statement = getStatementNumber();
         clickStatementDetails();
         String customerNumber = getcustomerNumber();
@@ -195,6 +198,7 @@ public class BillRun extends ActionEngine {
         driver.navigate().to("chrome://downloads/");
         ChromeDownloads download = new ChromeDownloads();
         //Thread.sleep(6000);
+
         String downloadedFile = download.getFileName();
         System.out.println(downloadedFile);
         return downloadedFile;
