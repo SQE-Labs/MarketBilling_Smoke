@@ -13,7 +13,6 @@ import java.io.IOException;
 public class SmokeTest extends ActionEngine {
     IndexPage indexPage;
     CustomerSearchPage searchPage = new CustomerSearchPage();
-    Admin admin = new Admin();
 
     String BASE_URL = PropertiesUtil.getPropertyValue("baseUrl");
     String INDEX = PropertiesUtil.getPropertyValue("indexPage");
@@ -260,12 +259,12 @@ public class SmokeTest extends ActionEngine {
     }
 
 
-    @Test(priority = -1, enabled = true, description = "Download Zip file from Statement Summary")
+    @Test(priority = 12, enabled = true, description = "Download Zip file from Statement Summary")
     public void statementSummary_downloadZip() throws InterruptedException, IOException {
         Admin admin = new Admin();
         Login login = new Login();
         BillRun billRun = new BillRun();
-        login.validLogin();
+//        login.validLogin();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
         String statement = billRun.downloadZip();
@@ -282,7 +281,6 @@ public class SmokeTest extends ActionEngine {
     public void statementSummary_downloadPdf() throws InterruptedException {
         Admin admin = new Admin();
         Login login = new Login();
-        //login.validLogin();
         BillRun billRun = new BillRun();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
