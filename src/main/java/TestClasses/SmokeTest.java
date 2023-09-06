@@ -260,11 +260,12 @@ public class SmokeTest extends ActionEngine {
     }
 
 
-    @Test(priority = 12, enabled = true, description = "Download Zip file from Statement Summary")
+    @Test(priority = -1, enabled = true, description = "Download Zip file from Statement Summary")
     public void statementSummary_downloadZip() throws InterruptedException, IOException {
         Admin admin = new Admin();
         Login login = new Login();
         BillRun billRun = new BillRun();
+        login.validLogin();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
         String statement = billRun.downloadZip();

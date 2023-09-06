@@ -63,7 +63,7 @@ public class ActionEngine extends BasePage {
             extentTest.log(PASS, "Clicked element Successfully! " + var);
         } catch (Exception e) {
             extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
-           throw new RuntimeException(e);
+          throw new RuntimeException(e);
         }
 
     }

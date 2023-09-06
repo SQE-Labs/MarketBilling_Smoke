@@ -44,7 +44,7 @@ public class Admin  extends ActionEngine {
             Thread.sleep(4000);
             click_custom(billRunStatus);
             selectDropDownByVisibleText_custom(billRunStatus,"Committed");
-            clear_custum(processDataFrom);
+        //    clear_custum(processDataFrom);
             click_custom(reload);
             Thread.sleep(2000);
         }
