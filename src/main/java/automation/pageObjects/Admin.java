@@ -16,11 +16,7 @@ public class Admin  extends ActionEngine {
     public  By groupEditBtn = By.xpath("//p[text()='Edit Group']");
     public  By billRun = By.xpath("//span[text()='Bill Run']");
     public  By plans = By.xpath("//span[text()='Plans']");
-    public  By processDataFrom = By.id("dateFrom");
-    public  By billRunStatus = By.id("billrunStatus");
-    public  By commit = By.xpath("//option[text()='Committed']");
-    public  By reload = By.xpath("//a[@class='btn btn-primary reloadButton']");
-    public  By billRunSearchBtn = By.xpath("//i[@class='icon-search']");
+
 
     public  void navigateToInvoiceSetup(){
         click_custom(AdminIcon);
@@ -35,19 +31,6 @@ public class Admin  extends ActionEngine {
     public  void navigateToBillRun() throws InterruptedException {
         click_custom(AdminIcon);
         click_custom(billRun);
-        if(PropertiesUtil.getPropertyValue("billRun").contains("old")){
-          //  if(isElementPresent_custom(billRunSearchBtn,"BillRunSearch")){ //&&
-            click_custom(billRunSearchBtn);
-        }
-        else
-        {
-            Thread.sleep(4000);
-            click_custom(billRunStatus);
-            selectDropDownByVisibleText_custom(billRunStatus,"Committed");
-        //    clear_custum(processDataFrom);
-            click_custom(reload);
-            Thread.sleep(2000);
-        }
 
     }
     public  void navigateToBasePage(){

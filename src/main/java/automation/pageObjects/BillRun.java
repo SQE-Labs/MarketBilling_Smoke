@@ -30,6 +30,12 @@ public class BillRun extends ActionEngine {
     public By SelectCustomerZip = By.xpath("//*[@id='downloadIndividual']");
     public By invoiceTemplateCustomer = By.id("forCustomerSettings");
     public By CustomerCheckbox = By.xpath("//input[@id='chkDelete_0']");
+    public By processDataFrom = By.id("dateFrom");
+    public By billRunStatus = By.id("billrunStatus");
+    public By commit = By.xpath("//option[text()='Committed']");
+    public By reload = By.xpath("//a[@class='btn btn-primary reloadButton']");
+    public By billRunSearchBtn = By.xpath("//i[@class='icon-search']");
+    public By noResultFound = By.xpath("//tbody/tr/td[@class='dataTables_empty']");
 
     public void clickDownloadPDF() {
         click_custom(downloadPDF);
@@ -40,6 +46,28 @@ public class BillRun extends ActionEngine {
         selectCheckBox(CustomerCheckbox);
         Thread.sleep(2000);
 
+    }
+
+    public void billRunFilter() throws InterruptedException {
+        if (PropertiesUtil.getPropertyValue("billRun").contains("old")) {
+            click_custom(billRunSearchBtn);
+        } else {
+            Thread.sleep(4000);
+            selectDropDownByVisibleText_custom(billRunStatus, "Committed");
+            click_custom(reload);
+            if (isElementPresent_custom(noResultFound, "No Result Found")) {
+                click_custom(billRunStatus);
+                selectDropDownByVisibleText_custom(billRunStatus, "Ready to Commit");
+                click_custom(reload);
+                Thread.sleep(2000);
+            } else {
+                click_custom(billRunStatus);
+                selectDropDownByVisibleText_custom(billRunStatus, "Ready to Commit");
+                //    clear_custum(processDataFrom);
+                click_custom(reload);
+                Thread.sleep(2000);
+            }
+        }
     }
 
     public void clickInvoiceTemplate() {
@@ -103,14 +131,13 @@ public class BillRun extends ActionEngine {
 
     public String downloadPdf() throws InterruptedException {
         //clickBillRunSearch();
-       // Thread.sleep(5000);
-          String statement = getStatementNumber();
+        // Thread.sleep(5000);
+        String statement = getStatementNumber();
         clickStatementDetails();
         String customerNumber = getcustomerNumber();
-        if (PropertiesUtil.getPropertyValue("billRun").contains("old")){
+        if (PropertiesUtil.getPropertyValue("billRun").contains("old")) {
             select_StatementCheckbox();
-        }
-        else {
+        } else {
             CustomerCheckbox();
         }
         clickDownloadPDF();
@@ -133,11 +160,9 @@ public class BillRun extends ActionEngine {
         String statement = getStatementNumber();
         clickStatementDetails();
         String customerNumber = getcustomerNumber();
-        if (PropertiesUtil.getPropertyValue("billRun").contains("old")){
+        if (PropertiesUtil.getPropertyValue("billRun").contains("old")) {
             select_StatementCheckbox();
-        }
-
-        else{
+        } else {
             switchToWindow(browser);
             select_StatementCheckbox();
         }

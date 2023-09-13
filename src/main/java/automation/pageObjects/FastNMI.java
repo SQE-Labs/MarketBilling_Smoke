@@ -14,9 +14,7 @@ public class FastNMI extends ActionEngine {
     public By dlf = By.xpath("(//label[@class='col-sm-2 control-label']/../div/input)[2]");
     public By tni = By.xpath("(//label[@class='col-sm-2 control-label']/../div/input)[3]");
     public By fastNMiBtn =By.xpath("//a[text()=' Fast NMI']");
-
     public By goToSelectedNMI = By.xpath("//button[contains(text(),'Discovery')]");
-
     public By result = By.id("result");
 
     public String getResultText() {

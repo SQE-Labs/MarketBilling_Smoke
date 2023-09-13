@@ -264,16 +264,16 @@ public class SmokeTest extends ActionEngine {
         Admin admin = new Admin();
         Login login = new Login();
         BillRun billRun = new BillRun();
-//        login.validLogin();
+      //  login.validLogin();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
+        billRun.billRunFilter();
         String statement = billRun.downloadZip();
         String fileName = billRun.getcustomerNumber() + "_" + statement + "_" + DateTime.getEpocTime() + ".7z";
         String home = System.getProperty("user.home");
         billRun.unzip(home + "/Downloads/", fileName);
         String downloadedFile = billRun.validateDownloadedFile();
         Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
-
 
     }
 
