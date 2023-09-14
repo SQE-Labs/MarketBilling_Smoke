@@ -56,14 +56,13 @@ public class BillRun extends ActionEngine {
             selectDropDownByVisibleText_custom(billRunStatus, "Committed");
             click_custom(reload);
             if (isElementPresent_custom(noResultFound, "No Result Found")) {
-                click_custom(billRunStatus);
+                Thread.sleep(1000);
                 selectDropDownByVisibleText_custom(billRunStatus, "Ready to Commit");
                 click_custom(reload);
                 Thread.sleep(2000);
             } else {
                 click_custom(billRunStatus);
                 selectDropDownByVisibleText_custom(billRunStatus, "Ready to Commit");
-                //    clear_custum(processDataFrom);
                 click_custom(reload);
                 Thread.sleep(2000);
             }
@@ -131,7 +130,7 @@ public class BillRun extends ActionEngine {
 
     public String downloadPdf() throws InterruptedException {
         //clickBillRunSearch();
-        // Thread.sleep(5000);
+        Thread.sleep(1000);
         String statement = getStatementNumber();
         clickStatementDetails();
         String customerNumber = getcustomerNumber();
