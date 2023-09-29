@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 import java.io.IOException;
 
 public class SmokeTest extends ActionEngine {
@@ -258,13 +259,31 @@ public class SmokeTest extends ActionEngine {
 
     }
 
+    @Test(priority = 14, enabled = true, description = "verify EDI Type 2 Reports")
+    public void validate_EDI_Type_2_Reports() throws InterruptedException {
+        Admin admin = new Admin();
+        Reports report = new Reports();
+        Login login = new Login();
+        BillRun billRun = new BillRun();
+        //login.validLogin();
+        admin.navigateToBasePage();
+        report.navigateToReports();
+        report.goTo_EdiReport_Type_2();
+        report.select_Latest_StatementNumber();
+        report.downloadReport();
+        report.goToNotification();
+        String downloadedFile = billRun.validateDownloadedFile();
+        Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
+
+    }
+
 
     @Test(priority = 12, enabled = true, description = "Download Zip file from Statement Summary")
     public void statementSummary_downloadZip() throws InterruptedException, IOException {
         Admin admin = new Admin();
         Login login = new Login();
         BillRun billRun = new BillRun();
-      //  login.validLogin();
+        //  login.validLogin();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
         billRun.billRunFilter();
@@ -290,11 +309,12 @@ public class SmokeTest extends ActionEngine {
 
     }
 
-    @Test(priority = 14, enabled = true, description = "verify build version at index page")
+    @Test(priority = 15, enabled = true, description = "verify build version at index page")
     public void version_Check_Jsp() {
         Version version = new Version();
         getDriver().get(PropertiesUtil.getPropertyValue("baseUrl") + PropertiesUtil.getPropertyValue("versionJsp"));
         Assert.assertEquals(version.getHeaderText().trim(), PropertiesUtil.getPropertyValue("jspVersion"));
 
     }
+
 }
