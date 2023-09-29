@@ -19,6 +19,7 @@ public class Admin extends ActionEngine {
     public By plans = By.xpath("//span[text()='Plans']");
 
 
+
     public void navigateToInvoiceSetup() {
         click_custom(AdminIcon);
         click_custom(invoiceSetupBtn);
