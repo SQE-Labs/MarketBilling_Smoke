@@ -303,6 +303,7 @@ public class SmokeTest extends ActionEngine {
         BillRun billRun = new BillRun();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
+        billRun.billRunFilter();
         String statement = billRun.downloadPdf();
         String downloadedFile = billRun.validateDownloadedFile();
         Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
