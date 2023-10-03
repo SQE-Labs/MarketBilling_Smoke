@@ -4,6 +4,7 @@ import automation.pageObjects.*;
 import automation.utilities.ActionEngine;
 import automation.utilities.DateTime;
 import automation.utilities.PropertiesUtil;
+import automation.utilities.WebDriverWaits;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -159,9 +160,12 @@ public class SmokeTest extends ActionEngine {
 
     @Test(priority = 7, enabled = true, description = "verify  Customer Tab")
     public void Click_CustomerTabs() throws InterruptedException {
+  Login login =new Login();
+  login.validLogin();
+
         String tabs[] = PropertiesUtil.getPropertyValue("customerTabs").split(",");
         SoftAssert softAssert = new SoftAssert();
-        Login login = new Login();
+
         for (String tab : tabs) {
 
             Customer customer = new Customer();
@@ -307,7 +311,6 @@ public class SmokeTest extends ActionEngine {
         String statement = billRun.downloadPdf();
         String downloadedFile = billRun.validateDownloadedFile();
         Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
-
     }
 
     @Test(priority = 15, enabled = true, description = "verify build version at index page")
@@ -317,5 +320,4 @@ public class SmokeTest extends ActionEngine {
         Assert.assertEquals(version.getHeaderText().trim(), PropertiesUtil.getPropertyValue("jspVersion"));
 
     }
-
 }

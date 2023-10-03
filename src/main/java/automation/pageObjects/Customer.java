@@ -123,6 +123,8 @@ public class Customer extends ActionEngine {
     public  By editService = By.xpath("//button[@title='View']");
     public  By backToServices = By.xpath("//a[@value='Back']");
 
+    public By contracts=By.xpath("//a[text()=' Contracts']");
+
 
 
     public String getGroupName() {
@@ -155,8 +157,10 @@ public class Customer extends ActionEngine {
     public void clickServiceTab() {
         clickBtn_custom(service, "Servcie Tab");
     }
+
+
     public void clickCustomerTab(String tabName) throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(4000);
  
     	WebDriverWaits.waitForElementUntilVisible((By.xpath("//a[contains(text(),'" + tabName + "')]")), Duration.ofSeconds(10));
 
@@ -429,5 +433,9 @@ public class Customer extends ActionEngine {
 
         scrollIntoView(backToServices);
         click_custom(backToServices,"Back To Services Button");
+    }
+    public void verifyContractsTab(){
+        SoftAssert softAssert = new SoftAssert();
+        click_custom(contracts ,"Contracts Tab");
     }
 }

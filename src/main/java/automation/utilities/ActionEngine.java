@@ -50,7 +50,7 @@ public class ActionEngine extends BasePage {
         }
     }
 
-    public void click_custom(By path, String... label) {
+    public static void click_custom(By path, String... label) {
         String var = "";
         try {
 
@@ -125,7 +125,7 @@ public class ActionEngine extends BasePage {
 
 
     //Select dropdown value value by visibleText
-    public void selectDropDownByVisibleText_custom(By path, String ddVisibleText, String... fieldName) {
+    public static void selectDropDownByVisibleText_custom(By path, String ddVisibleText, String... fieldName) {
 
         String var = "";
         try {
