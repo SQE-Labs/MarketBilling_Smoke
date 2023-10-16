@@ -57,12 +57,12 @@ public class BillRun extends ActionEngine {
             click_custom(reload);
             if (isElementPresent_custom(noResultFound, "No Result Found")) {
                 Thread.sleep(1000);
-                selectDropDownByVisibleText_custom(billRunStatus, "Ready to Commit");
+                selectDropDownByVisibleText_custom(billRunStatus, "Statement Generated");
                 click_custom(reload);
                 Thread.sleep(2000);
             } else {
                 click_custom(billRunStatus);
-                selectDropDownByVisibleText_custom(billRunStatus, "Ready to Commit");
+                selectDropDownByVisibleText_custom(billRunStatus, "Statement Generated");
                 click_custom(reload);
                 Thread.sleep(2000);
             }
