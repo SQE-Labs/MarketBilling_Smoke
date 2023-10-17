@@ -25,6 +25,11 @@ public class Admin extends ActionEngine {
         click_custom(invoiceSetupBtn);
     }
 
+    public void navigateToAdminPage() {
+        click_custom(AdminIcon);
+    }
+
+
     public GroupEdit navigateToGroupEdit() {
         click_custom(AdminIcon);
         click_custom(groupEditBtn);

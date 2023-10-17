@@ -313,11 +313,21 @@ public class SmokeTest extends ActionEngine {
         Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
     }
 
-    @Test(priority = 15, enabled = true, description = "verify build version at index page")
+    @Test(priority = 16, enabled = true, description = "verify build version at index page")
     public void version_Check_Jsp() {
         Version version = new Version();
         getDriver().get(PropertiesUtil.getPropertyValue("baseUrl") + PropertiesUtil.getPropertyValue("versionJsp"));
         Assert.assertEquals(version.getHeaderText().trim(), PropertiesUtil.getPropertyValue("jspVersion"));
+    }
 
+    @Test(priority = 15, enabled = true, description = "verify user list through config file")
+    public void validate_UserListHeader() throws InterruptedException {
+        Admin admin = new Admin();
+        UserList userList = new UserList();
+        Login login = new Login();
+        login.validLogin();
+        admin.navigateToAdminPage();
+        userList.navigateToUserList();
+        userList.verify_UserListHeader();
     }
 }
