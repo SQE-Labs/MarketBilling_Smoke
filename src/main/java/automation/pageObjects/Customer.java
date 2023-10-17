@@ -254,6 +254,13 @@ public class Customer extends ActionEngine {
         return getText_custom(successMessageForCustomerCreation);
     }
 
+    public static void userLists(String ele) throws InterruptedException {
+
+        WebDriverWaits.waitForElementUntilVisible((By.xpath("//th[@class='sorting']")), Duration.ofSeconds(10));
+
+        clickBtn_custom(By.xpath("//th[@class='sorting']"));
+    }
+
     public String createCustomer(String category, String companyName, String firstName, String lastName, String phoneNumber, String email, String billingEmail, String addressOne, String addressTwo, String city, String zipCode, String country, String plan) throws InterruptedException {
         as = new Assertions();
         clickCustomerTab();

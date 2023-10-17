@@ -33,7 +33,7 @@ public class ActionEngine extends BasePage {
 
 
     //custom click method to log evey click action in to extent report
-    public void clickBtn_custom(By path, String... label) {
+    public static void clickBtn_custom(By path, String... label) {
         String var = "";
         try {
             var = label.length > 0 ? label[0] : path.toString();

@@ -11,6 +11,10 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class SmokeTest extends ActionEngine {
     IndexPage indexPage;
@@ -160,8 +164,8 @@ public class SmokeTest extends ActionEngine {
 
     @Test(priority = 7, enabled = true, description = "verify  Customer Tab")
     public void Click_CustomerTabs() throws InterruptedException {
-  Login login =new Login();
-  login.validLogin();
+        Login login = new Login();
+        login.validLogin();
 
         String tabs[] = PropertiesUtil.getPropertyValue("customerTabs").split(",");
         SoftAssert softAssert = new SoftAssert();
@@ -325,9 +329,16 @@ public class SmokeTest extends ActionEngine {
         Admin admin = new Admin();
         UserList userList = new UserList();
         Login login = new Login();
-        login.validLogin();
+        //login.validLogin();
         admin.navigateToAdminPage();
         userList.navigateToUserList();
-        userList.verify_UserListHeader();
+       Set<String> actualSet=userList.getHeaderstext();
+        actualSet.remove("Username");
+        actualSet.remove("Status");
+        actualSet.remove("");
+        String UserEle[] = PropertiesUtil.getPropertyValue("userList").split(",");
+        Set<String> expectedSet = new HashSet<>(Arrays.asList(UserEle));
+        Assert.assertTrue(actualSet.equals(expectedSet));
+
     }
 }

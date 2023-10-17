@@ -76,12 +76,12 @@ public class BaseTest {
     @AfterSuite
     public void toClose() {
 
-       //driver.quit();
+       driver.quit();
     }
     @AfterClass
     public void afterClass() {
 
-       // driver.close();
+       driver.close();
     }
 
 
