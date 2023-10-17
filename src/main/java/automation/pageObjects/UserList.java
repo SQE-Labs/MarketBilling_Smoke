@@ -25,11 +25,9 @@ public class UserList extends ActionEngine {
         public Set<String> getHeaderstext () {
             List<WebElement> list = getWebElements(headerList, "Headers");
             Set <String > textheaderSet= new HashSet();
-            List<String> list1=new ArrayList();
             for (WebElement headerEle : list) {
                 String headerText=getText_custom(headerEle);
                 textheaderSet.add(headerText);
-                list1.add(headerText);
             }
            return textheaderSet;
         }
