@@ -165,7 +165,7 @@ public class SmokeTest extends ActionEngine {
     @Test(priority = 7, enabled = true, description = "verify  Customer Tab")
     public void Click_CustomerTabs() throws InterruptedException {
         Login login = new Login();
-        login.validLogin();
+        //login.validLogin();
 
         String tabs[] = PropertiesUtil.getPropertyValue("customerTabs").split(",");
         SoftAssert softAssert = new SoftAssert();
