@@ -273,6 +273,7 @@ public class SmokeTest extends ActionEngine {
         Reports report = new Reports();
         Login login = new Login();
         BillRun billRun = new BillRun();
+        //login.loginWithGroupName("Markettest8887");
         //login.validLogin();
         admin.navigateToBasePage();
         report.navigateToReports();
@@ -330,6 +331,7 @@ public class SmokeTest extends ActionEngine {
         UserList userList = new UserList();
         Login login = new Login();
         //login.validLogin();
+        admin.navigateToBasePage();
         admin.navigateToAdminPage();
         userList.navigateToUserList();
        Set<String> actualSet=userList.getHeaderstext();
