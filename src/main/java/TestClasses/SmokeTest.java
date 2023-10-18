@@ -11,6 +11,10 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class SmokeTest extends ActionEngine {
     IndexPage indexPage;
@@ -160,8 +164,8 @@ public class SmokeTest extends ActionEngine {
 
     @Test(priority = 7, enabled = true, description = "verify  Customer Tab")
     public void Click_CustomerTabs() throws InterruptedException {
-  Login login =new Login();
-  login.validLogin();
+        Login login = new Login();
+        //login.validLogin();
 
         String tabs[] = PropertiesUtil.getPropertyValue("customerTabs").split(",");
         SoftAssert softAssert = new SoftAssert();
@@ -269,6 +273,7 @@ public class SmokeTest extends ActionEngine {
         Reports report = new Reports();
         Login login = new Login();
         BillRun billRun = new BillRun();
+        //login.loginWithGroupName("Markettest8887");
         //login.validLogin();
         admin.navigateToBasePage();
         report.navigateToReports();
@@ -313,11 +318,29 @@ public class SmokeTest extends ActionEngine {
         Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
     }
 
-    @Test(priority = 15, enabled = true, description = "verify build version at index page")
+    @Test(priority = 16, enabled = true, description = "verify build version at index page")
     public void version_Check_Jsp() {
         Version version = new Version();
         getDriver().get(PropertiesUtil.getPropertyValue("baseUrl") + PropertiesUtil.getPropertyValue("versionJsp"));
         Assert.assertEquals(version.getHeaderText().trim(), PropertiesUtil.getPropertyValue("jspVersion"));
+    }
+
+    @Test(priority = 15, enabled = true, description = "verify user list through config file")
+    public void validate_UserListHeader() throws InterruptedException {
+        Admin admin = new Admin();
+        UserList userList = new UserList();
+        Login login = new Login();
+        //login.validLogin();
+        admin.navigateToBasePage();
+        admin.navigateToAdminPage();
+        userList.navigateToUserList();
+       Set<String> actualSet=userList.getHeaderstext();
+        actualSet.remove("Username");
+        actualSet.remove("Status");
+        actualSet.remove("");
+        String UserEle[] = PropertiesUtil.getPropertyValue("userList").split(",");
+        Set<String> expectedSet = new HashSet<>(Arrays.asList(UserEle));
+        Assert.assertTrue(actualSet.equals(expectedSet));
 
     }
 }

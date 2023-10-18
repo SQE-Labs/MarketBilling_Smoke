@@ -11,7 +11,8 @@ public class Reports extends ActionEngine {
 
     public By reportIcon = By.xpath("//i[@class='icon-file-text-alt']");
     public By financialIcon = By.xpath("//i[@class='fa fa-line-chart reportButtonFontSize']");
-    public By ediReportType2 = By.xpath("//*[@id='utbListDiv']/table/tbody/tr[10]/td[1]/a");
+    //public By ediReportType2 = By.xpath("//*[@id='utbListDiv']/table/tbody/tr[10]/td[1]/a");
+    public By ediReportType2 = By.xpath("//a[contains(text(),'EDI Report - Type 2')]");
     public By statement = By.id("stmt_no");
     public By displayBtn = By.xpath("//a[@class='btn btn-primary']");
     public By downloadBtn = By.xpath("//button[@class='btn btn-success']");
@@ -45,8 +46,6 @@ public class Reports extends ActionEngine {
 
     public void select_Latest_StatementNumber() {
         selectDropDownByIndex_custom(statement, 1);
-       ;
-
     }
 
     public void downloadReport() throws InterruptedException {
