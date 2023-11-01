@@ -32,7 +32,8 @@ public class FastNMI extends ActionEngine {
    
     
  
-    public void enterNmi(String text) {
+    public void enterNmi(String text) throws InterruptedException {
+        Thread.sleep(2000);
         sendKeys_custom(nmi,text);
 
     }

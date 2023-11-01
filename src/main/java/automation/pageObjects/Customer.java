@@ -95,7 +95,7 @@ public class Customer extends ActionEngine {
     public  By ServiceName_Dropdown = By.xpath("//*[@id='nmis']");
     public  By ServiceName_DropdownOpn = By.xpath("//*[@id='nmis']/option[2]");
     public  By MeterNumber_Dropdown = By.xpath("//*[@id='meterNo']");
-    public  By MeterNumber_DropdownOpn = By.xpath("//*[@id='meterNo']/option[2]");
+    public  By MeterNumber_DropdownOpn = By.xpath("//select[@id='meterNo']");
     public  By ViewMeterReads = By.xpath("//*[@id='viewMeterReads']");
     public  By viewDemandReads = By.xpath("//*[@id='viewDemandReads']");
    // public  By viewKvarhReads = By.xpath("//*[@id='viewKvarhReads']");
@@ -156,7 +156,6 @@ public class Customer extends ActionEngine {
         clickBtn_custom(service, "Servcie Tab");
     }
     public void clickCustomerTab(String tabName) throws InterruptedException {
- 
     	WebDriverWaits.waitForElementUntilVisible((By.xpath("//a[contains(text(),'" + tabName + "')]")), Duration.ofSeconds(10));
  
         clickBtn_custom(By.xpath("//a[contains(text(),'" + tabName + "')]"), tabName);
@@ -364,10 +363,10 @@ public class Customer extends ActionEngine {
         click_custom(MeterNumber_DropdownOpn);
     }
     public void addMeterInformation(){
-        click_custom(ServiceName_Dropdown,"ServiceName");
-        click_custom(ServiceName_DropdownOpn);
+        //click_custom(ServiceName_Dropdown,"ServiceName");
+       // click_custom(ServiceName_DropdownOpn);
         click_custom(MeterNumber_Dropdown,"Meter Number");
-      //  click_custom(MeterNumber_DropdownOpn);
+        click_custom(MeterNumber_DropdownOpn);
     }
     public void verifyMeterReadsTabs(){
         click_custom(ViewMeterReads,"Meter Reads Tab");

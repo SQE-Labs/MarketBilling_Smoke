@@ -71,7 +71,7 @@ public class ExtentReportClass extends BaseTest {
     public void tearDown(ITestResult result) throws IOException {
 
         if (result.getStatus() == ITestResult.FAILURE) {
-            // extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS " + result.getName());
+             extentTest.log(LogStatus.FAIL, "TEST CASE FAILED IS " + result.getName());
             extentTest.log(LogStatus.FAIL, "TEST CASE FAILED : " + result.getThrowable());
             Log.info("Test execution " + result.getMethod().getMethodName() + " failed...");
 

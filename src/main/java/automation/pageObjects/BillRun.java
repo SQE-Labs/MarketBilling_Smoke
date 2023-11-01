@@ -9,14 +9,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import static automation.utilities.WebDriverWaits.SwitchToNewTab;
 import static com.relevantcodes.extentreports.LogStatus.FAIL;
 import static com.relevantcodes.extentreports.LogStatus.PASS;
 
 public class BillRun extends ActionEngine {
 
-    public By billRunSearch = By.xpath("(//*[@class='btn btn-primary'])[1]");
+    public By billRunSearch = By.xpath("(//*[@class='btn btn-primary'])[4]");
     public By statementDetails = By.xpath("(//i[@class='icon-th-large'])[1]");
-    public By statementCheckbox = By.id("chkDelete_0");
+    public By statementCheckbox = By.xpath("//input[@id='chkDelete_0']");
     public By downloadPDF = By.xpath("(//button[@class='btn btn-large dropdown-toggle btn-primary'])[1]");
     public By selectCustomer = By.id("downloadSelected");
     public By selectInvoiceTemplate = By.id("downloadGroupSettigs");
@@ -27,6 +28,7 @@ public class BillRun extends ActionEngine {
     public By customerNumber = By.xpath("//tbody/tr[1]//td[2]");
     public By SelectCustomerZip = By.xpath("//*[@id='downloadIndividual']");
     public By invoiceTemplateCustomer = By.id("forCustomerSettings");
+    public By viewDetails = By.xpath("(//a[@class='btn btn-primary'])[1]");
 
     public void clickDownloadPDF() {
         click_custom(downloadPDF);
@@ -37,7 +39,8 @@ public class BillRun extends ActionEngine {
     }
 
 
-    public void clickBillRunSearch() {
+    public void clickBillRunSearch() throws InterruptedException {
+        Thread.sleep(2000);
         click_custom(billRunSearch);
     }
 
@@ -45,7 +48,10 @@ public class BillRun extends ActionEngine {
         click_custom(statementDetails);
     }
 
-    public void select_StatementCheckbox() {
+    public void select_StatementCheckbox() throws InterruptedException {
+        Thread.sleep(2000);
+       // selectCheckBox(statementCheckbox);
+        SwitchToNewTab();
         click_custom(statementCheckbox);
     }
 
@@ -61,6 +67,10 @@ public class BillRun extends ActionEngine {
 
     public void clickDownload() {
         click_custom(download);
+    }
+
+    public void clickOnViewDetails() {
+        click_custom(viewDetails);
     }
 
     public void invoiceGroupTemplateSelection() throws InterruptedException {
@@ -90,11 +100,12 @@ public class BillRun extends ActionEngine {
 
 
     public String downloadPdf() throws InterruptedException {
-        clickBillRunSearch();
-        String statement = getStatementNumber();
+        //  clickBillRunSearch();
+         String statement = getStatementNumber();
         clickStatementDetails();
-        getcustomerNumber();
+        //  getcustomerNumber();
         select_StatementCheckbox();
+        Thread.sleep(2000);
         clickDownloadPDF();
         click_SelectCustomer();
         Thread.sleep(2000);
@@ -110,10 +121,12 @@ public class BillRun extends ActionEngine {
     }
 
     public String downloadZip() throws InterruptedException {
-        clickBillRunSearch();
-        String statement = getStatementNumber();
-        clickStatementDetails();
-        getcustomerNumber();
+         //clickBillRunSearch();
+        //  String statement = getStatementNumber();
+          clickStatementDetails();
+        //  getcustomerNumber();
+        Thread.sleep(2000);
+       // clickOnViewDetails();
         select_StatementCheckbox();
         clickDownloadPDF();
         selectCustomerZip();
@@ -123,8 +136,9 @@ public class BillRun extends ActionEngine {
         //  invoiceGroupTemplateSelectionDD();
         clickDownload();
         Thread.sleep(10000);
-        return statement;
+        //  return statement;
 
+        return null;
     }
 
     public boolean isFileDownloaded(String fileName) throws InterruptedException {

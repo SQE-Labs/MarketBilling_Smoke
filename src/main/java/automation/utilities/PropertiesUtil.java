@@ -17,7 +17,7 @@ public class PropertiesUtil {
 
     public static String getPropertyValue(String key) {
         //1. load data from properties file
-        String propFilePath = System.getProperty("user.dir") + "/src/main/config/config.properties";
+        String propFilePath = System.getProperty("user.dir") + "/src/main/config/config.besyuat.properties";
         FileInputStream fis;
         try {
             fis = new FileInputStream(propFilePath);
@@ -27,7 +27,6 @@ public class PropertiesUtil {
         }
         //2. read data
         String value = prop.get(key).toString();
-
         if (StringUtils.isEmpty(value)) {
             try {
                 throw new Exception("Value is not specified for key: " + key + " in properties file.");
