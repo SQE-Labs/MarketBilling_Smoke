@@ -140,12 +140,17 @@
             <version>1.8</version>
         </dependency>
 
+<<<<<<< HEAD
         <!--  https://mvnrepository.com/artifact/com.aventstack/extentreports  -->
+=======
+
+>>>>>>> e74eff9000cedf2cbd09f18061035993a174ca44
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
-            <version>5.0.9</version>
+            <version>5.0.2</version>
         </dependency>
+
 
 
         <dependency>
@@ -195,12 +200,14 @@
             <version>4.11.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.5</version>
+            <version>7.8.0</version>
             <scope>test</scope>
         </dependency>
+
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
