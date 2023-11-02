@@ -98,7 +98,7 @@ public class Customer extends ActionEngine {
     public  By MeterNumber_DropdownOpn = By.xpath("//*[@id='meterNo']/option[2]");
     public  By ViewMeterReads = By.xpath("//*[@id='viewMeterReads']");
     public  By viewDemandReads = By.xpath("//*[@id='viewDemandReads']");
-   // public  By viewKvarhReads = By.xpath("//*[@id='viewKvarhReads']");
+    // public  By viewKvarhReads = By.xpath("//*[@id='viewKvarhReads']");
     public  By viewTOUReads = By.xpath("//*[@id='viewTOUReads']");
     public  By viewTOUDailyReads = By.xpath("//*[@id='viewTOUDailyReads']");
     public  By viewNEM13Reads = By.xpath("//*[@id='viewNEM13Reads']");
@@ -147,7 +147,7 @@ public class Customer extends ActionEngine {
     public void clickDetailsTab() {
         clickBtn_custom(detailsTab, "Details Tab");
     }
-//    public void clickNMITab() throws InterruptedException {
+    //    public void clickNMITab() throws InterruptedException {
 //        clickBtn_custom(nmiTab, "NMI Tab");
 //    }
     public void clickMarketTab() {
@@ -161,8 +161,8 @@ public class Customer extends ActionEngine {
 
     public void clickCustomerTab(String tabName) throws InterruptedException {
         Thread.sleep(4000);
- 
-    	WebDriverWaits.waitForElementUntilVisible((By.xpath("//a[contains(text(),'" + tabName + "')]")), Duration.ofSeconds(10));
+
+        WebDriverWaits.waitForElementUntilVisible((By.xpath("//a[contains(text(),'" + tabName + "')]")), Duration.ofSeconds(10));
 
         clickBtn_custom(By.xpath("//a[contains(text(),'" + tabName + "')]"), tabName);
     }
@@ -372,7 +372,7 @@ public class Customer extends ActionEngine {
         click_custom(ServiceName_Dropdown,"ServiceName");
         click_custom(ServiceName_DropdownOpn);
         click_custom(MeterNumber_Dropdown,"Meter Number");
-      //  click_custom(MeterNumber_DropdownOpn);
+        //  click_custom(MeterNumber_DropdownOpn);
     }
     public void verifyMeterReadsTabs(){
         click_custom(ViewMeterReads,"Meter Reads Tab");

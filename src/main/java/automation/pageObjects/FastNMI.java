@@ -27,14 +27,14 @@ public class FastNMI extends ActionEngine {
         return getAttributevalue(tni,"value");
     }
 
- 
+
     public void enterNmi(String serviceID) {
         click_custom(fastNMiBtn,"FastNMiBtn");
         WebDriverWaits.waitForElementUntilVisible(nmi, Duration.ofSeconds(10));
         sendKeys_custom(nmi,serviceID);
 
     }
- 
+
     public void clickDiscoveryBtn() {
         clickBtn_custom(goToSelectedNMI);
 

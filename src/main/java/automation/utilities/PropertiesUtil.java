@@ -27,7 +27,6 @@ public class PropertiesUtil {
         }
         //2. read data
         String value = prop.get(key).toString();
-
         if (StringUtils.isEmpty(value)) {
             try {
                 throw new Exception("Value is not specified for key: " + key + " in properties file.");

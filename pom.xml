@@ -140,7 +140,11 @@
             <version>1.8</version>
         </dependency>
 
+<<<<<<< HEAD
+        <!--  https://mvnrepository.com/artifact/com.aventstack/extentreports  -->
+=======
 
+>>>>>>> e74eff9000cedf2cbd09f18061035993a174ca44
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>

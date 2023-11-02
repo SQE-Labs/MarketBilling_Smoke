@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 public class WebDriverWaits extends BaseTest {
     /**
@@ -110,8 +111,17 @@ public class WebDriverWaits extends BaseTest {
                 .pollingEvery(waitTimeForPolling)
                 .ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
 
+    public static void SwitchToNewTab() throws InterruptedException {
+        String originalHandle = driver.getWindowHandle();
+        Set<String> tabs = driver.getWindowHandles();
 
+        for (String handle : tabs) {
+            if (!handle.equals(originalHandle)) {
+                driver.switchTo().window(handle);
+            }
+        }
     }
 
 
