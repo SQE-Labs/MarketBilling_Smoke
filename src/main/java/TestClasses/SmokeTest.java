@@ -273,8 +273,6 @@ public class SmokeTest extends ActionEngine {
         Reports report = new Reports();
         Login login = new Login();
         BillRun billRun = new BillRun();
-        login.loginWithGroupName("Powerclub Production");
-        //login.validLogin();
         admin.navigateToBasePage();
         report.navigateToReports();
         report.goTo_EdiReport_Type_2();
@@ -292,8 +290,6 @@ public class SmokeTest extends ActionEngine {
         Admin admin = new Admin();
         Login login = new Login();
         BillRun billRun = new BillRun();
-        //login.validLogin();
-        login.loginWithGroupName("Powerclub Production");
         admin.navigateToBasePage();
         admin.navigateToBillRun();
         billRun.billRunFilter();
@@ -311,8 +307,6 @@ public class SmokeTest extends ActionEngine {
         Admin admin = new Admin();
         Login login = new Login();
         BillRun billRun = new BillRun();
-       // login.validLogin();
-        login.loginWithGroupName("Powerclub Production");
         admin.navigateToBasePage();
         admin.navigateToBillRun();
         billRun.billRunFilter();
@@ -333,7 +327,6 @@ public class SmokeTest extends ActionEngine {
         Admin admin = new Admin();
         UserList userList = new UserList();
         Login login = new Login();
-        //login.validLogin();
         admin.navigateToBasePage();
         admin.navigateToAdminPage();
         userList.navigateToUserList();
