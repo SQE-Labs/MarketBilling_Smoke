@@ -13,7 +13,7 @@ import java.util.List;
 public class WebserviceTest extends ActionEngine {
     String BASE_URL=PropertiesUtil.getPropertyValue("baseUrl");
 
-    @Test(priority = 20, enabled = false, description = "Load Webservices page and open each WSDL file link")
+    @Test(priority = 20, enabled =true, description = "Load Webservices page and open each WSDL file link")
     public void load_WebServices() {
         SoftAssert softAssert = new SoftAssert();
         Webservice webservice = new Webservice();

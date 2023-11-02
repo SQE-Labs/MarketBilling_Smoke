@@ -36,7 +36,7 @@ public class SmokeTest extends ActionEngine {
         if (PropertiesUtil.getPropertyValue("group").contains("multi")) {
             indexPage = login.loginWithGroupName(PropertiesUtil.getPropertyValue("groupName"));
             Assert.assertEquals(indexPage.getPageUrl(), BASE_URL + "/");
-
+//index page
         } else {
             indexPage = login.validLogin();
 

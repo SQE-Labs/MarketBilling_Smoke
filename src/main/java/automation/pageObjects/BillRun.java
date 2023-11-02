@@ -1,6 +1,7 @@
 package automation.pageObjects;
 
 import automation.utilities.ActionEngine;
+import automation.utilities.PropertiesUtil;
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
 import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.openqa.selenium.By;
@@ -29,6 +30,8 @@ public class BillRun extends ActionEngine {
     public By SelectCustomerZip = By.xpath("//*[@id='downloadIndividual']");
     public By invoiceTemplateCustomer = By.id("forCustomerSettings");
     public By viewDetails = By.xpath("(//a[@class='btn btn-primary'])[1]");
+    public By proceeDateFrom=By.xpath("//input[@id='dateFrom']");
+    public By today=By.xpath("(//th[text()='Today'])[1]");
 
     public void clickDownloadPDF() {
         click_custom(downloadPDF);
@@ -46,6 +49,10 @@ public class BillRun extends ActionEngine {
 
     public void clickStatementDetails() {
         click_custom(statementDetails);
+    }
+    public void clickOnProcessDateFrom(){
+        click_custom(proceeDateFrom);
+        click_custom(today);
     }
 
     public void select_StatementCheckbox() throws InterruptedException {
@@ -102,6 +109,9 @@ public class BillRun extends ActionEngine {
     public String downloadPdf() throws InterruptedException {
         //  clickBillRunSearch();
          String statement = getStatementNumber();
+      /*  if (PropertiesUtil.getPropertyValue("Process Date From").contains("02/11/2023")){
+            clickOnProcessDateFrom();
+        } */
         clickStatementDetails();
         //  getcustomerNumber();
         select_StatementCheckbox();
