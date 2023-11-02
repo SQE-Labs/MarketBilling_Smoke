@@ -30,7 +30,21 @@ public class ActionEngine extends BasePage {
  
         }
     }
+    public void sendKeys_withClear(By path, String valueToBeSent, String... label) {
+        String var = "";
+        try {
+            var = label.length > 0 ? label[0] : path.toString();
+            Element element = new Element(var, path);
+            element.getWebElement().clear();
+            element.getWebElement().sendKeys(valueToBeSent);
+            extentTest.log(PASS, "Entered value as: " + valueToBeSent);
+        } catch (Exception e) {
+            extentTest.log(FAIL, "Unable to enter data  for => " + var);
+            throw new RuntimeException(e);
 
+
+        }
+    }
 
     //custom click method to log evey click action in to extent report
     public void clickBtn_custom(By path, String... label) {

@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 import static com.relevantcodes.extentreports.LogStatus.FAIL;
 import static com.relevantcodes.extentreports.LogStatus.PASS;
@@ -33,10 +34,10 @@ public class BillRun extends ActionEngine {
     public By processDataFrom = By.id("dateFrom");
     public By billRunStatus = By.id("billrunStatus");
     public By commit = By.xpath("//option[text()='Committed']");
-    public By reload = By.xpath("//a[@class='btn btn-primary reloadButton']");
+    public By reload = By.xpath("//span[contains(text(),'Reload')]");
     public By billRunSearchBtn = By.xpath("//i[@class='icon-search']");
     public By noResultFound = By.xpath("//tbody/tr/td[@class='dataTables_empty']");
-
+    public By billRunDate = By.id("dateFrom");
     public void clickDownloadPDF() {
         click_custom(downloadPDF);
     }
@@ -47,14 +48,22 @@ public class BillRun extends ActionEngine {
         Thread.sleep(2000);
 
     }
-
     public void billRunFilter() throws InterruptedException {
         if (PropertiesUtil.getPropertyValue("billRun").contains("old")) {
             click_custom(billRunSearchBtn);
+
         } else {
+            if (!(PropertiesUtil.getPropertyValue("billrunfilterDate").isEmpty())) {
+                Thread.sleep(4000);
+                click_custom(billRunDate);
+                sendKeys_withClear(billRunDate, PropertiesUtil.getPropertyValue("billrunfilterDate"));
+            }
             Thread.sleep(4000);
             selectDropDownByVisibleText_custom(billRunStatus, "Committed");
+            Thread.sleep(1000);
+
             click_custom(reload);
+
             if (isElementPresent_custom(noResultFound, "No Result Found")) {
                 Thread.sleep(1000);
                 selectDropDownByVisibleText_custom(billRunStatus, "Statement Generated");
@@ -66,8 +75,8 @@ public class BillRun extends ActionEngine {
                 click_custom(reload);
                 Thread.sleep(2000);
             }
+          }
         }
-    }
 
     public void clickInvoiceTemplate() {
         click_custom(invoiceTemplateCustomer);
