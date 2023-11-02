@@ -51,6 +51,7 @@ public class BillRun extends ActionEngine {
     public void billRunFilter() throws InterruptedException {
         if (PropertiesUtil.getPropertyValue("billRun").contains("old")) {
             click_custom(billRunSearchBtn);
+
         } else {
             if (!(PropertiesUtil.getPropertyValue("billrunfilterDate").isEmpty())) {
                 Thread.sleep(4000);
