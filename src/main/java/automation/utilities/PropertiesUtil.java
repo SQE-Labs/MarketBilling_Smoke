@@ -12,7 +12,6 @@ import java.util.Properties;
 
 public class PropertiesUtil {
 
-
     static Properties prop = new Properties();
 
     public static String getPropertyValue(String key) {

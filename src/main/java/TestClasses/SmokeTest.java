@@ -287,25 +287,30 @@ public class SmokeTest extends ActionEngine {
 
     @Test(priority = 12, enabled = true, description = "Download Zip file from Statement Summary")
     public void statementSummary_downloadZip() throws InterruptedException, IOException {
+//        Login login = new Login();
+//        login.validLogin();
         Admin admin = new Admin();
-        Login login = new Login();
+     //   Login login = new Login();
         BillRun billRun = new BillRun();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
         billRun.billRunFilter();
         String statement = billRun.downloadZip();
-        String fileName = billRun.getcustomerNumber() + "_" + statement + "_" + DateTime.getEpocTime() + ".7z";
-        String home = System.getProperty("user.home");
-        billRun.unzip(home + "/Downloads/", fileName);
+//        String fileName = billRun.getcustomerNumber() + "_" + statement + "_" + DateTime.getEpocTime() + ".7z";
+//        String home = System.getProperty("user.home");
+//        billRun.unzip(home + "/Downloads/", fileName);
         String downloadedFile = billRun.validateDownloadedFile();
         Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
+
 
     }
 
     @Test(priority = 13, enabled = true, description = "Download Pdf file from Statement Summary")
     public void statementSummary_downloadPdf() throws InterruptedException {
+//        Login login = new Login();
+//        login.validLogin();
         Admin admin = new Admin();
-        Login login = new Login();
+    //    Login login = new Login();
         BillRun billRun = new BillRun();
         admin.navigateToBasePage();
         admin.navigateToBillRun();

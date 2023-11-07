@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 
 import static com.relevantcodes.extentreports.LogStatus.FAIL;
@@ -26,6 +27,7 @@ public class BillRun extends ActionEngine {
     public By invoiceGroupTemplateSelection = By.xpath("//div[@class='btn-group bootstrap-select show-tick']");
     public By invoiceGroupTemplateSelectionDropdown = By.xpath("(//small[@class='muted text-muted'])[1]");
     public By download = By.id("submitSelected");
+    public By downloadInBackgroundButton=By.xpath("//button[text()='Download in Background']");
     public By statementNumber = By.xpath("(//tbody/tr[1]//td[1])[1]");
     public By customerNumber = By.xpath("//tbody/tr[1]//td[2]");
     public By SelectCustomerZip = By.xpath("//*[@id='downloadIndividual']");
@@ -38,8 +40,23 @@ public class BillRun extends ActionEngine {
     public By billRunSearchBtn = By.xpath("//i[@class='icon-search']");
     public By noResultFound = By.xpath("//tbody/tr/td[@class='dataTables_empty']");
     public By billRunDate = By.id("dateFrom");
+    public By adminIcon=By.xpath("//span[text()='Admin']");
+
+    public By jobHistoryIcon=By.xpath("//p[text()='Job History']");
+    public By downloadIcon=By.xpath("(//a[@class='btn btn-primary fileDownload'])[1]");
+    public By DownloadIcon=By.xpath("//a[@class='btn btn-success']");
     public void clickDownloadPDF() {
         click_custom(downloadPDF);
+    }
+    public void downloadInBackground() throws InterruptedException {
+        click_custom(adminIcon);
+        click_custom(jobHistoryIcon);
+        Thread.sleep(5000);
+        WebDriverWaits.waitForElementVisible(downloadIcon, Duration.ofSeconds(15));
+        click_custom(downloadIcon);
+    }
+    public void clickOnDownloadIcon(){
+       click_custom(DownloadIcon);
     }
 
     public void CustomerCheckbox() throws InterruptedException {
@@ -148,17 +165,28 @@ public class BillRun extends ActionEngine {
         } else {
             CustomerCheckbox();
         }
-        clickDownloadPDF();
-        click_SelectCustomer();
-        Thread.sleep(2000);
+          clickDownloadPDF();
+          click_SelectCustomer();
+        if (isElementPresent_custom(downloadInBackgroundButton,"downloadBackgroundButton is present")){
+            clickDownload();
+            Thread.sleep(6000);
+            downloadInBackground();
+            Thread.sleep(15000);
+        }
+        else{
+            clickDownload();
+        }
+            //  clickDownloadPDF();
+    //    click_SelectCustomer();
+     //   Thread.sleep(2000);
         // //By default Selecting invoice templete for customer settings.
         //  selectInvoiceTemplate();
         //  clickInvoiceTemplate();
         // invoiceGroupTemplateSelection();
         //  invoiceGroupTemplateSelectionDD();
-        clickDownload();
+      // clickDownload();
         Thread.sleep(6000);
-
+      //  clickOnDownloadIcon();
         return statement;
     }
 
@@ -180,8 +208,20 @@ public class BillRun extends ActionEngine {
         clickDownloadPDF();
         selectCustomerZip();
         Thread.sleep(2000);
-        clickDownload();
-        Thread.sleep(10000);
+
+        if (isElementPresent_custom( downloadInBackgroundButton,"downloadBackgroundButton is present")){
+            clickDownload();
+            Thread.sleep(6000);
+            downloadInBackground();
+            Thread.sleep(15000);
+        }
+        else{
+            clickDownload();
+        }
+//        clickDownload();
+//        Thread.sleep(10000);
+//        downloadInBackground();
+//        Thread.sleep(15000);
         return statement;
     }
 
@@ -235,8 +275,11 @@ public class BillRun extends ActionEngine {
         String downloadedFile = download.getFileName();
         System.out.println(downloadedFile);
         return downloadedFile;
-
     }
+
+
+
+
 
     public String getContent(final String directory, final String fileName, final String subFileName) throws IOException {
         String out = null;
