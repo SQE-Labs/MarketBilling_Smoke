@@ -18,7 +18,7 @@ public class PropertiesUtil {
     public static String getPropertyValue(String key) {
         String value="";
         //1. load data from properties file
-        String propFilePath = System.getProperty("user.dir") + "/src/main/config/config1.properties";
+        String propFilePath = System.getProperty("user.dir") + "/src/main/config/config.properties";
         FileInputStream fis;
         try {
             fis = new FileInputStream(propFilePath);
