@@ -5,6 +5,7 @@ import automation.utilities.Assertions;
 import automation.utilities.RandomGenerator;
 import automation.utilities.WebDriverWaits;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
@@ -85,6 +86,7 @@ public class Customer extends ActionEngine {
     public By Company_Name_Field = By.xpath("//*[@id=\"company\"]");
     public By settingsTab = By.xpath("//a[text()=' Settings']");
     public By recentCustomerId = By.xpath("(//td[@class=\"sorting_1\"]/a)[1]");
+    public By customerName = By.xpath("(//*[@class='col-sm-2 control-label'])[1]");
     Assertions as;
     String SUCCESS_MESG = "Successfully saved customer.";
 
@@ -92,9 +94,10 @@ public class Customer extends ActionEngine {
     //Metering
 
     public  By MeterReads_Tab = By.xpath("//*[@class='icon-bar-chart']");
-    public  By ServiceName_Dropdown = By.xpath("//*[@id='nmis']");
-    public  By ServiceName_DropdownOpn = By.xpath("//*[@id='nmis']/option[2]");
-    public  By MeterNumber_Dropdown = By.xpath("//*[@id='meterNo']");
+    public  By ServiceName_Dropdown = By.xpath("//*[@data-id='nmis']");
+   // public  By ServiceName_DropdownOpn = By.xpath("//*[@id='nmis']/option[2]");
+    public  By ServiceName_DropdownOpn = By.xpath("(//*[@class='selected'])[1]");
+    public  By MeterNumber_Dropdown = By.xpath("//*[@data-id='meterNo']");
     public  By MeterNumber_DropdownOpn = By.xpath("//*[@id='meterNo']/option[2]");
     public  By ViewMeterReads = By.xpath("//*[@id='viewMeterReads']");
     public  By viewDemandReads = By.xpath("//*[@id='viewDemandReads']");
@@ -106,6 +109,7 @@ public class Customer extends ActionEngine {
     public  By retrieveTOUReads = By.id("retrieveTOUReads");
     public  By exportNEM13Reads = By.id("exportNEM13Reads");
     public  By retrieveNEM13Reads = By.id("retrieveNEM13Reads");
+
 
 
     //Market Page
@@ -124,7 +128,6 @@ public class Customer extends ActionEngine {
     public  By backToServices = By.xpath("//a[@value='Back']");
 
     public By contracts=By.xpath("//a[text()=' Contracts']");
-
 
 
     public String getGroupName() {
@@ -161,7 +164,11 @@ public class Customer extends ActionEngine {
 
     public void clickCustomerTab(String tabName) throws InterruptedException {
         Thread.sleep(4000);
- 
+
+        if (tabName.equalsIgnoreCase("Market"))
+        {
+            tabName=" Market";
+        }
     	WebDriverWaits.waitForElementUntilVisible((By.xpath("//a[contains(text(),'" + tabName + "')]")), Duration.ofSeconds(10));
 
         clickBtn_custom(By.xpath("//a[contains(text(),'" + tabName + "')]"), tabName);
@@ -368,13 +375,16 @@ public class Customer extends ActionEngine {
         click_custom(MeterNumber_Dropdown,"Meter Number");
         click_custom(MeterNumber_DropdownOpn);
     }
-    public void addMeterInformation(){
+    public void addMeterInformation() throws InterruptedException {
         click_custom(ServiceName_Dropdown,"ServiceName");
-        click_custom(ServiceName_DropdownOpn);
+       // click_custom(ServiceName_DropdownOpn);
+        click_custom(customerName,"customer Name");
         click_custom(MeterNumber_Dropdown,"Meter Number");
-      //  click_custom(MeterNumber_DropdownOpn);
+        click_custom(customerName,"customer Name");
+        //click_custom(MeterNumber_DropdownOpn);
     }
-    public void verifyMeterReadsTabs(){
+    public void verifyMeterReadsTabs() throws InterruptedException {
+        scrollIntoView(ViewMeterReads);
         click_custom(ViewMeterReads,"Meter Reads Tab");
         attachScreenShot("Meter Reads Tab");
         click_custom(viewDemandReads," Demand Reads Tab");

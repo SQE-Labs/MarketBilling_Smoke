@@ -5,6 +5,7 @@ import automation.elements.*;
 import automation.helpers.ExtentReportClass;
 import automation.logger.Log;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
@@ -79,6 +80,14 @@ public class ActionEngine extends BasePage {
             extentTest.log(FAIL, "==> Unable to click on => " + var+" due to exception "+e);
           throw new RuntimeException(e);
         }
+
+    }
+
+
+    public void scrollIntoView(By element) {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        WebElement ele = driver.findElement(element);
+        jse.executeScript("arguments[0].scrollIntoView(true);", ele);
 
     }
 
