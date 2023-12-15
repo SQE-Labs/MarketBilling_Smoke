@@ -128,8 +128,6 @@ public class Customer extends ActionEngine {
     public  By backToServices = By.xpath("//a[@value='Back']");
 
     public By contracts=By.xpath("//a[text()=' Contracts']");
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-
 
 
     public String getGroupName() {
@@ -386,7 +384,7 @@ public class Customer extends ActionEngine {
         //click_custom(MeterNumber_DropdownOpn);
     }
     public void verifyMeterReadsTabs() throws InterruptedException {
-        js.executeScript("window.scrollBy(0,250)", "");
+        scrollIntoView(ViewMeterReads);
         click_custom(ViewMeterReads,"Meter Reads Tab");
         attachScreenShot("Meter Reads Tab");
         click_custom(viewDemandReads," Demand Reads Tab");
