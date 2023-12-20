@@ -243,6 +243,7 @@ public class SmokeTest extends ActionEngine {
         // indexPage.searchAll(serviceID);
         Customer customer = new Customer();
         SrvCustSearchResults srvCustSearchResults = indexPage.searchAllMeterNumber();
+
         if (srvCustSearchResults.getHeaderCount() > 1) {
             customer.clickRecentCustomerId();
             customer.switchToWindow("customer");
@@ -292,17 +293,24 @@ public class SmokeTest extends ActionEngine {
     @Test(priority = 12, enabled = true, description = "Download Zip file from Statement Summary")
     public void statementSummary_downloadZip() throws InterruptedException, IOException {
         Admin admin = new Admin();
-        Login login = new Login();
         BillRun billRun = new BillRun();
+        Login login = new Login();
+        login.validLogin();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
         billRun.billRunFilter();
         String statement = billRun.downloadZip();
-        String fileName = billRun.getcustomerNumber() + "_" + statement + "_" + DateTime.getEpocTime() + ".7z";
+        //String fileName = billRun.getcustomerNumber() + "_" + statement + "_" + DateTime.getEpocTime() + ".7z";
+        String CustomerId = billRun.getcustomerNumber();
+        String fileName = "Statement_"+statement + "_" + DateTime.getEpocTime() + ".7z";
         String home = System.getProperty("user.home");
-        billRun.unzip(home + "/Downloads/", fileName);
+        System.out.println(fileName);
         String downloadedFile = billRun.validateDownloadedFile();
-        Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
+        //billRun.getcustomerNumber();
+        billRun.unzip(home + "/Downloads/", downloadedFile);
+         String extractedfileName = CustomerId+"_"+statement+".pdf";
+        //is file extracted pdf
+        Assert.assertTrue(billRun.isFileDownloaded(extractedfileName));
 
     }
 
@@ -311,10 +319,12 @@ public class SmokeTest extends ActionEngine {
         Admin admin = new Admin();
         Login login = new Login();
         BillRun billRun = new BillRun();
+        //Login login = new Login();
+        login.validLogin();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
         billRun.billRunFilter();
-        String statement = billRun.downloadPdf();
+        billRun.downloadPdf();
         String downloadedFile = billRun.validateDownloadedFile();
         Assert.assertTrue(billRun.isFileDownloaded(downloadedFile));
     }
