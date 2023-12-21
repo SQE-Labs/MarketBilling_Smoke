@@ -2,21 +2,20 @@ package automation.pageObjects;
 
 import automation.utilities.ActionEngine;
 import automation.utilities.PropertiesUtil;
-import automation.utilities.WebDriverWaits;
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
 import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.openqa.selenium.By;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Properties;
+import java.io.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import static com.relevantcodes.extentreports.LogStatus.FAIL;
 import static com.relevantcodes.extentreports.LogStatus.PASS;
 
 public class BillRun extends ActionEngine {
 
+    private static final int BUFFER_SIZE = 2;
     public By billRunSearch = By.xpath("(//*[@class='btn btn-primary'])[1]");
     public By statementDetails = By.xpath("(//i[@class='icon-th-large'])[1]");
     public By statementCheckbox = By.id("chkDelete_0");
@@ -26,7 +25,8 @@ public class BillRun extends ActionEngine {
     public By invoiceGroupTemplateSelection = By.xpath("//div[@class='btn-group bootstrap-select show-tick']");
     public By invoiceGroupTemplateSelectionDropdown = By.xpath("(//small[@class='muted text-muted'])[1]");
     public By download = By.id("submitSelected");
-    public By statementNumber = By.xpath("(//tbody/tr[1]//td[1])[1]");
+    //  public By statementNumber = By.xpath();
+    public By statementNumber = By.xpath("//h2[contains(text(),'Statement Summary')]");
     public By customerNumber = By.xpath("//tbody/tr[1]//td[2]");
     public By SelectCustomerZip = By.xpath("//*[@id='downloadIndividual']");
     public By invoiceTemplateCustomer = By.id("forCustomerSettings");
@@ -38,6 +38,7 @@ public class BillRun extends ActionEngine {
     public By billRunSearchBtn = By.xpath("//i[@class='icon-search']");
     public By noResultFound = By.xpath("//tbody/tr/td[@class='dataTables_empty']");
     public By billRunDate = By.id("dateFrom");
+
     public void clickDownloadPDF() {
         click_custom(downloadPDF);
     }
@@ -48,6 +49,7 @@ public class BillRun extends ActionEngine {
         Thread.sleep(2000);
 
     }
+
     public void billRunFilter() throws InterruptedException {
         if (PropertiesUtil.getPropertyValue("billRun").contains("old")) {
             click_custom(billRunSearchBtn);
@@ -75,8 +77,8 @@ public class BillRun extends ActionEngine {
                 click_custom(reload);
                 Thread.sleep(2000);
             }
-          }
         }
+    }
 
     public void clickInvoiceTemplate() {
         click_custom(invoiceTemplateCustomer);
@@ -128,7 +130,8 @@ public class BillRun extends ActionEngine {
     public String getStatementNumber() {
 
         String stateNumber = getText_custom(statementNumber);
-        System.out.println(stateNumber);
+        stateNumber = stateNumber.replace("Statement Summary #", "");
+
         return stateNumber;
     }
 
@@ -137,12 +140,14 @@ public class BillRun extends ActionEngine {
     }
 
 
-    public String downloadPdf() throws InterruptedException {
+    public void downloadPdf() throws InterruptedException {
         //clickBillRunSearch();
         Thread.sleep(1000);
-        String statement = getStatementNumber();
+        //  String statement = getStatementNumber();
         clickStatementDetails();
-        String customerNumber = getcustomerNumber();
+        //String statement = getStatementNumber();
+
+        // String customerNumber = getcustomerNumber();
         if (PropertiesUtil.getPropertyValue("billRun").contains("old")) {
             select_StatementCheckbox();
         } else {
@@ -159,19 +164,19 @@ public class BillRun extends ActionEngine {
         clickDownload();
         Thread.sleep(6000);
 
-        return statement;
     }
 
     public String downloadZip() throws InterruptedException {
         //clickBillRunSearch();
-
-        String statement = getStatementNumber();
+        String statement="";
         clickStatementDetails();
-        String customerNumber = getcustomerNumber();
+        // String customerNumber = getcustomerNumber();
         if (PropertiesUtil.getPropertyValue("billRun").contains("old")) {
             select_StatementCheckbox();
         } else {
             switchToWindow(browser);
+            statement = getStatementNumber();
+
             select_StatementCheckbox();
         }
         //By default Selecting invoice templete for customer settings.
@@ -184,6 +189,8 @@ public class BillRun extends ActionEngine {
         Thread.sleep(10000);
         return statement;
     }
+
+
 
     public boolean isFileDownloaded(String fileName) throws InterruptedException {
         Thread.sleep(10000);
@@ -203,10 +210,15 @@ public class BillRun extends ActionEngine {
         }
     }
 
+
+
+
+
     public String unzip(String directory, String fileName) {
         final StringBuilder sb = new StringBuilder();
         final File fDirectory = new File(directory);
         final File input7z = new File(fDirectory, fileName);
+
         try (final SevenZFile sevenZFile = new SevenZFile(input7z)) {
             SevenZArchiveEntry entry = sevenZFile.getNextEntry();
             while (entry != null) {
@@ -223,8 +235,23 @@ public class BillRun extends ActionEngine {
         } catch (final IOException ioe) {
             final String error = "Error when reading entry " + fileName;
             sb.append(error).append("\n");
+            extentTest.log(FAIL,"Unzip failed");
+            throw  new RuntimeException( "Unzip failed");
         }
         return sb.length() == 0 ? null : sb.toString();
+    }
+
+    public boolean isFileExists(String directoryPath, String fileName) {
+        File directory = new File(directoryPath);
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.getName().equals(fileName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public String validateDownloadedFile() {

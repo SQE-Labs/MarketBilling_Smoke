@@ -377,14 +377,18 @@ public class Customer extends ActionEngine {
     }
     public void addMeterInformation() throws InterruptedException {
         click_custom(ServiceName_Dropdown,"ServiceName");
-       // click_custom(ServiceName_DropdownOpn);
+        //click_custom(ServiceName_DropdownOpn);
         click_custom(customerName,"customer Name");
         click_custom(MeterNumber_Dropdown,"Meter Number");
         click_custom(customerName,"customer Name");
         //click_custom(MeterNumber_DropdownOpn);
     }
+
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+
     public void verifyMeterReadsTabs() throws InterruptedException {
-        scrollIntoView(ViewMeterReads);
+        //scrollIntoView(ViewMeterReads);
+        js.executeScript("window.scrollBy(0,1000)");
         click_custom(ViewMeterReads,"Meter Reads Tab");
         attachScreenShot("Meter Reads Tab");
         click_custom(viewDemandReads," Demand Reads Tab");
