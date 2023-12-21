@@ -295,7 +295,7 @@ public class SmokeTest extends ActionEngine {
         Admin admin = new Admin();
         BillRun billRun = new BillRun();
         Login login = new Login();
-        login.validLogin();
+        //login.validLogin();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
         billRun.billRunFilter();
@@ -320,7 +320,7 @@ public class SmokeTest extends ActionEngine {
         Login login = new Login();
         BillRun billRun = new BillRun();
         //Login login = new Login();
-        login.validLogin();
+        //login.validLogin();
         admin.navigateToBasePage();
         admin.navigateToBillRun();
         billRun.billRunFilter();
